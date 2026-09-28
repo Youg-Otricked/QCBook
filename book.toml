@@ -1,0 +1,22 @@
+[book]
+title = "QCBook"
+authors = ["Youg-Otricked"]
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+
+
+[preprocessor.plantuml]
+plantuml-cmd = "plantuml"
+
+[preprocessor.quiz]
+
+[preprocessor.termlink]
+glossary-path = "reference/glossary.md"
+case-sensitive = false
+
+[output.html]
+additional-js = ["mermaid.min.js", "mermaid-init.js", "theme/wavedrom.min.js", "theme/default.js", "theme/wavedrom-init.js"]
+additional-css = ["css/qc.css"]
+[output.html.search]
+use-boolean-and = true

@@ -1,0 +1,19 @@
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = """
+What is the output of this code:
+
+```qc
+int x = 0;
+for (int i = -10; x > i; i += 2) {
+    x--;
+}
+if (x <= -5) {
+    `qout("%i", x);
+} else {
+    `qout("X more than -5");
+}
+```
+"""
+answer.answer = "X more than -5"
+id = "a4b41e45-dd3c-40f3-967d-6e1f00a9c894"

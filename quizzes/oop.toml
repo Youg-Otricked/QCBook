@@ -1,0 +1,8 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "In that above code, what method was called by myMethod()"
+prompt.distractors = [
+    "Base's"
+]
+answer.answer = "Child's"
+id = "cf3ff62c-0177-49ff-b302-042d13f944d2"

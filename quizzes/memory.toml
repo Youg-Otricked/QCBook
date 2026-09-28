@@ -1,0 +1,65 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of the following is an lvalue?"
+prompt.distractors = [
+    "42",
+    "x + y",
+    "A function call"
+]
+answer.answer = "A variable access"
+context = "An lvalue identifies an object in memory and therefore can have an address."
+id = "14c215c2-efa5-441e-a809-82abdc99083e"
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "What must appear on the left-hand side of an assignment?"
+prompt.distractors = [
+    "An rvalue",
+    "A literal",
+    "A function call"
+]
+answer.answer = "An lvalue"
+context = "The left-hand side must identify an object that can receive the assigned value."
+id = "13f23314-e5d3-4898-bd99-30a64511849d"
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which operator obtains the address of an lvalue?"
+prompt.distractors = [
+    "*",
+    "->",
+    "sizeof"
+]
+answer.answer = "&"
+id = "a46db560-5555-44a8-ac1d-794de40bd474"
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which statement about `nullptr` is correct?"
+prompt.distractors = [
+    "`nullptr` points to the first byte of memory.",
+    "`nullptr` contains the value zero stored in an integer.",
+    "`nullptr` is a pointer to the stack."
+]
+answer.answer = "`nullptr` is a null pointer that points to nothing."
+context = "nullptr is a sentinel pointer value representing a pointer that does not point to an object."
+id = "b82c92bf-31c9-4fed-b3f9-1a8aa4caa444"
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "What does dereferencing a pointer do?"
+prompt.distractors = [
+    "It converts the pointer into an address-sized integer.",
+    "It allocates new memory at the pointer's address.",
+    "It frees the memory pointed to by the pointer."
+]
+answer.answer = "It accesses the value at the address stored in the pointer."
+context = "The unary * operator dereferences a pointer and accesses the object at its stored address."
+id = "4ed4b9e5-5bc1-41f2-81dc-7171c74a0dc8"
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these is not UB?"
+prompt.distractors = [
+    "Dereferencing a `nullptr`",
+    "Using a freed pointer",
+    "Out-Of-Bounds Access",
+    "Dereferencing a dangling pointer"
+]
+answer.answer = "Memory Leaks"
+id = "5c312051-15bf-43be-86a9-add10de59143"
