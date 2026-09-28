@@ -1,0 +1,581 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Internals: Control Flow - QCBook</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="css/qc-6539c7cd.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-811715da.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-4e0a64ef.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">QCBook</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="comments--control-flow"><a class="header" href="#comments--control-flow">Comments &amp; Control Flow</a></h1>
+<p>Comments literally dont exist in the final file.</p>
+<h2 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h2>
+<h3 id="conditionals"><a class="header" href="#conditionals">Conditionals</a></h3>
+<p><code>if</code> is not a concept of llvm. Instead, <code>if</code> statements become jumps. You see, in asm, you compare things with the <code>cmp</code> instruction. This sets specific flag bits in the RFLAGS register, which comunicates with the Arithemtic Logic Unit of your CPU what results where true for the instruction. In LLVM, you use the <code>icmp</code> and <code>fcmp</code> instruction, which returns a i1, the result of the comparison e.g.</p>
+<pre><code class="language-llvm">%cond = icmp ne i32 123, i32 21 ; checks if 132 != 21
+%cond2 = icmp sge i32 12, i32 12 ; checks if 12 &gt;= 12
+</code></pre>
+<p>In ASM, you seperate code with labels, which are just named segments in your code.</p>
+<pre><code class="language-asm">my_label:
+    add 123, 321
+    ...
+my_other_label:
+    ...
+</code></pre>
+<p>LLVM has a similar concept to labels, called basic blocks. They are also the control flow. Each bb(basic block) has one entry point and one terminator, e.g. bg, ret, or switch.</p>
+<p><code>cmp</code> internally basically checks the result of left - right. The <code>zero</code> bit is set if they are equal, the sign flag is set if the result is negative, the carry flag is set if the result unsigned overflowed, the overflow flag is set if the result signed overflowed, and the parity flag is set if the lowest byte has an even amount of <code>1</code>s
+In asm to jump to labels you use specific instructions:</p>
+<pre><code class="language-asm">my_label:
+    ...
+_start:
+    jmp my_label ; unconditional jump. Always jumps to label.
+    jz my_label ; jumps IF the last `cmp` had ZF(zero flag) set. (equal)
+    je my_label ; jumps IF the last `cmp` had ZF set (equal)
+    jne my_label ; jumps IF the last `cmp` did NOT have `ZF` set. (not equal)
+    jne my_label ; jumps IF the last `cmp` did NOT have `ZF` set. (not equal)
+    js my_label ; jumps IF SF (sign flag)
+    jc my_label ; jumps IF CF (carry flag)
+    jo my_label ; jumps IF OF (overflow flag)
+    ja my_label ; jumps IF CF and ZF = 0 (above/greater) (unsigned comparison)
+    jbe my_label ; jumps IF CF or ZF = 1 (below or equal to) (unsigned comparison)
+    jl my_label ; jumps IF SF != OF (less than)
+    jge my_label ; jumps IF SF == OF (greater than or equal to)
+    jg my_label ; jumps IF ZF == 0 and SF == OF (greater than)
+</code></pre>
+<p>In LLVM, you instead use the <code>br</code> instruction. <code>br</code> ing a plain label is equivelant to a <code>jmp</code> instruction</p>
+<pre><code class="language-llvm">1:
+    ; my stuff
+2:
+    br label %1 ; unconditional jump to 1
+</code></pre>
+<p>But if you want a condition, you use br with a <code>i1</code> (which you can get from a cmp)</p>
+<pre><code class="language-llvm">1: 
+    ; my stuff
+2:
+    ; other stuff
+3:
+    br i1 %condition, label %1, label %2
+</code></pre>
+<p>It is like a <code>if (condition)</code>.</p>
+<p>This <code>if</code> statement</p>
+<pre><code class="language-qc">int x = 12;
+if (x &lt; 24) {
+    return 2;
+}
+return 1;
+</code></pre>
+<p>Would become</p>
+<pre><code class="language-llvm">    %x = alloca i32, align 4
+    store i32 12, ptr %x, align 4
+    %x1 = load i32, ptr %x, align 4
+    %icmplt = icmp slt i32 %x1, 24
+    br i1 %icmplt, label %then, label %ifcont
+then:
+    ret i32 2
+ifcont:
+    ret i32 1 
+</code></pre>
+<p>If there was no return statement, (a terminator), then at the end of then their would be a unconditional jump to <code>ifcont</code>. There is no jump after the return anyways because llvm basic blocks cannot have more than one terminator.
+Labels can’t exist more than once, so multiple if’s just add a number to the end of then/ifcont.</p>
+<p>Else statements just change the 2nd label in the br to <code>%else</code> and create a <code>else</code> label with the else code. Else also jumps to ifcont if it fails and there is no terminator.
+<code>else if</code>’s just add even more conditions. This</p>
+<pre><code class="language-qc">int x = 0;
+if (x &lt; 2) {
+    x = 2;
+} else if (x &lt; 4) {
+    x = 4;
+} else {
+    x = 5;
+}
+...
+</code></pre>
+<p>Becomes (when useless loads are removed)</p>
+<pre><code class="language-llvm">    %x = alloca i32, align 4 ; creates x
+    store i32 0, ptr %x, align 4 ; sets x to 0 
+    %x1 = load i32, ptr %x, align 4 ; loads the value for the condition
+    %icmplt = icmp slt i32 %x1, 2 ; x &lt; 2
+    br i1 %icmplt, label %then, label %elif.cond ; jumps to the else if condition if false and the then block if true
+
+then:
+    store i32 2, ptr %x, align 4 ; set x to 2
+    br label %ifcont ; continue
+elif.cond:
+    %icmplt1 = icmp slt i32 %x1, 4
+    br i1 %icmplt1, label %elif.body, label %else ; jumps to the else body if false and the else if body if true
+
+elif.body:
+    store i32 4, ptr %x, align 4 ; set x to 4
+    br label %ifcont ; continue at ifcont
+else:
+    store i32 5, ptr %x, align 4 ; set x to 5
+    br label %ifcont ; continue at ifcont (here because unlike asm, all bb's MUST have exactly 1 terminator)
+ifcont:
+    ...
+</code></pre>
+<p>And this could eventually become asm like this</p>
+<pre><code class="language-asm">    mov eax, [x] ; load x's value in memory to eax
+    cmp eax, 2 ; compare against 2
+    jl .then ; less than: jump to then
+    jmp .elif.cond ; else jump to elif.cond
+.then:
+    mov eax, 2 ; load 2 to eax
+    jmp .ifcont ; continue
+.elif.cond:
+    cmp eax, 4 ; compare against 4
+    jl .elif.body ; less than: jump to elif.body
+    jmp .else ; else jump to else
+.elif.body:
+    mov eax, 4 ; load 4 to eax
+    jmp .ifcont ; jump to ifcont
+.else:
+    mov eax, 5 ; load 5 to eax and fallthrough to ifcont
+.ifcont:
+    mov [x], eax ; store eax back to [x]
+    ...
+</code></pre>
+<p>Ternarys don’t actually become a if statement nonsense. They are actual llvm instructions! They kinda look like a <code>br</code>.</p>
+<pre><code class="language-llvm">%ternary = select i1 %condition, &lt;type&gt; %lhs, &lt;type&gt; %rhs
+</code></pre>
+<p>And these can become various instructions, such as <code>cmovl</code>(conditional move).</p>
+<h2 id="loops"><a class="header" href="#loops">Loops</a></h2>
+<p>Loops basically take the concept of labels on steroids.</p>
+<h3 id="while-loop"><a class="header" href="#while-loop">While Loop</a></h3>
+<p>The while loop is like a if statement, except it jumps to the begining if a condition is true.</p>
+<pre><code class="language-qc">int x = 5;
+while (x &gt;= 0) {
+    x--;
+}
+</code></pre>
+<p>becomes</p>
+<pre><code class="language-llvm">  %x = alloca i32, align 4 ; int x
+  store i32 5, ptr %x, align 4 ; = 5;
+  br label %while.cond ; start while loop
+
+while.cond:
+  %x1 = load i32, ptr %x, align 4 ; load x
+  %icmpge = icmp sge i32 %x1, 0 ; compare it with 0
+  br i1 %icmpge, label %while.body, label %while.end ; if its &gt;= 0 jump to the body, otherwise jump to the end
+
+while.body:
+  %dec_deref = load i32, ptr %x, align 4 ; load x
+  %dec = sub i32 %dec_deref, 1 ; decrement it
+  store i32 %dec, ptr %x, align 4 ; store it back to x
+  br label %while.cond ; recheck the condition
+
+while.end: 
+    ...
+</code></pre>
+<p>A if statement with a jump to the condition at the end of <code>then:</code> is just a loop.</p>
+<p>Thus, this LLVM would become somthing like</p>
+<pre><code class="language-asm">    mov eax, [x]
+    jmp .while.cond
+.while.cond:
+    cmp eax, 0
+    jge .while.body
+    jmp .while.end
+.while.body:
+    dec eax
+    jmp .while.cond
+.while.end:
+    mov [x], eax
+</code></pre>
+<p>A lot of the simplicity of ASM you trade away for the ability to not make 15 compilers and instead only make one.</p>
+<h3 id="for-loop"><a class="header" href="#for-loop">For Loop</a></h3>
+<p>The for loop just emits the init expression before the cond &amp; body then adds an additional <code>for.inc:</code> label which has the step expression then jumps to cond and body jumps to inc instead of cond.</p>
+<pre><code class="language-qc">for (int x = 5; x &gt;= 0; x--) {
+    ...
+}
+</code></pre>
+<p>Becomes</p>
+<pre><code class="language-llvm">  %x = alloca i32, align 4 ; for (int x
+  store i32 5, ptr %x, align 4 ; = 5;
+  br label %for.cond ; start loop
+for.cond:
+  %x1 = load i32, ptr %x, align 4 ; load x
+  %icmpge = icmp sge i32 %x1, 0 ; compare it with 0
+  br i1 %icmpge, label %for.body, label %for.end ; if its &gt;= 0 jump to the body, otherwise jump to the end
+
+for.body:
+  ...
+  br label %for.inc ; jump to inc 
+for.inc:
+  %dec_deref = load i32, ptr %x, align 4
+  %dec = sub i32 %dec_deref, 1
+  store i32 %dec, ptr %x, align 4
+  br label %for.cond ; check condition
+for.end:
+  ...
+</code></pre>
+<p>In ASM:</p>
+<pre><code class="language-asm">    mov eax, [x]
+    jmp .for.cond
+.for.cond:
+    cmp eax, 0
+    jge .for.body
+    jmp .for.end
+.for.body:
+    ...
+    jmp .for.inc
+.for.inc:
+    dec eax
+    jmp .for.cond
+.for.end:
+    mov [x], eax
+    ...
+</code></pre>
+<h3 id="break--continue"><a class="header" href="#break--continue">Break &amp; Continue</a></h3>
+<p>Break just creates an immediate <code>br label %&lt;loop&gt;.end</code>, and continue just creates a <code>br label %for.inc</code>/<code>br label %while.cond</code>/it’s equivelant ASM.</p>
+<h2 id="do-while-loop"><a class="header" href="#do-while-loop">Do While Loop</a></h2>
+<p>The do-while loop is actually really simple!</p>
+<pre><code class="language-qc">int x = 5;
+do {
+    x--;
+} while (x &gt;= 0);
+</code></pre>
+<p>becomes</p>
+<pre><code class="language-llvm">  %x = alloca i32, align 4 ; int x
+  store i32 5, ptr %x, align 4 ; = 5;
+  br label %while.body ; start do while loop
+
+while.cond:
+  %x1 = load i32, ptr %x, align 4 ; load x
+  %icmpge = icmp sge i32 %x1, 0 ; compare it with 0
+  br i1 %icmpge, label %while.body, label %while.end ; if its &gt;= 0 jump to the body, otherwise jump to the end
+
+while.body:
+  %dec_deref = load i32, ptr %x, align 4 ; load x
+  %dec = sub i32 %dec_deref, 1 ; decrement it
+  store i32 %dec, ptr %x, align 4 ; store it back to x
+  br label %while.cond ; recheck the condition
+
+while.end: 
+    ...
+</code></pre>
+<p>It literally just changes the br label from while.cond to while.body.</p>
+<h2 id="switch"><a class="header" href="#switch">Switch</a></h2>
+<p>Switch normally only can operate on numbers, so C^4’s switch compiles directly to a else if chain if it’s not a whole number type.</p>
+<p>Normal switch is actually a instruction in llvm: You switch a value to a ton of labels.</p>
+<pre><code class="language-qc">int x = 0;
+switch (x) {
+    case 1:
+        return 1;
+    case 2:
+        x = 12;
+        break;
+    case 0:
+        x = 2;
+        break;
+    default:
+        x = -1;
+        break;
+}
+</code></pre>
+<p>becomes</p>
+<pre><code class="language-llvm">  %x = alloca i32, align 4
+  store i32 0, ptr %x, align 4
+  %x1 = load i32, ptr %x, align 4
+  switch i32 %x1, label %switch.default [ ; switch on value x1, with defualt label switch.default
+    i32 1, label %switch.case ; on 1 jump to .case
+    i32 2, label %switch.case2 ; on 2 jump to .case2
+    i32 0, label %switch.case3 ; on 3 jump to .case3 
+  ]
+switch.case: 
+  ret i32 1
+
+switch.case2:
+  store i32 12, ptr %x, align 4
+  br label %switch.end
+
+switch.case3:
+  store i32 2, ptr %x, align 4
+  br label %switch.end
+switch.default:
+  store i32 -1, ptr %x, align 4
+  br label %switch.end
+switch.end:
+    ...
+</code></pre>
+<p>Switch statements are VERY fast. That’s because instead of a jump chain, they become a jump <em>table</em>. Basically a array of index -&gt; label.</p>
+<pre><code class="language-asm">.section .rodata
+.align 4
+.JUMP_TABLE:
+    .long .switch.case3 - .JUMP_TABLE   ; index 0 maps to case 0
+    .long .switch.case - .JUMP_TABLE  ; index 1 maps to case 1
+    .long .switch.case2 - .JUMP_TABLE  ; index 2 maps to case 2
+
+.text
+.global _start ; entry point is _start
+
+_start:
+    ...
+    mov eax, [x] ; load x's value to eax
+    cmp eax, 2 ; compare eax and the case count 
+    ja .switch.default ; if the case count is less than eax jump straight to default
+    lea rdx, [rip + .JUMP_TABLE] ; put the address of the jump table into rdx
+    movsxd rax, dword ptr [rdx + rax * 4] ; signed extend the calculated table idx and put it back into rax.
+    add rax, rdx ; add rax to rdx, thus giving you the address of the code label.
+    jmp rax ; jump to it (did i say you can jump to addresses?)
+
+.switch.case:
+    ... exit with code 0...
+.switch.case2:
+    mov rax, 12
+    jmp .switch.end
+.switch.case3:
+    mov rax, 2
+    jmp .switch.end
+.switch.default:
+    mov rax, -1
+.switch.end:
+    mov [x], eax
+    ...
+</code></pre>
+<p>It’s obvious why this approach can’t work on non integers (pointers and stuff just… wouldn’t work for this). It’s way more complex, but it is hella fast. For reference, this runs in CONSTANT TIME (O(1)) for all non default cases.</p>
+<p>Meanwhile, in else if chains, assuming == conditions (equivelent to switch conditions), that’s 3 instructions per condition. For 4 conditions, that’s:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Condition</th><th>Instruction count</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>3</td></tr>
+<tr><td>2</td><td>6</td></tr>
+<tr><td>3</td><td>9</td></tr>
+<tr><td>4</td><td>12</td></tr>
+</tbody>
+</table>
+</div>
+<p>For switch, in the above example it is always 7.</p>
+<p>But imagine if it gets bigger. And if it gets even bigger, it can use <em>binary search</em>. That means for if in the middle of a 100000 case set thats 150000 instructions. For binary search that’s around 51.</p>
+<p>We have one more terminator, too along with <code>break</code> and <code>continue</code>: <code>unreachable</code>! It compiles straight down to LLVM unreachable. It’s for optimization purposes, and if you run it, it’s UB because the compiler didn’t do any cleanup past unreachable becuase… it’s unreachable.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_18-0_basic_internals.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_20_memory_revisited.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_18-0_basic_internals.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_20_memory_revisited.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-cc2620ca.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="mermaid-eefea253.min.js"></script>
+        <script src="mermaid-init-53b67c53.js"></script>
+        <script src="theme/wavedrom-1993954d.min.js"></script>
+        <script src="theme/default-7ddb9cfd.js"></script>
+        <script src="theme/wavedrom-init-ec64f22d.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

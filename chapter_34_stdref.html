@@ -1,0 +1,932 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>STDRef - QCBook</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="css/qc-6539c7cd.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-811715da.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-4e0a64ef.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">QCBook</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="stdref"><a class="header" href="#stdref">STDRef</a></h1>
+<p>Currently, the standard library is rather small, with only 14 namespaces.</p>
+<ol>
+<li><a href="#CoreConcepts">CoreConcepts</a>.
+This contains concepts for everything else to use, those being <code>Eq</code> (<code>operator==</code>), and <code>Allocated</code> (<code>_destroy</code>).</li>
+<li><a href="#AdvQBool">AdvQBool</a>.
+Random boolean.</li>
+<li><a href="#Array">Array</a>.
+A constant-size array.</li>
+<li><a href="#Vector">Vector</a>.
+A dynamic array.</li>
+<li><a href="#List">List</a>.
+A linked list.</li>
+<li><a href="#Utils">Utils</a>.
+Basic utility functions.</li>
+<li><a href="#Math">Math</a>.
+Math intrinsics.</li>
+<li><a href="#OSInterop">OSInterop</a>.
+Operating-system interaction.</li>
+<li><a href="#Pair">Pair</a>.
+Pair of 2 items.</li>
+<li><a href="#Optional">Optional</a>.
+Optional value.</li>
+<li><a href="#Span">Span</a>.
+Like an array, but does not own the memory.</li>
+<li><a href="#Encodings">Encodings</a>.
+Base64, Hex, and URL encodings.</li>
+<li><a href="#Unordered">Unordered</a>.
+Hash-based Map and Set.</li>
+<li><a href="#Filesystem">Filesystem</a>.
+Filesystem functionality similar to C++ <code>std::filesystem</code>.</li>
+</ol>
+<h1 id="coreconcepts"><a class="header" href="#coreconcepts">CoreConcepts</a></h1>
+<h2 id="eq"><a class="header" href="#eq"><code>Eq</code></a></h2>
+<pre><code class="language-qc">concept Eq {
+    1_of {
+        bool operator==(Self other);
+        bool operator==(Self self, Self other);
+    }
+}
+</code></pre>
+<p>Concept requiring <code>operator==</code>.</p>
+<h2 id="allocated"><a class="header" href="#allocated"><code>Allocated</code></a></h2>
+<pre><code class="language-qc">concept Allocated {
+    at_least 1_of {
+        void _destroy();
+        void _destroy(Self self);
+    }
+}
+</code></pre>
+<p>Concept requiring <code>_destory</code>.</p>
+<h1 id="advqbool"><a class="header" href="#advqbool">AdvQBool</a></h1>
+<h2 id="altypes"><a class="header" href="#altypes"><code>AlTypes</code></a></h2>
+<pre><code class="language-qc">type AlTypes = qbool | bool | AQB;
+</code></pre>
+<p>Booleanish types.</p>
+<h2 id="aqb"><a class="header" href="#aqb"><code>AQB</code></a></h2>
+<p>A probabilistic boolean.</p>
+<h3 id="fields"><a class="header" href="#fields">Fields</a></h3>
+<pre><code class="language-qc">int TruthLevel;
+int FalseLevel;
+</code></pre>
+<p>The percentage chances that the value evaluates to <code>true</code> or <code>false</code>.</p>
+<h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
+<pre><code class="language-qc">AQB(int truth)
+</code></pre>
+<pre><code class="language-qc">void operator=(int other)
+bool operator&amp;&amp;(AlTypes other)
+bool operator||(AlTypes other)
+bool operator^(AlTypes other)
+bool operator!()
+bool _eval()
+string _repr()
+</code></pre>
+<h1 id="array"><a class="header" href="#array">Array</a></h1>
+<h2 id="iterator"><a class="header" href="#iterator"><code>Iterator</code></a></h2>
+<h3 id="itt"><a class="header" href="#itt"><code>It&lt;T&gt;</code></a></h3>
+<pre><code class="language-qc">It(T* data, int size, bool is_end)
+bool _atEnd()
+T _next()
+bool _atStart()
+T _prev()
+void _moveTo(int index)
+</code></pre>
+<h2 id="arrt-int-s--0"><a class="header" href="#arrt-int-s--0"><code>Arr&lt;T, int S = 0&gt;</code></a></h2>
+<p>A fixed-size array containing <code>S</code> elements of type <code>T</code>.</p>
+<pre><code class="language-qc">Arr()
+</code></pre>
+<p>Creates an empty array.</p>
+<pre><code class="language-qc">void operator[]=(T* data, int length)
+T&amp; operator[](int index)
+Iterator::It&lt;T&gt; _begin()
+Iterator::It&lt;T&gt; _end()
+void _destroy()
+Arr&lt;T, S&gt;&amp; operator=(Arr&lt;T, S&gt; other)
+</code></pre>
+<h1 id="vector"><a class="header" href="#vector">Vector</a></h1>
+<h2 id="iterator-1"><a class="header" href="#iterator-1"><code>Iterator</code></a></h2>
+<h3 id="itt-1"><a class="header" href="#itt-1"><code>It&lt;T&gt;</code></a></h3>
+<pre><code class="language-qc">It(T* data, int size, bool is_end)
+bool _atEnd()
+T _next()
+bool _atStart()
+T _prev()
+void _moveTo(int index)
+</code></pre>
+<h2 id="vect"><a class="header" href="#vect"><code>Vec&lt;T&gt;</code></a></h2>
+<p>A dynamically sized array.</p>
+<pre><code class="language-qc">Vec()
+</code></pre>
+<pre><code class="language-qc">void reserve(int cap)
+</code></pre>
+<p>Allocates enough storage for at least <code>cap</code> elements without changing the vector’s length.</p>
+<pre><code class="language-qc">void push(T value)
+</code></pre>
+<p>Adds an element to the end of the vector, increasing its capacity if necessary.</p>
+<pre><code class="language-qc">int length()
+</code></pre>
+<p>Returns the current number of elements in the vector.</p>
+<pre><code class="language-qc">void pop()
+</code></pre>
+<p>Removes the last element from the vector.</p>
+<pre><code class="language-qc">void shrinkToFit()
+</code></pre>
+<p>Reduces the vector’s allocated capacity to match its current length.</p>
+<pre><code class="language-qc">void operator[]=(T* data, int length)
+T&amp; operator[](int index)
+Iterator::It&lt;T&gt; _begin()
+Iterator::It&lt;T&gt; _end()
+void _destroy()
+Vec&lt;T&gt;&amp; operator=(Vec&lt;T&gt; other)
+</code></pre>
+<pre><code class="language-qc">bool isEmpty()
+</code></pre>
+<p>Returns <code>true</code> if the vector contains no elements.</p>
+<h1 id="list"><a class="header" href="#list">List</a></h1>
+<h2 id="nodet"><a class="header" href="#nodet"><code>Node&lt;T&gt;</code></a></h2>
+<p>The internal node used by a linked list.</p>
+<pre><code class="language-qc">T value;
+Node&lt;T&gt;* next;
+</code></pre>
+<p>Stores an element and a pointer to the next node.</p>
+<h2 id="iterator-2"><a class="header" href="#iterator-2"><code>Iterator</code></a></h2>
+<h3 id="itt-2"><a class="header" href="#itt-2"><code>It&lt;T&gt;</code></a></h3>
+<pre><code class="language-qc">It(Node&lt;T&gt;* node)
+bool _atEnd()
+T _next()
+bool _atStart()
+T _prev()
+</code></pre>
+<h2 id="listt"><a class="header" href="#listt"><code>List&lt;T&gt;</code></a></h2>
+<p>A doubly-ended linked list.</p>
+<pre><code class="language-qc">List()
+</code></pre>
+<p>Creates an empty list.</p>
+<pre><code class="language-qc">bool isEmpty()
+</code></pre>
+<p>Returns <code>true</code> if the list contains no elements.</p>
+<pre><code class="language-qc">T front()
+</code></pre>
+<p>Returns the first element in the list.</p>
+<pre><code class="language-qc">T back()
+</code></pre>
+<p>Returns the last element in the list.</p>
+<pre><code class="language-qc">void pushFront(T value)
+</code></pre>
+<p>Adds an element to the beginning of the list.</p>
+<pre><code class="language-qc">void pushBack(T value)
+</code></pre>
+<p>Adds an element to the end of the list.</p>
+<pre><code class="language-qc">void popFront()
+</code></pre>
+<p>Removes the first element from the list.</p>
+<pre><code class="language-qc">void popBack()
+</code></pre>
+<p>Removes the last element from the list.</p>
+<pre><code class="language-qc">void clear()
+</code></pre>
+<p>Removes every element from the list.</p>
+<pre><code class="language-qc">bool contains(T value)
+</code></pre>
+<p>Returns whether the list contains the specified value.</p>
+<pre><code class="language-qc">Iterator::It&lt;T&gt; _begin()
+Iterator::It&lt;T&gt; _end()
+void _destroy()
+T&amp; operator[](int index)
+void operator[]=(T* data, int length)
+List&lt;T&gt;&amp; operator=(List&lt;T&gt; other)
+</code></pre>
+<h1 id="utils"><a class="header" href="#utils">Utils</a></h1>
+<p>General-purpose utility functions.</p>
+<pre><code class="language-qc">Vector::Vec&lt;int&gt; range(int start, int stop, int step = 1)
+</code></pre>
+<p>Creates a vector containing a range of integers from <code>start</code> toward <code>stop</code>, incrementing by <code>step</code>.</p>
+<pre><code class="language-qc">volatile void sleep(long int milliseconds)
+</code></pre>
+<p>Sleeps for milliseconds milliseconds.</p>
+<h1 id="math"><a class="header" href="#math">Math</a></h1>
+<p>Mathematical constants and functions.</p>
+<pre><code class="language-qc">double e()
+</code></pre>
+<p>Returns Euler’s number, approximately <code>2.71828</code>.</p>
+<pre><code class="language-qc">double pi()
+</code></pre>
+<p>Returns π, approximately <code>3.14159</code>.</p>
+<pre><code class="language-qc">type Number = ...;
+</code></pre>
+<p>Number types.</p>
+<pre><code class="language-qc">Number max(Number a, Number b)
+</code></pre>
+<p>Returns the larger of two numbers.</p>
+<pre><code class="language-qc">Number min(Number a, Number b)
+</code></pre>
+<p>Returns the smaller of two numbers.</p>
+<pre><code class="language-qc">Number sqrt(Number val)
+</code></pre>
+<p>Returns the square root of a number.</p>
+<pre><code class="language-qc">Number root(Number val, Number power)
+</code></pre>
+<p>Returns the specified root of a number.</p>
+<pre><code class="language-qc">type Floating = float | double;
+</code></pre>
+<p>Decimal numbers.</p>
+<pre><code class="language-qc">int ceil(Floating a)
+</code></pre>
+<p>Rounds a floating-point value upward to the nearest integer.</p>
+<pre><code class="language-qc">int floor(Floating a)
+</code></pre>
+<p>Rounds a floating-point value downward to the nearest integer.</p>
+<pre><code class="language-qc">Number abs(Number a)
+</code></pre>
+<p>Returns the absolute value of a number.</p>
+<pre><code class="language-qc">double sin(double x)
+</code></pre>
+<p>Returns the sine of <code>x</code>.</p>
+<pre><code class="language-qc">double cos(double x)
+</code></pre>
+<p>Returns the cosine of <code>x</code>.</p>
+<pre><code class="language-qc">double tan(double x)
+</code></pre>
+<p>Returns the tangent of <code>x</code>.</p>
+<pre><code class="language-qc">double log(double x)
+</code></pre>
+<p>Returns the logarithm of <code>x</code>.</p>
+<h1 id="osinterop"><a class="header" href="#osinterop">OSInterop</a></h1>
+<pre><code class="language-qc">void system(string command)
+</code></pre>
+<p>Executes the supplied command using the operating system’s command interpreter.</p>
+<h1 id="pair"><a class="header" href="#pair">Pair</a></h1>
+<h2 id="paira-b"><a class="header" href="#paira-b"><code>Pair&lt;A, B&gt;</code></a></h2>
+<p>A structure containing two values.</p>
+<pre><code class="language-qc">A first;
+B second;
+</code></pre>
+<p>The first and second values stored in the pair.</p>
+<h2 id="makepair"><a class="header" href="#makepair"><code>makePair</code></a></h2>
+<pre><code class="language-qc">Pair&lt;A, B&gt; makePair&lt;A, B&gt;(A first, B second)
+</code></pre>
+<p>Creates and returns a <code>Pair</code> containing the two supplied values.</p>
+<h1 id="optional"><a class="header" href="#optional">Optional</a></h1>
+<h2 id="optiont"><a class="header" href="#optiont"><code>Option&lt;T&gt;</code></a></h2>
+<p>Represents a value that may or may not exist.</p>
+<pre><code class="language-qc">bool has_value;
+</code></pre>
+<p>Indicates whether the option currently contains a value.</p>
+<pre><code class="language-qc">Option()
+</code></pre>
+<p>Creates an empty option with no value.</p>
+<pre><code class="language-qc">Option(T value)
+</code></pre>
+<p>Creates an option containing the supplied value.</p>
+<pre><code class="language-qc">T&amp; value()
+</code></pre>
+<p>Returns a reference to the contained value and throws if no value exists.</p>
+<pre><code class="language-qc">bool safeGet(T&amp; output)
+</code></pre>
+<p>Copies the contained value into <code>output</code> if one exists and returns whether the operation succeeded.</p>
+<pre><code class="language-qc">void setValue(T&amp; val)
+</code></pre>
+<p>Sets the option’s value and marks it as containing a value.</p>
+<pre><code class="language-qc">void removeValue()
+</code></pre>
+<p>Removes the contained value and marks the option as empty.</p>
+<h1 id="span"><a class="header" href="#span">Span</a></h1>
+<p>A non-owning “view” over a contiguous section of memory.</p>
+<h2 id="iterator-3"><a class="header" href="#iterator-3"><code>Iterator</code></a></h2>
+<h3 id="itt-3"><a class="header" href="#itt-3"><code>It&lt;T&gt;</code></a></h3>
+<pre><code class="language-qc">It(T* data, int size, bool is_end)
+bool _atEnd()
+T _next()
+bool _atStart()
+T _prev()
+void _moveTo(int index)
+</code></pre>
+<h2 id="spant"><a class="header" href="#spant"><code>Span&lt;T&gt;</code></a></h2>
+<p>A non-owning view of an array of <code>T</code>.</p>
+<pre><code class="language-qc">T&amp; operator[](int index)
+</code></pre>
+<pre><code class="language-qc">Span()
+</code></pre>
+<p>Creates an empty span.</p>
+<pre><code class="language-qc">void operator[]=(T *data, int length)
+Iterator::It&lt;T&gt; _begin()
+Iterator::It&lt;T&gt; _end()
+</code></pre>
+<h1 id="encodings"><a class="header" href="#encodings">Encodings</a></h1>
+<p>Encoding and decoding functions for various representations.</p>
+<h2 id="hex"><a class="header" href="#hex">Hex</a></h2>
+<p>Hexadecimal encoding and decoding.</p>
+<pre><code class="language-qc">const string chars = "0123456789abcdef";
+</code></pre>
+<pre><code class="language-qc">string encode(string data)
+</code></pre>
+<p>Encodes string to hex.</p>
+<pre><code class="language-qc">string decode(string hex)
+</code></pre>
+<p>Decodes hex back into text.</p>
+<h2 id="base64"><a class="header" href="#base64">Base64</a></h2>
+<p>Base64 encoding and decoding.</p>
+<pre><code class="language-qc">const string chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+</code></pre>
+<p>Characters used by the Base64 encoding.</p>
+<pre><code class="language-qc">string encode(string data)
+</code></pre>
+<p>Encodes data using Base64.</p>
+<pre><code class="language-qc">int charValue(char c)
+</code></pre>
+<p>Returns the Base64 numeric value represented by a character.</p>
+<pre><code class="language-qc">string decode(string data)
+</code></pre>
+<p>Decodes Base64 data.</p>
+<h2 id="uri"><a class="header" href="#uri">URI</a></h2>
+<p>URL/URI percent encoding and decoding.</p>
+<pre><code class="language-qc">bool isUnreserved(char c)
+</code></pre>
+<p>Returns whether a character is allowed to appear unescaped in a URI.</p>
+<pre><code class="language-qc">string encode(string data)
+</code></pre>
+<p>Percent-encodes characters that require escaping in a URI.</p>
+<pre><code class="language-qc">string decode(string data)
+</code></pre>
+<p>Decodes percent-encoded URI data.</p>
+<h1 id="unordered"><a class="header" href="#unordered">Unordered</a></h1>
+<p>Hash-based containers.</p>
+<h2 id="hash"><a class="header" href="#hash"><code>Hash</code></a></h2>
+<pre><code class="language-qc">concept Hash {
+    1_of {
+        addr_t hash();
+        addr_t hash(Self self);
+    }
+}
+</code></pre>
+<p>A concept requiring a type to provide a hash function. You must provide a hash for types you use. Even primitives.</p>
+<h2 id="setnodet"><a class="header" href="#setnodet"><code>SetNode&lt;T&gt;</code></a></h2>
+<p>Internal node used by <code>Set</code>.</p>
+<pre><code class="language-qc">T value;
+SetNode&lt;T&gt;* next;
+</code></pre>
+<p>Stores a set value and the next node in its bucket.</p>
+<h2 id="mapnodek-v"><a class="header" href="#mapnodek-v"><code>MapNode&lt;K, V&gt;</code></a></h2>
+<p>Internal node used by <code>Map</code>.</p>
+<pre><code class="language-qc">Pair::Pair&lt;K, V&gt; data;
+MapNode&lt;K, V&gt;* next;
+</code></pre>
+<p>Stores a key-value pair and the next node in its bucket.</p>
+<h2 id="iterators"><a class="header" href="#iterators"><code>Iterators</code></a></h2>
+<p>Iterators for unordered containers.</p>
+<h3 id="mapitk-v"><a class="header" href="#mapitk-v"><code>MapIt&lt;K, V&gt;</code></a></h3>
+<pre><code class="language-qc">MapIt(MapNode&lt;K, V&gt;** buckets, int num_buckets, bool is_end)
+bool _atEnd()
+Pair::Pair&lt;K, V&gt;&amp; _next()
+</code></pre>
+<h3 id="setitt"><a class="header" href="#setitt"><code>SetIt&lt;T&gt;</code></a></h3>
+<pre><code class="language-qc">SetIt(SetNode&lt;T&gt;** buckets, int num_buckets, bool is_end)
+bool _atEnd()
+T _next()
+</code></pre>
+<h2 id="settproves-hash"><a class="header" href="#settproves-hash"><code>Set&lt;T(proves Hash:)&gt;</code></a></h2>
+<p>A hash-based collection containing unique values.</p>
+<pre><code class="language-qc">Set()
+void operator[]=(T *data, int length)
+</code></pre>
+<pre><code class="language-qc">bool contains(T item)
+</code></pre>
+<p>Returns whether the specified item exists in the set.</p>
+<pre><code class="language-qc">void add(T item)
+</code></pre>
+<p>Adds an item to the set.</p>
+<pre><code class="language-qc">void _destroy()
+Iterators::SetIt&lt;T&gt; _begin()
+Iterators::SetIt&lt;T&gt; _end()
+</code></pre>
+<h2 id="mapkproves-hash-v"><a class="header" href="#mapkproves-hash-v"><code>Map&lt;K(proves Hash:), V&gt;</code></a></h2>
+<p>A hash-based key-value container.</p>
+<pre><code class="language-qc">Map()
+</code></pre>
+<p>Creates an empty map.</p>
+<pre><code class="language-qc">bool containsKey(K key)
+</code></pre>
+<p>Returns whether the map contains the specified key.</p>
+<pre><code class="language-qc">bool safeGet(K key, V&amp; output)
+</code></pre>
+<p>Copies the value associated with <code>key</code> into <code>output</code> if the key exists and returns whether the operation succeeded.</p>
+<pre><code class="language-qc">void set(K key, V value)
+</code></pre>
+<p>Adds or updates the value associated with a key.</p>
+<pre><code class="language-qc">void _destroy()
+void operator[]=(Pair::Pair&lt;K, V&gt; *data, int length)
+</code></pre>
+<pre><code class="language-qc">V&amp; operator[](K key)
+</code></pre>
+<p>Returns a reference to the value associated with <code>key</code>. Throws if not found.</p>
+<pre><code class="language-qc">Iterators::MapIt&lt;K, V&gt; _begin()
+Iterators::MapIt&lt;K, V&gt; _end()
+</code></pre>
+<h1 id="filesystem"><a class="header" href="#filesystem">Filesystem</a></h1>
+<p>Filesystem path, file, directory, and stream functionality.</p>
+<pre><code class="language-qc">string realpath(string input_path)
+</code></pre>
+<p>Resolves a path into its canonical filesystem path.</p>
+<pre><code class="language-qc">type DateTime = addr_t;
+</code></pre>
+<p>Filesystem timestamp representation.</p>
+<h2 id="filetype"><a class="header" href="#filetype"><code>FileType</code></a></h2>
+<pre><code class="language-qc">enum FileType {
+    Unknown = 0;
+    File = 1;
+    Directory = 2;
+    Symlink = 3;
+    Other = 4;
+}
+</code></pre>
+<h2 id="filestatus"><a class="header" href="#filestatus"><code>FileStatus</code></a></h2>
+<p>Contains metadata about a filesystem object.</p>
+<pre><code class="language-qc">FileType filetype;
+addr_t size;
+addr_t created;
+addr_t accessed;
+addr_t modified;
+short int permissions;
+bool exists;
+</code></pre>
+<p>Stores the object’s type, size, timestamps, permissions, and existence state.</p>
+<h2 id="path"><a class="header" href="#path"><code>Path</code></a></h2>
+<p>Represents and manipulates filesystem paths.</p>
+<pre><code class="language-qc">Path(string path)
+Path operator/(string other)
+Path operator/(Path other)
+Path&amp; operator=(Path other)
+Path&amp; operator=(string other)
+</code></pre>
+<pre><code class="language-qc">string toString()
+</code></pre>
+<p>Returns the path as a string.</p>
+<pre><code class="language-qc">bool empty()
+</code></pre>
+<p>Returns whether the path contains no characters.</p>
+<pre><code class="language-qc">bool isAbsolute()
+</code></pre>
+<p>Returns whether the path is absolute.</p>
+<pre><code class="language-qc">bool isRelative()
+</code></pre>
+<p>Returns whether the path is relative.</p>
+<pre><code class="language-qc">Path parent()
+</code></pre>
+<p>Returns the parent directory of the path.</p>
+<pre><code class="language-qc">string filename()
+</code></pre>
+<p>Returns the filename component of the path.</p>
+<pre><code class="language-qc">string extension()
+</code></pre>
+<p>Returns the file extension of the path.</p>
+<pre><code class="language-qc">string stem()
+</code></pre>
+<p>Returns the filename without its extension.</p>
+<pre><code class="language-qc">bool hasFilename()
+</code></pre>
+<p>Returns whether the path contains a filename component.</p>
+<pre><code class="language-qc">bool hasExtension()
+</code></pre>
+<p>Returns whether the path contains a file extension.</p>
+<pre><code class="language-qc">bool hasParent()
+</code></pre>
+<p>Returns whether the path has a parent component.</p>
+<pre><code class="language-qc">Path normalize()
+</code></pre>
+<p>Returns a normalized version of the path with redundant path components resolved.</p>
+<pre><code class="language-qc">Path absolute()
+</code></pre>
+<p>Returns an absolute version of the path.</p>
+<pre><code class="language-qc">Path canonical()
+</code></pre>
+<p>Returns the canonical filesystem path with symbolic links and redundant components resolved.</p>
+<pre><code class="language-qc">bool exists()
+</code></pre>
+<p>Returns whether the path exists.</p>
+<pre><code class="language-qc">addr_t fileSize()
+</code></pre>
+<p>Returns the size of the file represented by the path.</p>
+<pre><code class="language-qc">DateTime lastWriteTime()
+</code></pre>
+<p>Returns the last modification time of the filesystem object.</p>
+<pre><code class="language-qc">DateTime lastAccess_Time()
+</code></pre>
+<p>Returns the last access time of the filesystem object.</p>
+<pre><code class="language-qc">DateTime creationTime()
+</code></pre>
+<p>Returns the creation time of the filesystem object.</p>
+<pre><code class="language-qc">FileStatus status()
+</code></pre>
+<p>Returns filesystem metadata for the path.</p>
+<pre><code class="language-qc">FileStatus linkStatus()
+</code></pre>
+<p>Returns filesystem metadata for the path itself without following a symbolic link.</p>
+<pre><code class="language-qc">addr_t size()
+</code></pre>
+<p>Returns the size of the filesystem object.</p>
+<pre><code class="language-qc">bool isHidden()
+</code></pre>
+<p>Returns whether the filesystem object is considered hidden.</p>
+<pre><code class="language-qc">bool isFile()
+</code></pre>
+<p>Returns whether the path refers to a regular file.</p>
+<pre><code class="language-qc">bool isDirectory()
+</code></pre>
+<p>Returns whether the path refers to a directory.</p>
+<pre><code class="language-qc">bool isSymlink()
+</code></pre>
+<p>Returns whether the path refers to a symbolic link.</p>
+<h2 id="getcwd"><a class="header" href="#getcwd"><code>getCwd</code></a></h2>
+<pre><code class="language-qc">Path getCwd()
+</code></pre>
+<p>Returns the process’s current working directory.</p>
+<h1 id="inputstream"><a class="header" href="#inputstream">InputStream</a></h1>
+<p>A stream used for reading data from files or file descriptors.</p>
+<pre><code class="language-qc">InputStream()
+</code></pre>
+<p>Creates a closed input stream.</p>
+<pre><code class="language-qc">InputStream(Path path)
+</code></pre>
+<p>Creates an input stream and opens the specified path.</p>
+<pre><code class="language-qc">void open(Path path)
+</code></pre>
+<p>Opens the specified path for reading.</p>
+<pre><code class="language-qc">void setFd(int fd)
+</code></pre>
+<p>Sets the <a href="reference/glossary.html#file-descriptor" title="How the operating system keeps track of files" class="glossary-term">file descriptor</a> used by the stream.</p>
+<pre><code class="language-qc">char get()
+</code></pre>
+<p>Reads and returns the next character from the stream.</p>
+<pre><code class="language-qc">void getline(string dest, char till = '\n')
+</code></pre>
+<p>Reads characters into <code>dest</code> until the specified delimiter is encountered.</p>
+<pre><code class="language-qc">void read(string dest, addr_t count)
+</code></pre>
+<p>Reads up to <code>count</code> bytes into <code>dest</code>.</p>
+<pre><code class="language-qc">addr_t gcount()
+</code></pre>
+<p>Returns the number of bytes read by the most recent read operation.</p>
+<pre><code class="language-qc">bool isOpen()
+</code></pre>
+<p>Returns whether the stream currently has an open file descriptor.</p>
+<pre><code class="language-qc">void close()
+</code></pre>
+<p>Closes the stream’s file descriptor.</p>
+<pre><code class="language-qc">void _destroy()
+</code></pre>
+<h1 id="outputstream"><a class="header" href="#outputstream">OutputStream</a></h1>
+<p>A stream used for writing data to files or file descriptors.</p>
+<pre><code class="language-qc">OutputStream()
+</code></pre>
+<p>Creates a closed output stream.</p>
+<pre><code class="language-qc">OutputStream(Path path)
+</code></pre>
+<p>Creates an output stream and opens the specified path.</p>
+<pre><code class="language-qc">void open(Path path)
+</code></pre>
+<p>Opens the specified path for writing.</p>
+<pre><code class="language-qc">void setFd(int fd)
+</code></pre>
+<p>Sets the file descriptor used by the stream.</p>
+<pre><code class="language-qc">void put(char c)
+</code></pre>
+<p>Writes a single character to the stream.</p>
+<pre><code class="language-qc">void write(string data)
+</code></pre>
+<p>Writes the supplied string to the stream.</p>
+<pre><code class="language-qc">bool isOpen()
+</code></pre>
+<p>Returns whether the stream currently has an open file descriptor.</p>
+<pre><code class="language-qc">void close()
+</code></pre>
+<p>Closes the stream’s file descriptor.</p>
+<pre><code class="language-qc">void _destroy()
+</code></pre>
+<h1 id="rwstream"><a class="header" href="#rwstream">RWStream</a></h1>
+<p>A stream that supports both reading and writing.</p>
+<pre><code class="language-qc">RWStream()
+</code></pre>
+<p>Creates a closed read/write stream.</p>
+<pre><code class="language-qc">RWStream(Path path)
+</code></pre>
+<p>Creates a read/write stream and opens the specified path.</p>
+<pre><code class="language-qc">void open(Path path)
+</code></pre>
+<p>Opens the specified path for reading and writing.</p>
+<pre><code class="language-qc">void setFd(int fd)
+</code></pre>
+<p>Sets the file descriptor used by the stream.</p>
+<pre><code class="language-qc">void put(char c)
+</code></pre>
+<p>Writes a single character to the stream.</p>
+<pre><code class="language-qc">void write(string data)
+</code></pre>
+<p>Writes the supplied string to the stream.</p>
+<pre><code class="language-qc">char get()
+</code></pre>
+<p>Reads and returns the next character from the stream.</p>
+<pre><code class="language-qc">void getline(string dest, char till = '\n')
+</code></pre>
+<p>Reads characters into <code>dest</code> until the specified delimiter is encountered.</p>
+<pre><code class="language-qc">void read(string dest, addr_t count)
+</code></pre>
+<p>Reads up to <code>count</code> bytes into <code>dest</code>.</p>
+<pre><code class="language-qc">addr_t gcount()
+</code></pre>
+<p>Returns the number of bytes read by the most recent read operation.</p>
+<pre><code class="language-qc">bool isOpen()
+</code></pre>
+<p>Returns whether the stream currently has an open file descriptor.</p>
+<pre><code class="language-qc">void close()
+</code></pre>
+<p>Closes the stream’s file descriptor.</p>
+<pre><code class="language-qc">void _destroy()
+</code></pre>
+<h1 id="directoryiterator"><a class="header" href="#directoryiterator">DirectoryIterator</a></h1>
+<p>Iterates over the entries within a directory.</p>
+<pre><code class="language-qc">DirectoryIterator()
+</code></pre>
+<p>Creates a closed directory iterator.</p>
+<pre><code class="language-qc">DirectoryIterator(Path path)
+</code></pre>
+<p>Creates an iterator for the specified directory.</p>
+<pre><code class="language-qc">bool hasNext()
+</code></pre>
+<p>Returns whether another directory entry is available.</p>
+<pre><code class="language-qc">Path next()
+</code></pre>
+<p>Returns the next entry in the directory.</p>
+<pre><code class="language-qc">void close()
+</code></pre>
+<p>Closes the directory iterator.</p>
+<pre><code class="language-qc">bool isOpen()
+</code></pre>
+<p>Returns whether the directory iterator is currently open.</p>
+<pre><code class="language-qc">void _destroy()
+</code></pre>
+<h1 id="filesystem-operations"><a class="header" href="#filesystem-operations">Filesystem Operations</a></h1>
+<pre><code class="language-qc">bool createDirectory(Path path, int mode = 755)
+</code></pre>
+<p>Creates a single directory at the specified path.</p>
+<pre><code class="language-qc">bool createDirectories(Path path)
+</code></pre>
+<p>Creates the specified directory and any missing parent directories.</p>
+<pre><code class="language-qc">bool remove(Path path)
+</code></pre>
+<p>Removes the specified filesystem object.</p>
+<pre><code class="language-qc">bool removeAll(Path path)
+</code></pre>
+<p>Recursively removes the specified filesystem object and its contents.</p>
+<pre><code class="language-qc">bool rename(Path from, Path to)
+</code></pre>
+<p>Renames or moves a filesystem object.</p>
+<pre><code class="language-qc">void copy(Path source, Path destination)
+</code></pre>
+<p>Copies a filesystem object from <code>source</code> to <code>destination</code>.</p>
+<h1 id="owned"><a class="header" href="#owned">Owned</a></h1>
+<h2 id="class-ownedt"><a class="header" href="#class-ownedt"><code>class Owned&lt;T&gt;</code></a></h2>
+<pre><code class="language-qc">Owned(T *data);
+</code></pre>
+<p>Constructor. Owns data. <code>inval data</code> for original owner.</p>
+<pre><code class="language-qc">T *own()
+</code></pre>
+<p>Take ownership of data. Owned no longer owns.</p>
+<pre><code class="language-qc">void ignore()
+</code></pre>
+<p>Ignore data. Frees data. <code>inval data</code></p>
+<pre><code class="language-qc">void _destroy()
+</code></pre>
+<p>Frees data. <code>inval data</code></p>
+<p>Use <code>Owned::Owned</code> for when you want to specify you no longer have anything to do with a value.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_33_naming_commentary.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_35_final_project_1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_33_naming_commentary.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_35_final_project_1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-cc2620ca.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="mermaid-eefea253.min.js"></script>
+        <script src="mermaid-init-53b67c53.js"></script>
+        <script src="theme/wavedrom-1993954d.min.js"></script>
+        <script src="theme/default-7ddb9cfd.js"></script>
+        <script src="theme/wavedrom-init-ec64f22d.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
