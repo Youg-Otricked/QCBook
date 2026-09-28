@@ -3,16 +3,25 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
-      - name: Setup mdBook
-        uses: peaceiris/actions-mdbook@v2
+      - name: Install mdBook and plugins
+        uses: taiki-e/install-action@v2
         with:
-          mdbook-version: "latest"
+          tool: mdbook,mdbook-linkcheck,mdbook-mermaid,mdbook-plantuml,mdbook-quiz
+      - name: Cache Cargo binaries
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/
+          key: ${{ runner.os }}-cargo-bin-termlink
+      - name: Install mdbook-termlink via Cargo
+        run: cargo install mdbook-termlink
       - name: Build the book
         run: mdbook build
       - name: Deploy to GitHub Pages
