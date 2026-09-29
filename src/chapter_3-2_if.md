@@ -114,11 +114,11 @@ for (int i = 0; ++i < 9;) {
 
 ### Break & Continue
 
-In loops, you may want to stop early or skip an iteration. That's what break and continue do. Break immediately stops the loop (in for it does not run the step) and continue immedietly ends this iteration of the loop and run the condition again (and the step in for)
+In loops, you may want to stop early or skip an iteration. That's what break and continue do. Break immediately stops the loop (in for it does not run the step) and continue immediately ends this iteration of the loop and run the condition again (and the step in for)
 
 ### Loop Loop
 
-That wasn't a typo. The `loop` loop is equivelant to `while (true) { }`.
+That wasn't a typo. The `loop` loop is equivalent to `while (true) { }`.
 
 ```qc
 loop {

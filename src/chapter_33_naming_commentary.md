@@ -15,7 +15,7 @@ Here's a quick reference;
 | Namespaces Not Meant For Inclusion | Pascal_Snake_Case | Unique casing style, more underscores, you have to be trying to include this.           |
 | Global Scope Functions | camel_Snake_Case | Unique casing style, more underscores, similarity to private methods is intentional, because global scope cannot be included. |
 | Methods Used By Compiler | _camelCase | Different from everything else. (Special methods recognized by the compiler (for example iterator methods).) |
-| Compiler Reserved | _qc_ |  __qc_ and qc_,Unique, hard to use accidently         |
+| Compiler Reserved | _qc_ |  __qc_ and qc_,Unique, hard to use accidentally         |
 | Compiler Intrinsics | `snake_case | Clearly distinguishes compiler intrinsics from user-defined functions.  |
 
 General formatting recommendations:
@@ -55,9 +55,9 @@ Why these conventions? Why are they so weird?
 Let's start from the bottom and go up.
 
 1. Files are `kebab-case`. I just decided this on the spot. I think it makes files more readable. You can use any case. Camel, Pascal, Snake, who cares.
-2. Pointer asterisks bindo to tye type rather than the variable, but...
+2. Pointer asterisks bindo to type type rather than the variable, but...
     This is because pointers are a pointer to a type. `int ***x` isn't true. It's a pointer _to_ a pointer to a pointer to a int. It's not a pointer to a pointer to a pointer _to_ a int.
-    The final `*` binds to the declarator becuase it says this symbol is a pointer _to_ this type.
+    The final `*` binds to the declarator because it says this symbol is a pointer _to_ this type.
 3. Types in namespaces should have short names, the namespace gets the descriptive one.
     This is because the namespace should organize the code, the types should be the code. Otherwise, we would be typing `Vector::ReverseIterator::Iterator::next` all day long.
 4. Namespaces should have either:
@@ -66,12 +66,12 @@ Let's start from the bottom and go up.
     3. Helper functions/utility functions. One big `Math` namespace is better than 50 namespaces with 1 function each.
     4. Anything, if directly mapping another languages code to C^4. You shouldn't need to refactor a full API to rewrite in C^4. That's some other open source persons job. (most likely mine)
 5. Namespaces should be like the UNIX philosophy.
-    Having one massive namespace with 500 uncorelated things not split into subnamespaces is just bad design.
+    Having one massive namespace with 500 uncorrelated things not split into subnamespaces is just bad design.
 
 6. Maximum line length: approximately 120 characters relative to the current indentation. Because of the nature of this language, you may be writing code in a method in a class in a namespace in a namespace. That's already 16 levels of indenation. Nobody needs to code like this:
 ```qc
 if (
- Som
+ Some
 ethin
 g
 ) {
@@ -81,7 +81,7 @@ g
 7. Tabs or spaces are both acceptable. Who cares?
 8. Use LF line endings. `\r\n` is stupid.
 9. `//` for comments. How the language works
-10. `///` for documentation comments. Just a convention, not inforced neither does it do anything. Borrowed from Zig.
+10. `///` for documentation comments. Just a convention, not enforced neither does it do anything. Borrowed from Zig.
 11. `//!` for file-level documentation. Same as above.
 12. File paths are written without quotes. I like includes looking clean.
-13. Place everything except `main` inside a namespace when practical. Idealy not much code should be private to your file.
+13. Place everything except `main` inside a namespace when practical. Ideally not much code should be private to your file.

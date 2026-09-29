@@ -1,6 +1,6 @@
 # Appendix I: EBNF
 
-This file contains a full formal EBNF grammer for C^4.
+This file contains a full formal EBNF grammar for C^4.
 
 ```EBNF
 binary-digit = '0' | '1' | '_' ;

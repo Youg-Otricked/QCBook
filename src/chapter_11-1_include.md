@@ -11,7 +11,7 @@ No, it's not.
 
 ## Exported
 
-If you want to include somthing from other code, you first create an `Exported` namespace.
+If you want to include something from other code, you first create an `Exported` namespace.
 
 ```qc
 namespace Exported {
@@ -27,7 +27,7 @@ namespace Exported {
 }
 ```
 
-The `Exported` namespace is the place where a file says "these things are so core to my execution that every includer must have them." It is auto-merged at include time, and should be reserved exclusivly for dependency inclusion.
+The `Exported` namespace is the place where a file says "these things are so core to my execution that every includer must have them." It is auto-merged at include time, and should be reserved exclusively for dependency inclusion.
 
 ## Include Syntax
 
@@ -53,7 +53,7 @@ There are two things being included here and one being included _from_:
 - `Utilities::Strings`
 - `myfile.qc`
 
-The first two are namespaces, while the last one is the includee file.
+The first two are namespaces, while the last one is the include file.
 
 ## Nested Namespaces
 

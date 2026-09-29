@@ -6,11 +6,11 @@ Time to do the age-old tradition: Printing hello, world! to console.
 
 ## Setup:
 
-Using the setup feature of the package manager won't be neccessary for such a  simple project.
+Using the setup feature of the package manager won't be necessary for such a  simple project.
 
 ## Basics:
 
-Create and open a main.qc file. C^4 files end with .qc, and are kebab-case (words seperated by -) 
+Create and open a main.qc file. C^4 files end with .qc, and are kebab-case (words separated by -) 
 
 Filename: main.qc
 ```qc
@@ -31,7 +31,7 @@ qc ./main.qc
 
 It should have printed `Hello, World!`, Mac and Linux alike. Congrats: You wrote a C^4 program.
 
-## Disection:
+## Dissection:
 
 Breaking it up:
 
@@ -42,7 +42,7 @@ int main() {
 
 This declares the `main` function. It's a special function that's called at the start of your program. It is always what runs first. The `int` means it returns a whole number (integer)
 
-The () mean this function takes no parameters (explained later). Paramaters would go inside the () if there were any.
+The () mean this function takes no parameters (explained later). Parameters would go inside the () if there were any.
 The function "body" (code) is wrapped in {}. Braces wrap all function bodys. According to C^4 style, the opening brace is on the same line as the definition.
 
 The body of the function is 
@@ -52,7 +52,7 @@ return 0;
 ```
 
 `` `qout `` is a compiler intrinsic that writes to console. All compiler intrinsics start with backtick. The string "Hello, World!\n" is what it will write.
-`return 0;` tells the OS that this program succesfully ran.
+`return 0;` tells the OS that this program successfully ran.
 
 ### Compilation and Execution.
 

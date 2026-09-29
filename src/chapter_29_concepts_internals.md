@@ -8,4 +8,4 @@ I just compile them and then delete them. If a error happens, then it errored.
 
 ## Design Commentary: Why this syntax?
 
-I designed concepts like this because I liked the idea of a concept being fully graphable, and whenever I think of the word `proof`, as you don't "require" a concept, you `prove` it. Concepts are always abstract, which is why I designed the syntax with these little chuncks that depend on eachother.
+I designed concepts like this because I liked the idea of a concept being fully graphable, and whenever I think of the word `proof`, as you don't "require" a concept, you `prove` it. Concepts are always abstract, which is why I designed the syntax with these little chunks that depend on each other.

@@ -70,7 +70,7 @@ DataLayout *datalayout() {
 
 If not using `Owned::Owned`, above your function make sure to put doc comments (see [Documentation Guidelines](#documentation-guidelines).
 
-## nullptr, errors as values, sentinals, or throw?
+## nullptr, errors as values, sentinels, or throw?
 
 Return nullptr IF:
 - You are a function creating something.
@@ -81,8 +81,8 @@ Use errors-as-values IF:
 - You are dealing with a common place error (invalid input, etc)
 - Or inplace of `throw` if you like them more.
 
-Use sentinals IF:
-- You are doing operations that return numbers and the sentinal is obviously a bad value.
+Use sentinels IF:
+- You are doing operations that return numbers and the sentinel is obviously a bad value.
 - Simpler operations where the other options would be overkill.
 
 Use throw IF:
@@ -100,7 +100,7 @@ The format is this:
 /// @param my_other_param More params, each on new lines.
 /// @return What the function returns.
 /// @return Next return value. Each on new lines.
-/// @note Notes that might not be obvious. Seperate lines when different things are covered.
+/// @note Notes that might not be obvious. Separate lines when different things are covered.
 /// @inval things_to_inval
 ```
 e.g.
@@ -115,7 +115,7 @@ e.g.
 
 Structs are `POD` in C^4. So when do I use them over classes?
 
-1. When you aren't trying to encapsulize. If you aren't trying to encapsulize, think if you like the code better when it uses struct-style imperitive functions or OOP-style with methods.
+1. When you aren't trying to encapsulize. If you aren't trying to encapsulize, think if you like the code better when it uses struct-style imperative functions or OOP-style with methods.
 2. When the class is small-ish.
 
 If using structs, make sure to pair your API!

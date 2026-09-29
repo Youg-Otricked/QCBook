@@ -23,7 +23,7 @@ These will be put next to code to show if they are meant to show something other
 | ---- | ------- |
 | ![panik](./images/panik.png) | Code does not compile |
 | ![using namespace std;](./images/bad.png) | This code is heavily discouraged |
-| ![Windows Millenium Edition Logo](./images/winme.png) | This code errors/crashes |
+| ![Windows Millennium Edition Logo](./images/winme.png) | This code errors/crashes |
 | ![Python Logo](./images/python.png) | This code does not produce the expected output. |
 
 ## Sections

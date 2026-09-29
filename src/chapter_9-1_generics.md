@@ -18,7 +18,7 @@ class VecXYZABCDEF {
 ```
 forever.
 
-Generics allow you to define types that are substituted with the users chosen type at compiletime.
+Generics allow you to define types that are substituted with the users chosen type at compile time.
 
 ## Basic Generics
 

@@ -4,7 +4,7 @@
 
 
 Classes are a core part of the Object Oriented Programming paradigm, which is on the middle of the idea of state.
-Imperitive -> State is external to the code
+Imperative -> State is external to the code
 **Object Oriented** -> State is part of the code
 Functional -> State is not a thing
 
@@ -58,7 +58,7 @@ Unlike functions, methods have _overloading_. This means that you can declare mu
 
 ## Access Control
 
-Some things we don't want accessable to everybody. That's what `private` is for. It makes somthing inaccessable to anything but this class and it's methods.
+Some things we don't want accessible to everybody. That's what `private` is for. It makes something inaccessible to anything but this class and it's methods.
 
 ```qc
 class Mine {
@@ -70,11 +70,11 @@ class Mine {
 }
 ```
 
-`public` is the default, and means accessable by everything. You can use it explicitly too.
+`public` is the default, and means accessible by everything. You can use it explicitly too.
 
 ## Inheritance
 
-Sometimes, you want to have the same fundemental building blocks in many classes. Does this mean you need to copy your code around in every class? No. This is because of inheritance: You make a Base (Parent) class that has the shared state, then the children _inherit_ from it. To inherit from a class you use the following syntax:
+Sometimes, you want to have the same fundamental building blocks in many classes. Does this mean you need to copy your code around in every class? No. This is because of inheritance: You make a Base (Parent) class that has the shared state, then the children _inherit_ from it. To inherit from a class you use the following syntax:
 
 ```qc
 class Base {
@@ -96,22 +96,22 @@ class Child : Base {
 }
 ```
 
-There is also another access specifier: `protected`. This makes a field accessable only by a class _and it's children_
+There is also another access specifier: `protected`. This makes a field accessible only by a class _and it's children_
 
 ## Static
 
 Static fields and methods belong to the class instead of a instance, and are access with the :: (scope resolution) operator.
 
 ```qc
-class Statics {
+class Statistics {
     static int x = 123; // static fields can have default initializers.
     static void doStuff() {
         ...
     }
     ...
 }
-int x = Statics::x; // 123
-Statics::doStuff();
+int x = Statistics::x; // 123
+Statistics::doStuff();
 ```
 
 ## Friend & Friendly
@@ -163,7 +163,7 @@ It's as you would expect for all the other binops, then unary operator overloads
     `operator[]=` runs on initialization with a array initializer. It takes a `<type> *` data and a `int` length.
     It can also be used as a constructor (e.g. `Array x = [1, 2, 3];`), so your code must be safe for running on a uninitialized instance.
 3. `operator[]`
-    `operator[]` runs on subscript. Remember in the reference lesson I talked about returning references? This is where it is usefull. If you heap allocate your data, 
+    `operator[]` runs on subscript. Remember in the reference lesson I talked about returning references? This is where it is useful. If you heap allocate your data, 
     you can make custom collection types subscript modify the data (for like `x[1] = 2`) by returning a REFERENCE to the data.
 4. `_repr`
     `_repr` takes no arguments and returns a string, the stringified version of the class. _repr is automatically called on print with %cs or in use of a fstring / converting anything to a string.
@@ -189,6 +189,22 @@ abstract class MyThing {
 }
 MyThing x;
 ```
+```bash
+$ qc ./testerrors.qc
+- Running...
+=== Diagnostics ===
+error invalid syntax: : QC-S090: Cannot make constructor on abstract class 'MyThing'
+ --> ./testerrors.qc:1:16
+  1 | abstract class MyThing {
+    |                ^^^^^^^
+  2 |     MyThing() {
+  3 |     }
+
+==============
+= Error Code =
+Program exited with code 1
+==============
+```
 
 ## Final
 
@@ -202,7 +218,7 @@ Here is the important part of OOP. Polymorphism.
 
 > Is that a Pokémon?
 
-No. Polymorphism basically allows for a pointer to a parent class to store a pointer to any child class. We want this becuase then you can use the pointer like the parent class but get the new behavior, allowing for the concept of _dependency injection_, which we will cover later.
+No. Polymorphism basically allows for a pointer to a parent class to store a pointer to any child class. We want this because then you can use the pointer like the parent class but get the new behavior, allowing for the concept of _dependency injection_, which we will cover later.
 
 ```qc
 class Base {
@@ -238,6 +254,6 @@ And that's because of the most unapreciated pointer ever: the _vpointer_.
 
 The vpointer is hell for me (the compiler engineer) to deal with, but not for you. Your vpointer is your best friend.
 
-For a measly 4 bytes of memory, the vpointer stores a mapping of every method name to the methods address, so that way instead of polymorphic pointers methods being called just calls the base classes method, it calls the _correct method_!
+For a measly 4/8 bytes of memory, the vpointer stores a mapping of every method name to the methods address, so that way instead of polymorphic pointers methods being called just calls the base classes method, it calls the _correct method_!
 
 

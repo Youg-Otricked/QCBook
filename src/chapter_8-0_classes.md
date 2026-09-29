@@ -6,4 +6,4 @@ Specifically, classes are part of the OOP paradigm. There are 3 core paradigms, 
 
 - Functional: State is not exist in code. (Radicaists).
 - OOP: State is internal to the code.
-- Imperitive: State is external to the code.
+- Imperative: State is external to the code.

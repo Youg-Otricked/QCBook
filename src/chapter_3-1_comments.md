@@ -1,6 +1,6 @@
 # Comments
 
-You already learned functions and variables and datatypes. Time to learn about somthing (literaly) useless: COMMENTS!
+You already learned functions and variables and datatypes. Time to learn about something (literally) useless: COMMENTS!
 
 ```qc
 // This line of code is ignored. 

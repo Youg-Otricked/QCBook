@@ -7,4 +7,4 @@ This chapter covers:
 - Aliases: giving an existing type an extra name (This is useful later on when generics come around so you don't need to type `X<Y<Y<Y<Y<Y<Y<Y<Y<Y<Y<Z>>>>>>>>>>>` more than once).
 - Unions: values that can be more than one type, without using the uno wild card that is `void *`.
 
-> Memory internals of enums and unions (how they're laid out, what `extract` is actually doing under the hood) will be covered in the revisiting chapters.
+> Memory internals of enums and unions (how they're laid out, etc) will be covered in the revisiting chapters.

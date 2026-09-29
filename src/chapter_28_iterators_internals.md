@@ -6,4 +6,4 @@ While iterators are mostly user code with defined standards, `foreach` loops sti
 
 Why this structure? Why these method names?
 
-I don't really have a elegent explaination. The `_` prefix indicates methods can be used by the compiler, and the methods names just describe what they do.
+I don't really have a elegent explanation. The `_` prefix indicates methods can be used by the compiler, and the methods names just describe what they do.

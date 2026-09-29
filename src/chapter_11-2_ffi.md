@@ -14,7 +14,7 @@ int add(int a, int b) {
 }
 :extern
 ```
-This is equivelant to 
+This is equivalent to 
 ```c
 extern "C" {
     int add(int a, int b) {
@@ -34,7 +34,7 @@ int add(int a, int b);
 :foreign
 ```
 
-This is like puting signatures in a `extern "C"` in other languages.
+This is like putting signatures in a `extern "C"` in other languages.
 
 Then, to actually link the .so/.a files for your C-imported code to work,
 
@@ -42,7 +42,7 @@ Then, to actually link the .so/.a files for your C-imported code to work,
     Add your link librarys and link. To add a link search directory:
         add -Lyour_directory to the compile command
     To link a library from a search dir (. is default)
-        add -lyour_lib to the compile command to link a .so/.a file in the current dir titled lib<name>.extention
+        add -lyour_lib to the compile command to link a .so/.a file in the current dir titled lib<name>.extension
         add -laspecificfile to link that exact file.
     To add a specific link command
         add -Wl,COMMAND

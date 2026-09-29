@@ -1,6 +1,6 @@
 # Your First Project
 
-Time to move past a single file. In this chapter we'll build a small program that takes a name and age as input and prints a formatted greeting, along the way covering variables, functions, input, and how formatters work.
+Time to move past a single file. In this chapter we'll build a small program that takes a name as input and prints a formatted greeting, along the way covering variables, functions, input, and how formatters work.
 
 ## Initializing a Project
 
@@ -11,8 +11,10 @@ mkdir greeter
 cd greeter
 qcm init
 ```
-Press `n` for all the questions about printing compiletime, dependencies and library.
+
+Press `n` for all the questions about printing compile time, dependencies and library.
 This creates the following structure:
+
 ```
 greeter/
     scope.yaml
@@ -24,17 +26,20 @@ greeter/
 ## Variables
 
 Declaring a variable in C^4 looks like this:
+
 ```qc
 int age = 25;
 string name = "Me";
 ```
+
 Type comes first, then the name, then `=` and a value. Unlike some languages, C^4 requires an explicit type. There's no implicit `let`-style inference outside of the `auto` keyword:
+
 ```qc
 auto age = 25; // compiler infers `int`
 ```
 
-| ![using namespace std;](./images/bad.png) | Prefer explicit types over `auto`. Inferred types are very occasionally usefull in real projects, however they are against the purpose of the language: being explicit, and make it harder to learn the type system. |
-| ---- | ---- |
+| ![using namespace std;](./images/bad.png) | Prefer explicit types over `auto`. Inferred types are very occasionally useful in real projects, however they are against the purpose of the language: being explicit, and make it harder to learn the type system. |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 You can then reassign (change the value of variables).
 
@@ -88,14 +93,16 @@ int x, int y = addmul(123, 321);
 
 ## Input
 
-To read from the user, use the `` qin `` feature, the inverse of `` `qout `` from Chapter 1. It reads a single line from standard input and puts it in a variable.
+To read from the user, use the `qin` feature, the inverse of `` `qout `` from Chapter 1. It reads a single line from standard input and puts it in a variable.
 
 ```qc
 string name = "";
 qin |> name;
 ```
+
 You can also input to multiple variables by chaining |>, and each variable will contain up to a space.
 You can also input to any type and it casts if possible and comptime-errors if not.
+
 ```qc
 int x;
 string name;
@@ -104,13 +111,14 @@ qin |> x |> name;
 
 ## Printing with Formatters
 
-You already saw plain strings in Chapter 1. For anything with variables mixed in, you must use formatters. You can't use `f-strings` or string concatenation (taught later) becuase the first argument must be a compile-time known string:
+You already saw plain strings in Chapter 1. For anything with variables mixed in, you must use formatters. You can't use `f-strings` or string concatenation (taught later) because the first argument must be a compile-time known string:
 
 ```qc
 string name = "Me";
 int age = 25;
 `qout("Hi %s, you are %i years old.\n", name, age);
 ```
+
 Each of those %'s represents a variable to be inserted.
 
 %b = bool
@@ -121,7 +129,8 @@ Each of those %'s represents a variable to be inserted.
 %i = int
 
 If you want to use % you type %%
-## Types 
+
+## Types
 
 The following types are the types you should familiarise yourself with.
 
@@ -169,11 +178,11 @@ This is what escape sequences are: They represent a character.
 
 ## Math
 
-You can do math on variables and basicaly any numerical value.
+You can do math on variables and basically any numerical value.
 
-+ = addition
-- = subtraction
-* = multiplication
+\+ = addition
+\- = subtraction
+\* = multiplication
 / = division
 % = modulus
 #^ = power
@@ -187,17 +196,20 @@ int x = 12;
 x + 2;
 `qout("%i", x);
 ```
+
 It prints 12! Is there a bug in the compiler?
 
 No. This happens because math operations only produce a value, not edit memory. If you wanted to assign the value, you would need to do:
+
 ```qc
 x = x + 2;
 ```
-However becuase this is so common, you can use combinational operators, where you append = to the math operator (except for power) and it is equivelent to the longer version.
+
+However because this is so common, you can use combinational operators, where you append = to the math operator (except for power) and it is equivelent to the longer version.
 
 ```qc
 x += 2;
-// is 
+// is
 x = x + 2;
 
 x -= 123;
@@ -207,6 +219,23 @@ x = x - 123;
 x %= 12;
 ...
 ```
+
+## Extra Math
+
+Adding/Subtracting one to something is so common, it has it's own operator!
+
+`++`/`--` are equivelent to `+= 1` and `-= 1`. However, they have both postfix and prefix versions.
+Postfix means return the value then do the operation, so 
+```qc
+int x = 0;
+int y = x++;
+```
+Makes y 0 and x 1. Prefix happens before.
+```qc
+int x = 0;
+int y = ++y;
+```
+Makes both x and y 1.
 
 ## Boolean Logic
 
@@ -219,7 +248,7 @@ These operations operator on true and false.
 
 true && true == true
 true || false == true
-true ^ false == true 
+true ^ false == true
 true ^ true == false
 !false == true
 
@@ -229,10 +258,11 @@ Comparison operators operate on any primitive.
 1 == 1 // true
 !=: inequality
 1 != 123 // true
->: greater than
-<: less than
->=: greater than or equal to
-<=: less than or equal to
+
+> : greater than
+> <: less than
+> =: greater than or equal to
+> <=: less than or equal to
 
 When using a value in a boolean context when it is not a bool, it is converted to "truthiness".
 Truthiness rules:
@@ -248,6 +278,7 @@ string: != ""
 Here's the full program.
 
 `main.qc`
+
 ```qc
 string ask_name() {
     `qout("What's your name? ");

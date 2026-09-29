@@ -4,7 +4,7 @@ Let's cover aliases first, as they are the simplest.
 
 ## Aliases
 
-Aliases are just subtituted strings at compile time. My function, `llvmTypeFor`, takes a type string and returns it's type in LLVM. And the first step is alias resolving. It literally just checks if the type is in the aliases map, and subtitutes it. Then does it again. And again.
+Aliases are just substituted strings at compile time. My function, `llvmTypeFor`, takes a type string and returns it's type in LLVM. And the first step is alias resolving. It literally just checks if the type is in the aliases map, and substitutes it. Then does it again. And again.
 
 ## Enums
 

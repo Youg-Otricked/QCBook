@@ -17,8 +17,8 @@ Table T1:
 | All pointers | `ptr`                                     | Pointers                               |
 | `bool`       | `u1`¹                                     | Conditions                             |
 | `qbool`      | `u2`¹                                     | 4 state logic/Error codes              |
-| `float`      | `f32`                                     | Low percision decimal numbers          |
-| `double`     | `f64`                                     | High percision decimal numbers         |
+| `float`      | `f32`                                     | Low precision decimal numbers          |
+| `double`     | `f64`                                     | High precision decimal numbers         |
 | Arrays       | Either `ptr` or `[<elemtype> x <count> ]` | Arrays                                 |
 | Usertypes    | LLVM structs                              | Structs                                |
 | Enums        | Depends                                   | Constant Groups                        |

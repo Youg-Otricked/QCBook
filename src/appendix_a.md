@@ -26,13 +26,13 @@ These are the currently in-use keywords:
 
 ## Type Modifiers
 - `const`: Makes a variable constant
-- `out`: Marks a paramater as write-only and says its memory address will not be copied.
-- `inout`: Marks a paramater as having a no-copy memory address.
-- `restrict`: Marks a pointer paramater as the only way to access this memory address in this function.
+- `out`: Marks a parameter as write-only and says its memory address will not be copied.
+- `inout`: Marks a parameter as having a no-copy memory address.
+- `restrict`: Marks a pointer parameter as the only way to access this memory address in this function.
 - `volatile`: Says not to optimize this.
 - `atomic`: Tells devs this is atomic (means nothing to the compiler, effectivly is a comment)
 - `long`: Modifier for int or double, doubles sizeof
-- `short`: Modifier for in, halfs size
+- `short`: Modifier for in, halves size
 ## Control Flow
 - `if`: if statement
 - `else`: else statement
@@ -88,7 +88,7 @@ These are the currently in-use keywords:
 - `static`: Makes a method/member belong to the class not the instances.
 
 ## Blocks
-- `namespace`: Adds a accessable scope block to code.
+- `namespace`: Adds a accessible scope block to code.
 - `try`/`catch`: The `catch` runs for the right type if a error is `throw`n in the `try` block.
 - `defer`: Makes this code run at end of normal scope exit (not stack unwinding).
 

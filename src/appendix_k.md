@@ -1,4 +1,4 @@
-# Appendix K: Compatiblity and Version History
+# Appendix K: Compatibility and Version History
 
 ## Versioning Scheme
 
@@ -36,14 +36,14 @@ Unlike semantic versioning, QuarticC versions describe the scale and category of
 
 Now that C^4 is in version x1.0+, deprecations will be documented and have warnings. Specifically:
 
-1. All code within the same _Moderate_ version will work with eachother (assuming the code compiles)
+1. All code within the same _Moderate_ version will work with each other (assuming the code compiles)
 2. Intended deprecations will have at LEAST 1 _Moderate_ version of notice before becoming fully deprecated
 3. Major versions are no-mans-land, and no feature is protected between major versions.
 
 There's a predefined macro for the current version: `__quarticc`
 ## ABI
 
-A C-ish ABI is used. The C ABI is followed except for pass-by-value structs becoming pointers if large enough. Names are C-compatible, using absolutly zero name mangling.
+A C-ish ABI is used. The C ABI is followed except for pass-by-value structs becoming pointers if large enough. Names are C-compatible, using absolutely zero name mangling.
 
 ```qc
 namespace X {

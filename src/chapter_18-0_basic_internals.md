@@ -27,7 +27,7 @@ Creates a 4 byte stack slot aligned with every 4 bytes and stores it in x.
 The `call` calls the `llvm.memset` intrinsic, which sets all the bits to 0, then finally the store stoes a 0 into x. The align 4 is there for the same reason as the alloca.
 
 In ASM, variables are just stored directly in memory. You know the stack? That's still a part of ASM. That alloca instruction just moves the stack pointer.
-The stack pointer points to where in the stack you are currently accessing. That's the `rsp` register. At the begining of your function, `rsp` is subtracted enough bytes to create enough space for the function, e.g.
+The stack pointer points to where in the stack you are currently accessing. That's the `rsp` register. At the beginning of your function, `rsp` is subtracted enough bytes to create enough space for the function, e.g.
 
 ```asm
 sub rsp, 64
@@ -72,9 +72,9 @@ define i32 @add(i32 %a, i32 %b) {
 }
 ```
 
-They look simmilar to normal parameters.
+They look similar to normal parameters.
 
-To call, the call instruction is emited.
+To call, the call instruction is emitted.
 
 ```llvm
 %res = call i32 @add(i32 12, i32 12)
@@ -112,7 +112,7 @@ The `` `qout `` intrinsic just turns your format string into a lot of calls, whi
 
 This actually works via something called _syscalls_, which are special functions exposed by the operating system that allows you to perform operations that you can't do by your self. Specifically, the `` `qout `` intrinsic uses the write syscall.
 
-Syscalls work like this: You move the number of the syscall (1 for write) into `rax`, then the arguments like normal calling conventions except `rcx` is `r10`, and then the return result is either not there or in rax. `rcx` and `r11` are destroyed by syscalls and are _caller save_, unlike _callee save_. All the argment registers + `r10` and `r11` are caller save, `rbp`, `rsp`, and `rip` are callee save.
+Syscalls work like this: You move the number of the syscall (1 for write) into `rax`, then the arguments like normal calling conventions except `rcx` is `r10`, and then the return result is either not there or in rax. `rcx` and `r11` are destroyed by syscalls and are _caller save_, unlike _callee save_. All the argument registers + `r10` and `r11` are caller save, `rbp`, `rsp`, and `rip` are callee save.
 The write syscalls argument 1 is the file descriptor to write to (Both input AND output are actually files! `0` is input (stdin), `1` is output (stdout), and `2` is error (stderr)), arg 2 is the text to write, and arg 3 is the length of the text.
 ```asm
 mov rax, 1
@@ -150,7 +150,7 @@ srem <type> <lhs> <rhs> ; above for modulus
 There are also floating point operations, prepended with `f`. The power instruction calls a runtime function.
 
 These actually just become `add` `sub` `mul`/`imul` (signed), and `div` instructions. On x86_64, `srem` is unecesarry, as the remainder of the division is stored in `rdx`.
-However this means the `rdx` register must be cleared out to use `div`, as it fills up rdx. To clear, a common practice is to use `xor rdx, rdx` becuase it's faster.
+However this means the `rdx` register must be cleared out to use `div`, as it fills up rdx. To clear, a common practice is to use `xor rdx, rdx` because it's faster.
 Signed numbers use the `idiv` instruction instead of `div` on asm. `srem` stands for `signed remainder`, and there is also a `rem` instruction for unsigned.
 To use `idiv`, you need to turn rax and rdi into one big signed number using the `cqo` instruction first.
 

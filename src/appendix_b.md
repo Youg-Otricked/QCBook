@@ -126,7 +126,7 @@ A definition listed below is present when the corresponding condition is true. P
 
 Comptime makes code execution happen at compile time. This is what `comptime if` does. Comptime if makes a if statement run at compile time if the expression is evaluatable at compile time.
 
-Comptime if can stop code from running period, which is usefull for:
+Comptime if can stop code from running period, which is useful for:
 
 ### Comptime Intrinsics
 
@@ -134,7 +134,7 @@ Currently there are 3 comptime intrinsics:
 
 1. `` `compile_error ``: Takes a string. Compile errors with that string.
 2. `` `compile_warn ``: Takes a string. Compile warns with that string.
-3. `` `compile_note ``: At some time a compile error or warning must have happended before it. Takes a string. Attaches a note to the latest error/warning with that string as its text.
+3. `` `compile_note ``: At some time a compile error or warning must have happened before it. Takes a string. Attaches a note to the latest error/warning with that string as its text.
 
 ### Comptime Expressions
 

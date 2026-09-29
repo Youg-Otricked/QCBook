@@ -4,7 +4,7 @@ The following table lists each compiler flag and what it does. (For flags with 2
 
 | Flag                     | Usage (For special flags)                                            | Does                                                                                                                                               |
 | ------------------------ | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--progress`             |                                                                      | Prints when the compiler makes it past each stage of the compilation proccess. It may print like `[PARSING]: main.qc [DONE PARSING]: main.qc` etc. |
+| `--progress`             |                                                                      | Prints when the compiler makes it past each stage of the compilation process. It may print like `[PARSING]: main.qc [DONE PARSING]: main.qc` etc. |
 | `--target`               | `qc --target x86-pc-gnu-linux ...`                                   | Sets the LLVM target triple to that target.                                                                                                        |
 | `--silent-version`/`-sv` | `qc -sv`/`qc --silent-version`                                       | Prints the version of the compiler with no other text                                                                                              |
 | `-O0`                    |                                                                      | Sets the optimization level to 0.                                                                                                                  |
@@ -22,19 +22,19 @@ The following table lists each compiler flag and what it does. (For flags with 2
 | `-co`/`--compile-only`   |                                                                      | Only compile to LLVM, do not compile the LLVM IR or link.                                                                                          |
 | `-oo`/`--object-only`    |                                                                      | Only compile to LLVM and compile the generated LLVM. Do not link.                                                                                  |
 | `-o`                     | `qc -o myfile ...`                                                   | Tells the compiler to output to a specific file.                                                                                                   |
-| `-ad`/`--alias-dir`      | `qc -ad ./llvm/core/lib/api/types/lib/int/binary llvm-binary-int...` | Alias a directory name as a seperate name for includes.                                                                                            |
-| `-A`/`--alias`           | `qc -A ./common/api/SQL/Lite/dump.qc sqlite-dump.qc ...`             | Alias a file name to a seperate name for includes.                                                                                                 |
+| `-ad`/`--alias-dir`      | `qc -ad ./llvm/core/lib/api/types/lib/int/binary llvm-binary-int...` | Alias a directory name as a separate name for includes.                                                                                            |
+| `-A`/`--alias`           | `qc -A ./common/api/SQL/Lite/dump.qc sqlite-dump.qc ...`             | Alias a file name to a separate name for includes.                                                                                                 |
 | `-L`                     | `qc -L my-dir ...`/`qc -Lmy-dir`                                     | Tells the compiler to also search in that directory for `.so`/`.a` files to link. (Search dirs always contain `.`.)                                |
 | `-l`                     | `qc -l m ...`/`qc -lm`                                               | Tells the compiler to link that `libARGUMENT.so/.a` from the search dirs.                                                                          |
-| `-Wl,`                   | `qc -Wl,...`                                                         | Add that argment directly to the linker.                                                                                                           |
+| `-Wl,`                   | `qc -Wl,...`                                                         | Add that argument directly to the linker.                                                                                                           |
 | `-d`/`--debug`           |                                                                      | Prints the optimization pass and function body before running on each function.                                                                    |
 | `-D`/`--define`          | `qc -D MY_THING ...`                                                 | Defines that name as a macro for 1.                                                                                                                |
 | `-h`/`--help`            | `qc -h`                                                              | Prints the help text.                                                                                                                              |
 
 ## Warnings
 
-Warnings are divided up into catagories, and those catagories are divided up into subcatagories.
-The catagories:
+Warnings are divided up into categories, and those categories are divided up into subcategories.
+The categories:
 
 - `all`: All warnings
 - `core`: The most important warnings
@@ -43,9 +43,9 @@ The catagories:
 
 Warnings have a few flags:
 
-- `-W`: Enable that catagory/subcatagory of warnings.
-- `-E`: Enable that catagory/subcatagory of warnings as errors.
-- `-Wno-`: Disable that catagory/subcatagory of warnings.
+- `-W`: Enable that category/subcategory of warnings.
+- `-E`: Enable that category/subcategory of warnings as errors.
+- `-Wno-`: Disable that category/subcategory of warnings.
 
 Example:
 

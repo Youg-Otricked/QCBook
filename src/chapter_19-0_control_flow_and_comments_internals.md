@@ -6,14 +6,14 @@ Comments literally dont exist in the final file.
 
 ### Conditionals
 
-`if` is not a concept of llvm. Instead, `if` statements become jumps. You see, in asm, you compare things with the `cmp` instruction. This sets specific flag bits in the RFLAGS register, which comunicates with the Arithemtic Logic Unit of your CPU what results where true for the instruction. In LLVM, you use the `icmp` and `fcmp` instruction, which returns a i1, the result of the comparison e.g.
+`if` is not a concept of llvm. Instead, `if` statements become jumps. You see, in asm, you compare things with the `cmp` instruction. This sets specific flag bits in the RFLAGS register, which communicates with the Arithmetic Logic Unit of your CPU what results where true for the instruction. In LLVM, you use the `icmp` and `fcmp` instruction, which returns a i1, the result of the comparison e.g.
 
 ```llvm
 %cond = icmp ne i32 123, i32 21 ; checks if 132 != 21
 %cond2 = icmp sge i32 12, i32 12 ; checks if 12 >= 12
 ```
 
-In ASM, you seperate code with labels, which are just named segments in your code.
+In ASM, you separate code with labels, which are just named segments in your code.
 ```asm
 my_label:
     add 123, 321
@@ -46,7 +46,7 @@ _start:
     jg my_label ; jumps IF ZF == 0 and SF == OF (greater than)
 ```
 
-In LLVM, you instead use the `br` instruction. `br` ing a plain label is equivelant to a `jmp` instruction
+In LLVM, you instead use the `br` instruction. `br` ing a plain label is equivalent to a `jmp` instruction
 ```llvm
 1:
     ; my stuff
@@ -166,7 +166,7 @@ And these can become various instructions, such as `cmovl`(conditional move).
 Loops basically take the concept of labels on steroids.
 ### While Loop
 
-The while loop is like a if statement, except it jumps to the begining if a condition is true.
+The while loop is like a if statement, except it jumps to the beginning if a condition is true.
 
 ```qc
 int x = 5;
@@ -196,7 +196,7 @@ while.end:
 ```
 A if statement with a jump to the condition at the end of `then:` is just a loop.
 
-Thus, this LLVM would become somthing like 
+Thus, this LLVM would become something like 
 ```asm
     mov eax, [x]
     jmp .while.cond
@@ -265,7 +265,7 @@ In ASM:
 
 ### Break & Continue
 
-Break just creates an immediate `br label %<loop>.end`, and continue just creates a `br label %for.inc`/`br label %while.cond`/it's equivelant ASM.
+Break just creates an immediate `br label %<loop>.end`, and continue just creates a `br label %for.inc`/`br label %while.cond`/it's equivalent ASM.
 ## Do While Loop
 
 The do-while loop is actually really simple!
@@ -325,7 +325,7 @@ becomes
   %x = alloca i32, align 4
   store i32 0, ptr %x, align 4
   %x1 = load i32, ptr %x, align 4
-  switch i32 %x1, label %switch.default [ ; switch on value x1, with defualt label switch.default
+  switch i32 %x1, label %switch.default [ ; switch on value x1, with default label switch.default
     i32 1, label %switch.case ; on 1 jump to .case
     i32 2, label %switch.case2 ; on 2 jump to .case2
     i32 0, label %switch.case3 ; on 3 jump to .case3 
@@ -396,6 +396,6 @@ Meanwhile, in else if chains, assuming == conditions (equivelent to switch condi
 
 For switch, in the above example it is always 7.
 
-But imagine if it gets bigger. And if it gets even bigger, it can use _binary search_. That means for if in the middle of a 100000 case set thats 150000 instructions. For binary search that's around 51. 
+But imagine if it gets bigger. And if it gets even bigger, it can use _binary search_. That means for if in the middle of a 100000 case set that's 150000 instructions. For binary search that's around 51. 
 
-We have one more terminator, too along with `break` and `continue`: `unreachable`! It compiles straight down to LLVM unreachable. It's for optimization purposes, and if you run it, it's UB because the compiler didn't do any cleanup past unreachable becuase... it's unreachable.
+We have one more terminator, too along with `break` and `continue`: `unreachable`! It compiles straight down to LLVM unreachable. It's for optimization purposes, and if you run it, it's UB because the compiler didn't do any cleanup past unreachable because... it's unreachable.

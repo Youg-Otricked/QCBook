@@ -30,6 +30,11 @@ x = "hello";
 `qout("%s", `typeof(x)); // string
 ```
 
+You can also use the typeof keyword.
+```qc
+typeof x; // still string
+```
+
 ### Constant Members
 
 Unions aren't limited to types — they can also be restricted to specific constant values:

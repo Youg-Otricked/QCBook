@@ -81,14 +81,14 @@ catch.0:                                          ; preds = %catch.landing
   br label %try.end
 
 catch.1:                                          ; preds = %catch.landing
-  %exception.value.ptr1 = getelementptr inbounds nuw { ptr, i32 }, ptr %exception, i32 0, i32 1 ; second catch: gets the value and stores it into the %i from ealier
+  %exception.value.ptr1 = getelementptr inbounds nuw { ptr, i32 }, ptr %exception, i32 0, i32 1 ; second catch: gets the value and stores it into the %i from earlier
   %exception.value2 = load ptr, ptr %exception.value.ptr1, align 8
   %caught.value3 = load i32, ptr %exception.value2, align 4
   call void @llvm.memset.p0.i64(ptr align 4 %i, i8 0, i64 4, i1 false)
   store i32 %caught.value3, ptr %i, align 4
   br label %try.end
 
-catch.2:                                          ; no store/load because you cant get a untyped value.
+catch.2:                                          ; no store/load because you can't get a untyped value.
   br label %try.end
 
 invoke.cont.0:                                    ; no error
@@ -98,7 +98,7 @@ catch.no_match:                                   ; no match: continue the perso
   resume { ptr, i32 } %qc.exception
 }
 ```
-I explained as best as I could. (Read the heavily commeneted LLVM).
+I explained as best as I could. (Read the heavily commented LLVM).
 
 Here's a graph for what happens.
 ```mermaid

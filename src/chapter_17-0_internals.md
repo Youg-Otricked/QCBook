@@ -1,16 +1,20 @@
 # Internals
 
 > The sciences, each straining in its own direction, have hitherto harmed us little; but some day the piecing together of dissociated knowledge will open up such terrifying vistas of reality.
+>
 > > H.P. Lovecraft, The Call Of Cthulu
 
 Up until now, we've mostly been covering _using_ C^4. For almost the entire remainder of the book, we're going to look at how C^4 actually works, how the compiler turns your code into something a computer can execute, and why
+
 ```qc
 if (x > 0) {
     return 1;
 }
 return 0;
 ```
+
 becomes
+
 ```llvm
     %x1 = load i32, ptr %x, align 4
     %icmpgt = icmp sgt i32 %x1, 0
@@ -20,16 +24,20 @@ then:
 ifcont:
     ret i32 0 ; preds = %entry
 ```
+
 before becoming
+
 ```asm
     mov rax, [x]
     cmp rax, 0
     jg then
     jmp ifcont
 then:
-    ret 1
+    mov rax, 0
+    ret
 ifcont:
-    ret 0
+    mov rax, 1
+    ret
 ```
 
 You don't need to understand compiler internals to write C^4. You do, however, need to understand them if you want to know why the language behaves the way it does, how the compiler works, or why your perfect three-line program turned into several hundred lines of machine code.
@@ -49,11 +57,12 @@ Your CPU doesn't understand `int`, variable declarations, or C^4 syntax. The C^4
 ## Lexing
 
 The first thing the compiler needs to do is to tokenize your source code. This turns some text like this:
+
 ```qc
 int x = 10;
 ```
 
-into smaller chuncks of text with specific meanings, tokens.
+into smaller chunks of text with specific meanings, tokens.
 
 ```text
 KEYWORD int
@@ -62,7 +71,7 @@ EQ =
 INT 10
 ```
 
-We don't compile text directly because that significantly increases the dificulty of compilation & parsing, because it requires a lot of backtracking.
+We don't compile text directly because that significantly increases the difficulty of compilation & parsing, because it requires a lot of backtracking.
 
 ## Parsing
 
@@ -84,7 +93,7 @@ EQ =
 INT 10
 ```
 
-The compile still cannot do somthing usefull with this.
+The compile still cannot do something useful with this.
 Instead, it can represent it more like:
 
 ```text
@@ -175,7 +184,7 @@ That would mean the C^4 compiler would need to understand things such as:
 - different CPU architectures
 
 And then it would have to do all of that again for another architecture.
-Some people wouldnt want to maintain 1 version of the compiler. Why would you think I hate myself enough to maintain 12?
+Some people wouldn't want to maintain 1 version of the compiler. Why would you think I hate myself enough to maintain 12?
 
 > You would probably think correctly though. At some point in time, a not only self-hosted (written in C^4), but directly-to-asm compiler is coming. It probably will only support x86-64 and ARM64 though.
 

@@ -2,7 +2,7 @@
 
 ## Methods
 
-When a method is compiled, it's compiled with an additional first argument, the `this` pointer, and the name is just prefixed wit the class name followed by a _.
+When a method is compiled, it's compiled with an additional first argument, the `this` pointer, and the name is just prefixed with the class name followed by a _.
 
 ```qc
 class MyClass {
@@ -75,7 +75,7 @@ These simple mangling rules allow C^4 llvm to always be readable.
 
 ## Access Control
 
-Access control is not a concept in LLVM. Instead, whenever you preform a operation on a method the compiler checks if you are allowed to. It's a ZERO COST!
+Access control is not a concept in LLVM. Instead, whenever you perform a operation on a method the compiler checks if you are allowed to. It's a ZERO COST!
 
 ## Inheritance
 
@@ -102,7 +102,7 @@ define i32 @"Thing::add"(i32 a, i32 b) { ; quoted identifier to allow : in the n
 
 ## Friend & Friendly
 
-Just sets metadata. Nothign special. Just like access control.
+Just sets metadata. Nothing special. Just like access control.
 
 ## Operator Overloading
 

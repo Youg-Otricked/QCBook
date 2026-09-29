@@ -33,7 +33,7 @@ getelementptr %struct.Ints, ptr %y, i32 0, i32 0
 - the first `i32 0` is the starting offset.
 - the second `i32 0` is the field index relative to the starting offset. (in this case field 0, x)
 
-These integers need to be known at compiletime.
+These integers need to be known at compile time.
 The `getelementptr` instruction returns a pointer to the element... obviously. `getelementptr`. `Get` `Element` `Pointer`
 
 Sizeof might give a unexpected size. We know `sizeof char` is 1, and `sizeof int` is 4. So why is
@@ -55,12 +55,12 @@ Not exactly. `mmap` is _slow_. That's because syscalls in general are slow. Not 
 On x86, there are 4 levels but only 2 matter: Ring 0, which gives you absolute control and no protection. However only the OS has access to this memory. Ring 3 is userspace, which gives you memory protection and other things like this. In ring 0, everything can access all the memory, and one bad pointer crashes the OS. In ring 3, memory is isolated between programs, so your browser can't read the memory from your password manager.
 Some asm instructions are restricted in ring 3, and instead of normal memory access, when you _think_ you accessed an address, you are accessing virtual memory. Virtual memory are fake addresses that map to real addresses.
 
-Becuase these addresses arn't real, you can't direct access specific addresses in ring 3. This is why you need syscalls.
+Because these addresses arn't real, you can't direct access specific addresses in ring 3. This is why you need syscalls.
 Syscalls jump straight to ring 0, and run a function exposed by the kernel, allowing you to do things like reading and writing to files.
-That jump from ring 0 to ring 3 is the slow part. However, because `mmap` allocates one full page and just gives you the chunck size you asked for, allocating 1 byte and 4 kilobytes takes the exact same amount of time.
+That jump from ring 0 to ring 3 is the slow part. However, because `mmap` allocates one full page and just gives you the chunk size you asked for, allocating 1 byte and 4 kilobytes takes the exact same amount of time.
 
 So, `malloc` just grabs a FULL page of memory, then slowly segments it into little chunks till there is not enough left, then it allocates another page.
-Free just... says the split chunk is useable again. Eventually once enough memory is freed (typically 1 page), it calls the `unmap` syscall, which unallocates.
+Free just... says the split chunk is usable again. Eventually once enough memory is freed (typically 1 page), it calls the `unmap` syscall, which unallocates.
 Realloc basically is a tiny wrapper around malloc, and `calloc` basically just `memcpy`s the memory and fills it with `0`.
 
 ## Lvalues and Rvalues
@@ -107,7 +107,7 @@ C^4 is designed to allow you to do anything, so be that that thing might be segf
 
 ## Bitwise Operator Design Commentary
 
-You may have seen some intresting choices in the bitwise section. They have their reasons.
+You may have seen some interesting choices in the bitwise section. They have their reasons.
 
 ### Why $ Instead of ^
 
@@ -123,7 +123,7 @@ I find that something that is a core to systems engineering should have you do s
 
 ### Why Dedicated Logical VS Arithmetic RSHFT?
 
-C^4 is designed to be an explicit language. Nonsense like `>>` is arithemtic when signed and logical when unsigned is the definition of implicit. Sometimes you want to logical rshift a signed value.
+C^4 is designed to be an explicit language. Nonsense like `>>` is arithmetic when signed and logical when unsigned is the definition of implicit. Sometimes you want to logical rshift a signed value.
 
 ### Why Do the Shifts Look Like That?
 

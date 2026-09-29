@@ -7,7 +7,7 @@ Open returns a file descriptor, `read` returns the amount of bytes read, `write`
 
 ## Defer
 
-Defer just emits your defered code on every scope exit.
+Defer just emits your deferred code on every scope exit.
 
 ```qc
 int main() {

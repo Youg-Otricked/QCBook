@@ -1,6 +1,7 @@
 # Appendix D: Operators/Symbols
 
 This appendix contains a glossary of C^4’s operators and other symbols
+
 ## Operators
 
 Table B1 contains the operators in C^4, an example of how the operator would appear in context, a short explanation, and whether that operator is overloadable. If an operator is overloadable, the method name and parameters it would be called with are shown.
@@ -38,7 +39,7 @@ Table B1
 | `/`      | `expr / expr`            | Division                      | `operator/(rhs)`       | `roperator/(lhs)`    |
 | `/=`     | `lval / expr`            | Division + Assignment         | `operator/=(other)`    |                      |
 | `:`      | `ident: expr`            | Struct field initializer      |                        |                      |
-| `::`     | `ident::ident`           | Namespace Path Seperator      |                        |                      |
+| `::`     | `ident::ident`           | Namespace Path Separator      |                        |                      |
 | `;`      | `expr;`                  | Statement and item terminator |                        |                      |
 | `<<`     | `expr << expr`           | Left-shift                    | `operator<<(rhs)`      | `roperator<<(lhs)`   |
 | `<<=`    | `lval <<= expr`          | Left-shift + Assignment       | `operator<<=(other)`   |                      |
@@ -90,11 +91,12 @@ Table B-2: Stand-alone Syntax
 | `R"(...)"`, `R"(...)"`, `R"(<...>)"`, `R"({<[...]>})"` and so on | Raw string literal; escape characters not processed          |
 | `'.'`                                                            | Character literal                                            |
 | `fn(argtype argname, ...) -> rettype { code }`                   | Lambda                                                       |
-| `_`                                                              | "Ignored" variable, integer seperator literals readable      |
+| `_`                                                              | "Ignored" variable, integer separator literals readable      |
 
 Table B-3 shows symbols that appear in the context of generics.
 
 Table B-3: Generics
+
 | Symbol                                  | Explanation                                                                     |
 | --------------------------------------- | ------------------------------------------------------------------------------- |
 | `path<...>`                             | Specifies parameters to a generic type/method/function, e.g. `Vector::Vec<int>` |
@@ -108,44 +110,49 @@ Table B-3: Generics
 Table B-5 shows symbols that appear in the context of constraining generic type parameters.
 
 Table B-5: Type Constraints
-| Symbol | Explanation |
-| ------ | ----------- |
-| `T(proves U:)` | Generic parameter T constrained to types that prove U |
-| `T(:int|string)` | Generic parameter T must be a int or a string |
-| `T(:!int|string)` | Generic parameter T may not be int or string |
-| `T(proves X && Y)` | Combining concepts |
+
+| Symbol             | Explanation                                            |
+| ------------------ | ------------------------------------------------------ |
+| `T(proves U:)`     | Generic parameter T constrained to types that prove U  |
+| `T(:int\|string)`  | Generic parameter T must be a int or a string          |
+| `T(:!int\|string)` | Generic parameter T may not be int or string           |
+| `T(proves X && Y)` | Combining concepts                                     |
 | `T(proves U:!int)` | Generic parameter T must both not be a int and prove U |
 
 Table B-6 shows symbols that create comments.
 
 Table B-6: Comments
-| Symbol	| Explanation   |
-| ------ | ----------- |
+
+| Symbol    | Explanation   |
+| --------- | ------------- |
 | `//`      | Line comment  |
 | `/*...*/` | Block comment |
 
 Table B-8 shows the contexts in which parentheses are used.
 
 Table B-8: Parentheses
-| Symbol | Explanation |
-| ------ | ----------- |
-| `(expr)` | Parenthesized expression |
-| `expr(expr, ...)`	| Function/method call expression | 
+
+| Symbol            | Explanation                     |
+| ----------------- | ------------------------------- |
+| `(expr)`          | Parenthesized expression        |
+| `expr(expr, ...)` | Function/method call expression |
 
 Table B-9 shows the contexts in which curly brackets are used.
 
 Table B-9: Curly Brackets
-| Context | Explanation |
-| ------- | ----------- |
-| `{...}`	  | Block expression |
-| `Type{...}` | Struct literal |
+
+| Context     | Explanation      |
+| ----------- | ---------------- |
+| `{...}`     | Block expression |
+| `Type{...}` | Struct literal   |
 
 Table B-10 shows the contexts in which square brackets are used.
 
 Table B-10: Square Brackets
-| Context | Explanation |
-| ------- | ----------- |
-| `[...]` | Array literal |
-| `[type, len]` | Empty array literal containing len 0-initialized `type`s |
-| `expr[expr]`	| Collection indexing; overloadable (`operator[](index)`) |
-| Array Assign | Assigning with a array. Overloadable (`operator[]=(coll, len)`) |
+
+| Context       | Explanation                                                     |
+| ------------- | --------------------------------------------------------------- |
+| `[...]`       | Array literal                                                   |
+| `[type, len]` | Empty array literal containing len 0-initialized `type`s        |
+| `expr[expr]`  | Collection indexing; overloadable (`operator[](index)`)         |
+| Array Assign  | Assigning with a array. Overloadable (`operator[]=(coll, len)`) |

@@ -2,7 +2,7 @@
 
 ## Variadics
 
-The standard C^4 variadics (Not the C ones useable via extern) are just a compiler-backed struct with fancy intrinsics. The struct looks like this:
+The standard C^4 variadics (Not the C ones usable via extern) are just a compiler-backed struct with fancy intrinsics. The struct looks like this:
 
 ```qc
 struct qc_variadic {
@@ -31,7 +31,7 @@ int main() {
 }
 
 ```
-(Using a argument becuase we want the pointer to Hello)
+(Using a argument because we want the pointer to Hello)
 becomes this exact LLVM (at O2)
 ```llvm
 @.str.44 = private constant [6 x i8] c"Hello\00"

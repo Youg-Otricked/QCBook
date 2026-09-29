@@ -1,8 +1,9 @@
 # Inline ASM
 
 ## Raw Strings
+
 Raw strings allow you to put any character in your string, raw. This includes multi-line strings. To make a raw string, before the opening quote you put a `R`, and right after the quote you put some
-combination of (, ), {, }, [, ], <, and >, then when you are done with your string you put the inverse of that. e.g.
+combination of (, ), {, }, \[, \], <, and >, then when you are done with your string you put the inverse of that. e.g.
 
 ```qc
 R"([<(
@@ -10,7 +11,7 @@ I Can
 Contain anything 
  even unico
 de!`                    and tabs and """"" quotes!<A<<<<E< 
-I end with the invers of the opening, which is 
+I end with the inverse of the opening, which is 
 )>])"
 ```
 
@@ -26,7 +27,7 @@ To use arguments in inline asm, you use the following format:
 
 `$<argnum>[=]<i|m|g|r>`
 
-= makes a argument a output. All outputs must go before inputs. I makes a argument a constant integer, m makes a argument go in memory, g makes a argument somthing, and r makes a argument go in a register.
+= makes a argument a output. All outputs must go before inputs. I makes a argument a constant integer, m makes a argument go in memory, g makes a argument something, and r makes a argument go in a register.
 
 You cannot make a i or g argument a output.
 
@@ -44,4 +45,9 @@ e.g.
 ```qc
 `inline(R("
 "), "~{rsp}");
+```
+```bash
+$ ./a.out
+Segmentation Fault (Core Dumped)
+$
 ```
