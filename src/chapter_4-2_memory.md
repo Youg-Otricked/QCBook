@@ -131,7 +131,7 @@ For example, instead of passing an enormous object to a function by copying the 
 Normally functions are pass-by-value, meaning the value is copied when the function is called.
 
 ```qc
-int add (int a, int b) {
+void add (int a, int b) {
     a += b;
 }
 int main() {
@@ -145,7 +145,7 @@ Pointers allow you to pass the actual memory address and thus directly mutate th
 To dereference a pointer you use the `*` unary operator (not to be confused with the `*` (multiplication) binop)
 
 ```qc
-int add(int *x, int y) {
+void add(int *x, int y) {
     *x += y;
 }
 int main() {
@@ -713,7 +713,7 @@ Shifts precedancy sits between multiplication & division and plus & minus
 
   ```
   1001 <<< 0001 = 0011
-  -7       1      4
+  -7       1      3
   0110 <<< 0010 = 1001
   6        2      -7
   ```

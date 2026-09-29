@@ -138,8 +138,8 @@ The following types are the types you should familiarise yourself with.
 | -------- | ------------------------------------------- |
 | `bool`   | `true` or `false`                           |
 | `int`    | A whole number between -2.1 and 2.1 billion |
-| `float`  | A seven meaningful digit decimal number     |
-| `double` | A 14 meaningful digit decimal number        |
+| `float`  | A ~6 meaningful digit decimal number        |
+| `double` | A ~15 meaningful digit decimal number       |
 | `string` | A string of text                            |
 | `char`   | A single letter                             |
 
@@ -150,7 +150,7 @@ Literals are the name for values. Here are the important ones:
 bool literal (has bool type)
 `true` and `false`
 
-int litral (has int type)
+int literal (has int type)
 Just a number. e.g. 1346
 
 float literal (has float type)
@@ -225,16 +225,20 @@ x %= 12;
 Adding/Subtracting one to something is so common, it has it's own operator!
 
 `++`/`--` are equivelent to `+= 1` and `-= 1`. However, they have both postfix and prefix versions.
-Postfix means return the value then do the operation, so 
+Postfix means return the value then do the operation, so
+
 ```qc
 int x = 0;
 int y = x++;
 ```
+
 Makes y 0 and x 1. Prefix happens before.
+
 ```qc
 int x = 0;
 int y = ++y;
 ```
+
 Makes both x and y 1.
 
 ## Boolean Logic

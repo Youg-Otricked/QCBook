@@ -254,6 +254,5 @@ And that's because of the most unapreciated pointer ever: the _vpointer_.
 
 The vpointer is hell for me (the compiler engineer) to deal with, but not for you. Your vpointer is your best friend.
 
-For a measly 4/8 bytes of memory, the vpointer stores a mapping of every method name to the methods address, so that way instead of polymorphic pointers methods being called just calls the base classes method, it calls the _correct method_!
-
+For a measly 4/8 bytes of memory, the vpointer stores a pointer to a global mapping of every method index to the methods address, so that way instead of polymorphic pointers methods being called just calls the base classes method, it calls the _correct method_!
 
