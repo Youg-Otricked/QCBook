@@ -1,6 +1,5 @@
 ## Summary
 
-[Glossary](./reference/glossary.md)
 [Introduction](./chapter_0-0_introduction.md)
 
 1. [Getting Started](./chapter_1-0_start.md)
@@ -74,3 +73,4 @@
     - [Appendix I](./appendix_i.md)
     - [Appendix J](./appendix_j.md)
     - [Appendix K](./appendix_k.md)
+- [Glossary](./reference/glossary.md)

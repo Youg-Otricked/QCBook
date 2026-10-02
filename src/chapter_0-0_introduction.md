@@ -4,8 +4,8 @@ It's a book.
 
 ## Who's C^4 for?
 
-People like me. People who want speed, control, power, and a language that doesn't have 5 new arguments every hour and a new failed successor every 15 minutes.
-C^4 strives for clean code, no bad practices, readable syntax, and not saying "Uhhhh its not a zero-cost so... you must hate me and my entire bloodline".
+People who want speed, control, power, and a language that doesn't have 5 new arguments every hour and a new failed successor every 15 minutes.
+C^4 strives for clean code, as few bad practices as possible, readable syntax, and not saying "Uhhhh its not a zero-cost so... you must hate me and my entire bloodline".
 
 ## Who's this book for?
 
@@ -15,8 +15,6 @@ Anybody who wants to learn the what, how, and why of C^4.
 
 Just read it. It's preferred to code along, and you will be prompted to along the way, but just reading it is good enough.
 
-Gonna steal this one straight from the rust book:
-
 These will be put next to code to show if they are meant to show something other than "good" code:
 
 | Logo | Meaning |
@@ -25,6 +23,8 @@ These will be put next to code to show if they are meant to show something other
 | ![using namespace std;](./images/bad.png) | This code is heavily discouraged |
 | ![Windows Millennium Edition Logo](./images/winme.png) | This code errors/crashes |
 | ![Python Logo](./images/python.png) | This code does not produce the expected output. |
+
+###### Yes, I stole this from that one programming language book
 
 ## Sections
 
