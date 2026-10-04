@@ -64,6 +64,6 @@ qc main.qc -o hello
 This command would create a binary named hello.
 
 If you use languages like `Python` or `JavaScript`,
-A: Welcome to a real language,
+A: Welcome to a real language (`\j`),
 B: You may not be used to a 2-step run. That's because those languages are `interpreted ` which means they are ran line-by-line, but C^4 is `Ahead Of Time Compiled`
 meaning it is turned into a binary and then ran. This is significantly faster, and allows shipping just a binary instead of both your source code and a interpreter for your language.

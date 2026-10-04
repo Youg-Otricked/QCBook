@@ -34,10 +34,10 @@ This is what enums exist to fix.
 ## Defining an Enum
 ```qc
 enum Directions {
-    NORTH = 1;
-    SOUTH = 2;
-    EAST = 3;
-    WEST = 4;
+    NORTH;
+    SOUTH;
+    EAST;
+    WEST;
 }
 ```
 
@@ -57,3 +57,22 @@ move(Directions.NORTH);
 ```
 This is better in every way shape and form than the sentinel-value approach from the top of this chapter. The compiler now knows `move` accepts a `Directions`, which is just a int. Naming constants in a enum prevents technical debt, and stops a bluesky rant because the owner of the codebase hates poor people you decided.
 
+Enums can also have tags, special values that go with the enum:
+
+```qc
+enum Thing {
+    Valued(int);
+    NoValue;
+}
+```
+
+So the `Valued` member of the enum `Thing` has a `int` tag.
+Then, you can extract the tags in a _match_, which is like a switch, but it MUST be exaustive (cover every case, so all enum members or have a default in a non enum type).
+
+```qc
+Thing mything = Thing.Valued(123); // creates a thing with valued tag set to 123
+match (mything) {
+    Thing.Valued(x) /* x is the i32 value stored in mything */ => ...
+    Thing.NoValue => ...
+}
+```

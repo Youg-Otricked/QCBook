@@ -30,10 +30,10 @@ These will be put next to code to show if they are meant to show something other
 
 This book will be split into 4 sections.
 
-1. How use the language
-2. How does the language 
-3. How make stuff for the language
-4. How use stuff made for the language.
+1. How to use the language
+2. How to does the language 
+3. How to make stuff for the language
+4. How to use stuff made for the language.
 
 Any large code block will probably be heavily commented, and should be read (especially in section 2)
 

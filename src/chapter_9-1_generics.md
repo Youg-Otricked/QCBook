@@ -186,7 +186,7 @@ class Printer {
 
 # Generic... Everything?
 
-Any usertype can be generic other than enums. Structs, aliases, unions, all of it.
+Any usertype can be generic. Structs, aliases, unions, all of it.
 
 ---
 

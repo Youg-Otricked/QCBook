@@ -169,24 +169,25 @@ Any single character wrapped in ''
 
 You cannot just type certain characters in a string or char (namely a newline, tab, " (in string) and ' (in char))
 This is what escape sequences are: They represent a character.
-
+```
 \n == newline
 \t == tab
 \" == "
 \' == '
 \0 == nothing
+```
 
 ## Math
 
 You can do math on variables and basically any numerical value.
-
-\+ = addition
-\- = subtraction
-\* = multiplication
+```
++ = addition
+- = subtraction
+* = multiplication
 / = division
 % = modulus
 #^ = power
-
+```
 ### Combinational Operations
 
 You may notice if you have code like this:
@@ -236,7 +237,7 @@ Makes y 0 and x 1. Prefix happens before.
 
 ```qc
 int x = 0;
-int y = ++y;
+int y = ++x;
 ```
 
 Makes both x and y 1.
@@ -244,7 +245,7 @@ Makes both x and y 1.
 ## Boolean Logic
 
 These operations operator on true and false.
-
+```
 && = left and right are true
 || = either side is true
 ^ = exactly one side is true
@@ -255,9 +256,9 @@ true || false == true
 true ^ false == true
 true ^ true == false
 !false == true
-
+```
 Comparison operators operate on any primitive.
-
+```
 ==: equality
 1 == 1 // true
 !=: inequality
@@ -267,16 +268,16 @@ Comparison operators operate on any primitive.
 > <: less than
 > =: greater than or equal to
 > <=: less than or equal to
-
+```
 When using a value in a boolean context when it is not a bool, it is converted to "truthiness".
 Truthiness rules:
-
+```qc
 int: != 0
 float: != 0.0f
 double: != 0.0
 char: != '\0' // null escape sequence
 string: != ""
-
+```
 ## Putting It Together
 
 Here's the full program.
