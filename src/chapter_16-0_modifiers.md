@@ -1,3 +1,7 @@
-# Modifiers
+# Misc (Pt2)
 
-Modifiers are complicated. They are kinda like function call wrappers.
+This section will cover miscilanious topics, specifically
+
+- modifiers
+- function pointers & lambdas
+- fstrings
