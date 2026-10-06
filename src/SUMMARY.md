@@ -42,7 +42,7 @@
     1. [Modifiers](./chapter_16-1_modifiers.md)
     2. [Function Pointers](./chapter_16-2_function_pointers.md)
     3. [FStrings](./chapter_16-3_fstrings.md)
-    4. [Tuples](./chapteer_16-4_tuples.md)
+    4. [Tuples](./chapter_16-4_tuples.md)
 17. [Internals](./chapter_17-0_internals.md)
 18. [Basic Internals](./chapter_18-0_basic_internals.md)
 19. [Internals: Control Flow](./chapter_19-0_control_flow_and_comments_internals.md)
