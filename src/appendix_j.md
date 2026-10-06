@@ -80,6 +80,11 @@ Use errors-as-values IF:
 - You prefer them to throw
 - You are dealing with a common place error (invalid input, etc)
 - Or inplace of `throw` if you like them more.
+- Styles:
+    Tagged Enums
+    Error Unions
+    Multi Return
+    Tuples
 
 Use sentinels IF:
 - You are doing operations that return numbers and the sentinel is obviously a bad value.
@@ -126,6 +131,9 @@ By that, I mean let's say you provide `create_MYSTRUCT`: SUPPLY A `delete_MYSTRU
 
 Deprecation aint easy. You can't just:
 ```bash
+git checkout --orphan new-main
+git branch -D main
+git branch -m main
 rm -rf old.qc
 nvim new.qc
 git add -A

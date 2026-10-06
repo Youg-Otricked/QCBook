@@ -21,7 +21,10 @@ Table T1:
 | `double`     | `f64`                                     | High precision decimal numbers         |
 | Arrays       | Either `ptr` or `[<elemtype> x <count> ]` | Arrays                                 |
 | Usertypes    | LLVM structs                              | Structs                                |
-| Enums        | Depends                                   | Constant Groups                        |
+| Enums        | LLVM structs                              | Constant Groups                        |
+| Unions       | LLVM Structs                              | Type Unions                            |
+| Classes      | LLVM Structs                              | Classes                                |
+| Tuples       | LLVM Literal Structs                      | Tuples                                 |
 
 ¹ LLVM integer types do not encode signedness. uN is used here to indicate that the language treats the corresponding iN value as unsigned.
 
@@ -43,4 +46,10 @@ To cast not-allowed casts/cast in the middle of an expression (such as for `void
 
 ```qc
 *`cast(`malloc(sizeof int), int*) = 123;
+```
+
+You can also use `as` instead of cast.
+
+```qc
+*(`malloc(sizeof int) as int*) = 123;
 ```
