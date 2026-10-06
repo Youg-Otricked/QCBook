@@ -5,3 +5,4 @@ This section will cover miscilanious topics, specifically
 - modifiers
 - function pointers & lambdas
 - fstrings
+- tuples
