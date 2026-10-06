@@ -31,10 +31,10 @@ int doSomeStuff() {
 }
 ```
 
-A normal scope exit is stuff like reaching the end of a if, a break statement, or a return statement.
+And you can never worry about it again.
+A normal scope exit is anything reaching the end of an if, a break statement, or a return statement. The only non-normal scope exit is stack unwinding (Explained in chapter 12)
 
 "OH MY GOD IT'S A ZERO COST"
 
 > Every Rust User
 
-And you can never worry about it again.

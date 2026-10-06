@@ -8,7 +8,7 @@ concept Mathematical {
 
 Ok. Now, let's explain blocks. There are 3 core types of constraint blocks:
 - `all_of`: Every constraint in this block must be fulfilled.
-- `NUMBER_of`: NUMBER amount of constraints in this block must be fulfilled
+- `NUMBER_of`: Exactly NUMBER constraints in this block must be fulfilled
 - `at_least NUMBER_of`: NUMBER or more constraints in this block must be fulfilled. 
 Constraints can be:
 Method definitions, where Self can be used for a this equivelent for non-class types.
@@ -18,9 +18,11 @@ Expressions (more on this later).
 Let's make the Mathematical concept require a int subtract and int add function.
 ```qc
 concept Mathematical {
-    2_of {
+    1_of {
         int add(Self self, int other);
         int add(int other);
+    }
+    1_of {
         int subtract(int other);
         int subtract(Self self, int other);
     }
@@ -105,6 +107,6 @@ struct S {
     int data;
 }
 S proves C with_proof {
-    void data_operation(Self s) { return s->data; }
+    int data_operation(Self s) { return s->data; }
 }
 ```

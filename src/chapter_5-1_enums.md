@@ -55,7 +55,7 @@ void move(Directions d) {
 }
 move(Directions.NORTH);
 ```
-This is better in every way shape and form than the sentinel-value approach from the top of this chapter. The compiler now knows `move` accepts a `Directions`, which is just a int. Naming constants in a enum prevents technical debt, and stops a bluesky rant because the owner of the codebase hates poor people you decided.
+This is better in every way shape and form than the sentinel-value approach from the top of this chapter. The compiler now knows `move` accepts a `Directions`. Naming constants in an enum prevents technical debt, and stops somebody on bluesky ranting and raving because this codebase hates poor people (source: decided).
 
 Enums can also have tags, special values that go with the enum:
 
