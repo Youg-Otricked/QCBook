@@ -47,6 +47,9 @@ sizeof MyStruct;
 8 bytes?
 
 This is because _padding_. The CPU naturally wants to fetch things of a specific size. So your int, which is 4 bytes, wants to be fetched as 4. But your char want's to be fetched as 1 byte. So the compiler inserts 3 bytes of empty space (padding) so the CPU doesn't explode.
+
+Tuples just become nameless structs in LLVM (no structs in llvm have element names, tuples just also don't have type names.)
+
 ## The Heap
 
 Before we can explain this their is an important preface. Memory is stored in pages, which are larger typically 4kb chunks of memory.
