@@ -50,7 +50,7 @@ call void Class_Class(ptr %c)
 
 ### Overloading
 
-Overloaded methods just get prefixed by their changed types.
+Overloaded methods (and all methods with params) just get postfixed by their changed types.
 ```qc
 class MyClass {
     ...
@@ -84,7 +84,7 @@ Overriding just creates a new method and replaces it in the vtable & compiler me
 
 ## Static
 
-Static fields and methods get a `::` instead of `_` in their name and don't get the vptr.
+Static fields and methods get a `::` instead of `_` in their name and don't get the this ptr.
 
 ```qc
 class Thing {
@@ -123,16 +123,16 @@ The `vptr` becomes a hidden first field of the class `__vptr` with type `THISCLA
 ```qc
 class MyClass {
     int x;
-    int add(int x) {
+    virtual int add(int x) {
         return x;
     }
 }
 ```
 becomes 
 ```llvm
-@MyClass_vtable = local_unnamed_addr constant [1 x ptr] [ptr @MyClass_add]
+@MyClass_vtable = local_unnamed_addr constant [1 x ptr] [ptr @MyClass_add_int]
 ; Function Attrs: mustprogress nofree norecurse nosync nounwind willreturn memory(none)
-define i32 @MyClass_add(ptr readnone captures(none) %0, i32 returned %1) #0 !qc.return_types !0 {
+define i32 @MyClass_add_int(ptr readnone captures(none) %0, i32 returned %1) #0 !qc.return_types !0 {
 entry:
   ret i32 %1
 }
@@ -140,18 +140,3 @@ attributes #0 = { mustprogress nofree norecurse nosync nounwind willreturn memor
 !0 = !{!"int"}
 ```
 The vpointer is just an array of the methods. Notice the qc.return_types? That's a attribute for the compiler to track method returns for my sanity because once again... llvm pointers are bad.
-
-The compiler is stupid. Not really stupid, just a little stupid. VTables are generated in the order the methods are defined, which is why you need to define in the order of parent. Because if you do this:
-
-```qc
-class A {
-    A();
-    int doStuff();
-}
-class B : A {
-    int doStuff();
-    void otherThing();
-    B():
-}
-```
-then A vtable index 0 will be "A()", and A vtable index 1 will be "doStuff()", but B's vtable will be `[doStuff(), otherThing(), B()]`, which is... bad. because then calls to doStuff call otherThing, etc.

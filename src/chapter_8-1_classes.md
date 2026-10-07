@@ -223,13 +223,13 @@ No. Polymorphism basically allows for a pointer to a parent class to store a poi
 ```qc
 class Base {
     ...
-    void myMethod() {
+    virtual void myMethod() {
         ...some code
     }
 }
 class Child : Base {
     ...
-    void myMethod() /* Overrides myMethod from base */ {
+    void myMethod() override /* Overrides myMethod from base */ {
         ...other code
     }
 }
@@ -240,9 +240,7 @@ p = &c;
 p->myMethod();
 ```
 
-## Important
-
-All methods are virtual. If you want to use polymorphism, inherited methods MUST be defined in the same order as the parent class, and new methods must be defined after.
+Methods you mark `virtual` can be overriden by children, and to override a method, you put `override` after it's closing `)` before the `{`
 
 ---
 
@@ -254,5 +252,5 @@ And that's because of the most unapreciated pointer ever: the _vpointer_.
 
 The vpointer is hell for me (the compiler engineer) to deal with, but not for you. Your vpointer is your best friend.
 
-For a measly 4/8 bytes of memory, the vpointer stores a pointer to a global mapping of every method index to the methods address, so that way instead of polymorphic pointers methods being called just calls the base classes method, it calls the _correct method_!
-
+For a measly 4/8 bytes of memory, the vpointer stores a pointer to a global mapping of every virtual method index to the methods address, so that way instead of polymorphic pointers methods being called just calls the base classes method, it calls the _correct method_!
+Despite the mapping being called a "table", as in a grid, it's actually a array of addresses.
