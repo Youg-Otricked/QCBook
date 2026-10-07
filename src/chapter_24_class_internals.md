@@ -139,4 +139,6 @@ entry:
 attributes #0 = { mustprogress nofree norecurse nosync nounwind willreturn memory(none) }
 !0 = !{!"int"}
 ```
+
+Only classes with virtual methods or parents with virtual methods that are overriden by the class get vtables.
 The vpointer is just an array of the methods. Notice the qc.return_types? That's a attribute for the compiler to track method returns for my sanity because once again... llvm pointers are bad.
