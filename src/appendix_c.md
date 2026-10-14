@@ -4,9 +4,6 @@ There are a lot of intrinsics in the language. This is a quick reference of all 
 
 | Intrinsic              | Function                                                                                                                                       |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `` `time ``            | Returns the current time.                                                                                                                      |
-| `` `seed ``            | Seeds the random number generator.                                                                                                             |
-| `` `random ``          | Generates a random integer. With two arguments, generates a random integer within a specified range.                                           |
 | `` `len ``             | Returns the length of a value, such as a string or array.                                                                                      |
 | `` `to_lower ``        | Converts a string to lowercase.                                                                                                                |
 | `` `to_upper ``        | Converts a string to uppercase.                                                                                                                |

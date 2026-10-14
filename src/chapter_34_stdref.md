@@ -4,31 +4,29 @@ Currently, the standard library is rather small, with only 14 namespaces.
 
 1. [CoreConcepts](#CoreConcepts).
    This contains concepts for everything else to use, those being `Eq` (`operator==`), and `Allocated` (`_destroy`).
-2. [AdvQBool](#AdvQBool).
-   Random boolean.
-3. [Array](#Array).
+2. [Array](#Array).
    A constant-size array.
-4. [Vector](#Vector).
+3. [Vector](#Vector).
    A dynamic array.
-5. [List](#List).
+4. [List](#List).
    A linked list.
-6. [Utils](#Utils).
+5. [Utils](#Utils).
    Basic utility functions.
-7. [Math](#Math).
+6. [Math](#Math).
    Math intrinsics.
-8. [OSInterop](#OSInterop).
+7. [OSInterop](#OSInterop).
    Operating-system interaction.
-9. [Pair](#Pair).
+8. [Pair](#Pair).
    Pair of 2 items.
-10. [Optional](#Optional).
+9. [Optional](#Optional).
     Optional value.
-11. [Span](#Span).
+10. [Span](#Span).
     Like an array, but does not own the memory.
-12. [Encodings](#Encodings).
+11. [Encodings](#Encodings).
     Base64, Hex, and URL encodings.
-13. [Unordered](#Unordered).
+12. [Unordered](#Unordered).
     Hash-based Map and Set.
-14. [Filesystem](#Filesystem).
+13. [Filesystem](#Filesystem).
     Filesystem functionality similar to C++ `std::filesystem`.
 
 # CoreConcepts
@@ -58,45 +56,6 @@ concept Allocated {
 ```
 
 Concept requiring `_destory`.
-
-# AdvQBool
-
-## `AlTypes`
-
-```qc
-type AlTypes = qbool | bool | AQB;
-```
-
-Booleanish types.
-
-## `AQB`
-
-A probabilistic boolean. 
-
-### Fields
-
-```qc
-int TruthLevel;
-int FalseLevel;
-```
-
-The percentage chances that the value evaluates to `true` or `false`.
-
-### Methods
-
-```qc
-AQB(int truth)
-```
-
-```qc
-void operator=(int other)
-bool operator&&(AlTypes other)
-bool operator||(AlTypes other)
-bool operator^(AlTypes other)
-bool operator!()
-bool _eval()
-string _repr()
-```
 
 # Array
 

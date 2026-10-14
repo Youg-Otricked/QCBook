@@ -4,27 +4,31 @@ T1 lists primitive types:
 
 Table T1:
 
-| Type         | LLVM Type                                 | For                                    |
-| ------------ | ----------------------------------------- | -------------------------------------- |
-| `int`        | `i32`                                     | Normal signed integers                 |
-| `short int`  | `i16`                                     | Short signed integers                  |
-| `long int`   | `i<size>`                                 | Longer signed ints                     |
-| `nibble`     | `u4`¹                                     | Small unsigned chunks of data          |
-| `byte`       | `u8`¹                                     | Singular unsigned bytes of data        |
-| `addr_t`     | `u<size>`¹                                | (Unsigned) Addresses, loop incrementor |
-| `char`       | `i8`                                      | ASCII characters                       |
-| `string`     | `ptr`                                     | String of text                         |
-| All pointers | `ptr`                                     | Pointers                               |
-| `bool`       | `u1`¹                                     | Conditions                             |
-| `qbool`      | `u2`¹                                     | 4 state logic/Error codes              |
-| `float`      | `f32`                                     | Low precision decimal numbers          |
-| `double`     | `f64`                                     | High precision decimal numbers         |
-| Arrays       | Either `ptr` or `[<elemtype> x <count> ]` | Arrays                                 |
-| Usertypes    | LLVM structs                              | Structs                                |
-| Enums        | LLVM structs                              | Constant Groups                        |
-| Unions       | LLVM Structs                              | Type Unions                            |
-| Classes      | LLVM Structs                              | Classes                                |
-| Tuples       | LLVM Literal Structs                      | Tuples                                 |
+| Type         | LLVM Type                                 | For                                                             |
+| ------------ | ----------------------------------------- | --------------------------------------------------------------- |
+| `int`        | `i32`                                     | Normal signed integers                                          |
+| `short int`  | `i16`                                     | Short signed integers                                           |
+| `long int`   | `i<size>`                                 | Longer signed ints                                              |
+| `ai64_t`     | `i64`                                     | Neccesary-to-be i64 types (stands for always-i64-type), UTF8    |
+| `nibble`     | `u4`¹                                     | Small unsigned chunks of data                                   |
+| `byte`       | `u8`¹                                     | Singular unsigned bytes of data                                 |
+| `addr_t`     | `u<size>`¹                                | (Unsigned) Addresses, loop incrementor                          |
+| `ai64u_t`    | `u64`                                     | Neccesary-to-be u64 types (stands for always-i64-unsigned-type) |
+| `i16u_t`     | `u16`                                     | U16                                                             |
+| `i32u_t`     | `u32`                                     | U32                                                             |
+| `char`       | `i8`                                      | ASCII characters                                                |
+| `string`     | `ptr`                                     | String of text                                                  |
+| All pointers | `ptr`                                     | Pointers                                                        |
+| `bool`       | `u1`¹                                     | Conditions                                                      |
+| `qbool`      | `u2`¹                                     | 4 state logic/Error codes                                       |
+| `float`      | `f32`                                     | Low precision decimal numbers                                   |
+| `double`     | `f64`                                     | High precision decimal numbers                                  |
+| Arrays       | Either `ptr` or `[<elemtype> x <count> ]` | Arrays                                                          |
+| Usertypes    | LLVM structs                              | Structs                                                         |
+| Enums        | LLVM structs                              | Constant Groups                                                 |
+| Unions       | LLVM Structs                              | Type Unions                                                     |
+| Classes      | LLVM Structs                              | Classes                                                         |
+| Tuples       | LLVM Literal Structs                      | Tuples                                                          |
 
 ¹ LLVM integer types do not encode signedness. uN is used here to indicate that the language treats the corresponding iN value as unsigned.
 
