@@ -91,6 +91,7 @@ Table B-2: Stand-alone Syntax
 | `'.'`                                                | Character literal                                            |
 | `fn(argtype argname, ...) -> rettype { code }`       | Lambda                                                       |
 | `_`                                                  | "Ignored" variable, integer separator literals readable      |
+| `=>`                                                 | Used as a seperator between match values and code blocks.    |
 
 Table B-3 shows symbols that appear in the context of generics.
 
@@ -158,3 +159,17 @@ Table B-8: Square Brackets
 | `[type, len]` | Empty array literal containing len 0-initialized `type`s        |
 | `expr[expr]`  | Collection indexing; overloadable (`operator[](index)`)         |
 | Array Assign  | Assigning with a array. Overloadable (`operator[]=(coll, len)`) |
+
+Table B-9 shows uses and contexts of colons are used.
+
+Table B-9: Colons
+
+| Context              | Explanation             |
+| -------------------- | ----------------------- |
+| `identifier:`        | Label declaration       |
+| `ident::ident`       | Scope Path              |
+| `class Child : Base` | Inheritance             |
+| `Child() : Base()`   | Parent Constructor call |
+| `cond ? v1 : v2`     | Ternary operation       |
+| `case value:`        | Switch case             |
+| `default:`           | Default switch case     |

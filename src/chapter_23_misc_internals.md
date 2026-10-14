@@ -136,3 +136,100 @@ main:                                   # @main
 	.asciz	"Hello" ; the string
 	.size	.L.str.44, 6 ; it's length
 ```
+
+## Labels and Jmp
+
+This literally just creates basic blocks and br instructions, which create labels and jmp instructions.
+
+```qc
+int main() {
+    ...do_stuff
+    if (!x) {
+    err:
+        return 1;
+    }
+    ...
+    if (!y) {
+    cleanup_x:
+        ...
+        jmp err;
+    }
+    ...
+    if (!z) {
+    cleanup_y:
+        ...
+        jmp cleanup_x;
+    }
+    return 0;
+}
+```
+
+Would become:
+
+```llvm 
+define i32 @main() {
+    ...
+    %if_cond = icmp eq ptr %x, null
+    br i1 %if_cond, label %if.body, label %if.end
+if.body:
+    br label %err
+err:
+    ret i32 1
+if.end:
+    ...
+    %if_cond2 = icmp eq ptr %y, null
+    br i1 %if_cond2, label %if.body2, label %if.end2
+if.body2:
+    br label %cleanup_x
+cleanup_x:
+    ...
+    br label %err
+if.end2:
+    ...
+    %if_cond3 = icmp eq ptr %z, null
+    br i1 %if_cond3, label %if.body3, label %if.end3
+if.body3:
+    br label %cleanup_y
+cleanup_y:
+    ...
+    br label %cleanup_x
+if.end3:
+    ret i32 0
+}
+```
+
+Which would become something like:
+
+```asm
+_start:
+    ...
+    mov rax, [x]
+    cmp rax, 0
+    jne .if.end
+.if.body:
+    jmp .err
+.err:
+    ; exit with code 1
+.if.end:
+    ...
+    mov rax, [y]
+    cmp rax, 0
+    jne .if.end2
+.if.body2:
+    jmp .cleanup_x
+.cleanup_x:
+    ...
+    jmp .err
+.if.end2:
+    ...
+    mov rax, [z]
+    cmp rax, 0
+    jne .if.end3
+.if.body3:
+    jmp .cleanup_y
+.cleanup_y:
+    ...
+    jmp .cleanup_x
+.if.end3:
+    ; exit with code 0
+```
