@@ -33,6 +33,7 @@ The following table lists each compiler flag and what it does. (For flags with 2
 | `-tc`/`--translate-c`            |                                                                      | Translates a `.h` or `.c` file into a `.qc` file.                                                                                                 |
 | `--c-flags`                      |                                                                      | All flags past this point are to be passed to the C compiler when translting with -tc or `#include`ing headers.                                   |
 | `-nfci`/`--no-follow-c-includes` |                                                                      | Don't follow includes in C files (may break/crash if included structs are used)                                                                   |
+| `-g`                             |                                                                      | Attach Debug Symbols to the file.                                                                                                                 |
 
 ## Warnings
 
