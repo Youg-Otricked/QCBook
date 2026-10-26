@@ -8,71 +8,71 @@ Table B1 contains the operators in C^4, an example of how the operator would app
 
 Table B1
 
-| Operator | Example                  | Explanation                   | Overloadable?           | RHS Overloadable?    |
-| -------- | ------------------------ | ----------------------------- | ----------------------- | -------------------- |
-| `!`      | `!expr`                  | Logical NOT                   | `operator!()`           |                      |
-| `!=`     | `expr != expr`           | Inequality operator           | `operator!=(other)`     |                      |
-| `~`      | `~expr`                  | Bitwise NOT                   | `operator~()`           |                      |
-| `%`      | `expr % expr`            | Modulo                        | `operator%(rhs)`        | `roperator%(lhs)`    |
-| `%=`     | `lval %= expr`           | Modulus + Assignment          | `operator%=(other)`     |                      |
-| `&`      | `&lval`                  | Get address of a lval         |                         |                      |
-| `&`      | `expr & expr`            | Bitwise AND                   | `operator&(rhs)`        |                      |
-| `&=`     | `lval &= expr`           | Bitwise AND + Assignment      | `operator&=(other)`     |                      |
-| `&&`     | `expr && expr`           | Logical AND                   | `operator&&(rhs)`       |                      |
-| `*`      | `expr * expr`            | Multiplication                | `operator*(rhs)`        |                      |
-| `*=`     | `lval *= expr`           | Multiplication + Assignment   | `operator*=(other)`     |                      |
-| `*`      | `*expr`                  | Dereference                   |                         |                      |
-| `*`      | `type*`                  | Pointer                       |                         |                      |
-| `+`      | `expr + expr`            | Addition                      | `operator+(rhs)`        |                      |
-| `+=`     | `lval += expr`           | Addition + Assignment         | `operator+=(other)`     |                      |
-| `++`     | `++expr`, `expr++`       | Increment                     | `operator++(isPostfix)` |                      |
-| `,`      | `expr, expr`             | Argument separator            |                         |                      |
-| `-`      | `-expr`                  | Negation                      | `operator-()`           |                      |
-| `-`      | `expr - expr`            | Subtraction                   | `operator-(rhs)`        | `roperator-(lhs)`    |
-| `-=`     | `lval -= expr`           | Subtraction + Assignment      | `operator-=(other)`     |                      |
-| `--`     | `--expr`, `expr--`       | Decrement                     | `operator--(isPostfix)` |                      |
-| `->`     | `fn(...) -> type`        | Lambda return type            |                         |                      |
-| `->`     | `expr->ident`            | Dereference + Property access |                         |                      |
-| `.`      | `expr.ident`             | Property access               |                         |                      |
-| `.`      | `expr.ident(expr, ...)`  | Method call                   |                         |                      |
-| `->`     | `expr->ident(expr, ...)` | Dereference + Method call     |                         |                      |
-| `/`      | `expr / expr`            | Division                      | `operator/(rhs)`        | `roperator/(lhs)`    |
-| `/=`     | `lval /= expr`           | Division + Assignment         | `operator/=(other)`     |                      |
-| `:`      | `ident: expr`            | Struct field initializer      |                         |                      |
-| `::`     | `ident::ident`           | Namespace Path Separator      |                         |                      |
-| `;`      | `expr;`                  | Statement and item terminator |                         |                      |
-| `<<`     | `expr << expr`           | Left-shift                    | `operator<<(rhs)`       | `roperator<<(lhs)`   |
-| `<<=`    | `lval <<= expr`          | Left-shift + Assignment       | `operator<<=(other)`    |                      |
-| `<<<`    | `expr <<< expr`          | Left-Rotation                 | `operator<<<(rhs)`      | `roperator<<<(lhs)`  |
-| `<<<=`   | `lval <<<= expr`         | Left-Rotation + Assignment    | `operator<<<=(other)`   |                      |
-| `<`      | `expr < expr`            | Less than                     | `operator<(other)`      |                      |
-| `<=`     | `expr <= expr`           | Less than or equal to         | `operator<=(other)`     |                      |
-| `=`      | `lval = expr`            | Assignment                    | `operator=(other)`      |                      |
-| `==`     | `expr == expr`           | Equality                      | `operator==(other)`     |                      |
-| `>`      | `expr > expr`            | Greater than                  | `operator>(other)`      |                      |
-| `>=`     | `expr >= expr`           | Greater than or equal to      | `operator>=(other)`     |                      |
-| `\|>`    | `expr \|> expr`          | Arithmetic rshift             | `operator\|>(rhs)`      | `roperator\|>(lhs)`  |
-| `:>`     | `expr :> expr`           | Logical rshift                | `operator:>(rhs)`       | `roperator:>(lhs)`   |
-| `:>=`    | `lval :>= expr`          | Logical rshift + Assignment   | `operator:>=(other)`    |                      |
-| `\|>=`   | `lval \|>= expr`         | Right-shift + Assignment      | `operator\|>=(other)`   |                      |
-| `\|>>`   | `expr \|>> expr`         | Right-rotation                | `operator\|>>(rhs)`     | `roperator\|>>(lhs)` |
-| `\|>>=`  | `lval \|>>= expr`        | Right-rotation + Assignment   | `operator\|>>=(other)`  |                      |
-| `@`      | `[@collection]`          | Spread in an array            |                         |                      |
-| `$`      | `expr $ expr`            | Bitwise XOR                   | `operator$(rhs)`        |                      |
-| `$=`     | `lval $= expr`           | Bitwise XOR + Assignment      | `operator$=(other)`     |                      |
-| `\|`     | `expr \| expr`           | Bitwise OR                    | `operator\|(rhs)`       |                      |
-| `\|=`    | `lval \|= expr`          | Bitwise OR + Assignment       | `operator\|=(other)`    |                      |
-| `\|\|`   | `expr \|\| expr`         | Logical OR                    | `operator\|\|(rhs)`     |                      |
-| `^`      | `expr ^ expr`            | Logical XOR                   | `operator^(rhs)`        |                      |
-| `#^`     | `expr #^ expr`           | Power                         | `operator#^(rhs)`       | `roperator#^(lhs)`   |
-| `?:`     | `condition ? a : b`      | Ternary                       |                         |                      |
-| `...`    | `...args`                | Variadic args                 |                         |                      |
-| `!!`     | `!!expr`                 | QBOOL NOT                     | `operator!!()`          |                      |
-| `&&&`    | `expr &&& expr`          | QBOOL AND                     | `operator&&&(rhs)`      |                      |
-| `\|\|\|` | `expr \|\|\| expr`       | QBOOL OR                      | `operator\|\|\|(rhs)`   |                      |
-| `^^`     | `expr ^^ expr`           | QBOOL XOR                     | `operator^^(rhs)`       |                      |
-| `\|&\|`  | `expr \|&\| expr`        | QBOOL collapse OR             | `operator\|&\|(rhs)`    |                      |
-| `&\|&`   | `expr &\|& expr`         | QBOOL collapse AND            | `operator&\|&(rhs)`     |                      |
+| Operator | Example                  | Explanation                    | Overloadable?           | RHS Overloadable?    |
+| -------- | ------------------------ | ------------------------------ | ----------------------- | -------------------- |
+| `!`      | `!expr`                  | Logical NOT                    | `operator!()`           |                      |
+| `!=`     | `expr != expr`           | Inequality operator            | `operator!=(other)`     |                      |
+| `~`      | `~expr`                  | Bitwise NOT                    | `operator~()`           |                      |
+| `%`      | `expr % expr`            | Modulo                         | `operator%(rhs)`        | `roperator%(lhs)`    |
+| `%=`     | `lval %= expr`           | Modulus + Assignment           | `operator%=(other)`     |                      |
+| `&`      | `&lval`                  | Get address of a lval          |                         |                      |
+| `&`      | `expr & expr`            | Bitwise AND                    | `operator&(rhs)`        |                      |
+| `&=`     | `lval &= expr`           | Bitwise AND + Assignment       | `operator&=(other)`     |                      |
+| `&&`     | `expr && expr`           | Logical AND                    | `operator&&(rhs)`       |                      |
+| `*`      | `expr * expr`            | Multiplication                 | `operator*(rhs)`        |                      |
+| `*=`     | `lval *= expr`           | Multiplication + Assignment    | `operator*=(other)`     |                      |
+| `*`      | `*expr`                  | Dereference                    |                         |                      |
+| `*`      | `type*`                  | Pointer                        |                         |                      |
+| `+`      | `expr + expr`            | Addition                       | `operator+(rhs)`        |                      |
+| `+=`     | `lval += expr`           | Addition + Assignment          | `operator+=(other)`     |                      |
+| `++`     | `++expr`, `expr++`       | Increment                      | `operator++(isPostfix)` |                      |
+| `,`      | `expr, expr`             | Argument separator             |                         |                      |
+| `-`      | `-expr`                  | Negation                       | `operator-()`           |                      |
+| `-`      | `expr - expr`            | Subtraction                    | `operator-(rhs)`        | `roperator-(lhs)`    |
+| `-=`     | `lval -= expr`           | Subtraction + Assignment       | `operator-=(other)`     |                      |
+| `--`     | `--expr`, `expr--`       | Decrement                      | `operator--(isPostfix)` |                      |
+| `->`     | `fn(...) -> type`        | Lambda return type             |                         |                      |
+| `->`     | `expr->ident`            | Dereference + Property access  |                         |                      |
+| `.`      | `expr.ident`             | Property access                |                         |                      |
+| `.`      | `expr.ident(expr, ...)`  | Method call                    |                         |                      |
+| `->`     | `expr->ident(expr, ...)` | Dereference + Method call      |                         |                      |
+| `/`      | `expr / expr`            | Division                       | `operator/(rhs)`        | `roperator/(lhs)`    |
+| `/=`     | `lval /= expr`           | Division + Assignment          | `operator/=(other)`     |                      |
+| `:`      | `ident: expr`            | Struct field initializer       |                         |                      |
+| `::`     | `ident::ident`           | Namespace Path Separator       |                         |                      |
+| `;`      | `expr;`                  | Statement and item terminator  |                         |                      |
+| `<<`     | `expr << expr`           | Left-shift                     | `operator<<(rhs)`       | `roperator<<(lhs)`   |
+| `<<=`    | `lval <<= expr`          | Left-shift + Assignment        | `operator<<=(other)`    |                      |
+| `<<<`    | `expr <<< expr`          | Left-Rotation                  | `operator<<<(rhs)`      | `roperator<<<(lhs)`  |
+| `<<<=`   | `lval <<<= expr`         | Left-Rotation + Assignment     | `operator<<<=(other)`   |                      |
+| `<`      | `expr < expr`            | Less than                      | `operator<(other)`      |                      |
+| `<=`     | `expr <= expr`           | Less than or equal to          | `operator<=(other)`     |                      |
+| `=`      | `lval = expr`            | Assignment                     | `operator=(other)`      |                      |
+| `==`     | `expr == expr`           | Equality                       | `operator==(other)`     |                      |
+| `>`      | `expr > expr`            | Greater than                   | `operator>(other)`      |                      |
+| `>=`     | `expr >= expr`           | Greater than or equal to       | `operator>=(other)`     |                      |
+| `\|>`    | `expr \|> expr`          | Arithmetic rshift              | `operator\|>(rhs)`      | `roperator\|>(lhs)`  |
+| `:>`     | `expr :> expr`           | Logical rshift                 | `operator:>(rhs)`       | `roperator:>(lhs)`   |
+| `:>=`    | `lval :>= expr`          | Logical rshift + Assignment    | `operator:>=(other)`    |                      |
+| `\|>=`   | `lval \|>= expr`         | Arithmetic rshift + Assignment | `operator\|>=(other)`   |                      |
+| `\|>>`   | `expr \|>> expr`         | Right-rotation                 | `operator\|>>(rhs)`     | `roperator\|>>(lhs)` |
+| `\|>>=`  | `lval \|>>= expr`        | Right-rotation + Assignment    | `operator\|>>=(other)`  |                      |
+| `@`      | `[@collection]`          | Spread in an array             |                         |                      |
+| `$`      | `expr $ expr`            | Bitwise XOR                    | `operator$(rhs)`        |                      |
+| `$=`     | `lval $= expr`           | Bitwise XOR + Assignment       | `operator$=(other)`     |                      |
+| `\|`     | `expr \| expr`           | Bitwise OR                     | `operator\|(rhs)`       |                      |
+| `\|=`    | `lval \|= expr`          | Bitwise OR + Assignment        | `operator\|=(other)`    |                      |
+| `\|\|`   | `expr \|\| expr`         | Logical OR                     | `operator\|\|(rhs)`     |                      |
+| `^`      | `expr ^ expr`            | Logical XOR                    | `operator^(rhs)`        |                      |
+| `#^`     | `expr #^ expr`           | Power                          | `operator#^(rhs)`       | `roperator#^(lhs)`   |
+| `?:`     | `condition ? a : b`      | Ternary                        |                         |                      |
+| `...`    | `...args`                | Variadic args                  |                         |                      |
+| `!!`     | `!!expr`                 | QBOOL NOT                      | `operator!!()`          |                      |
+| `&&&`    | `expr &&& expr`          | QBOOL AND                      | `operator&&&(rhs)`      |                      |
+| `\|\|\|` | `expr \|\|\| expr`       | QBOOL OR                       | `operator\|\|\|(rhs)`   |                      |
+| `^^`     | `expr ^^ expr`           | QBOOL XOR                      | `operator^^(rhs)`       |                      |
+| `\|&\|`  | `expr \|&\| expr`        | QBOOL collapse OR              | `operator\|&\|(rhs)`    |                      |
+| `&\|&`   | `expr &\|& expr`         | QBOOL collapse AND             | `operator&\|&(rhs)`     |                      |
 
 ### Non-operator Symbols
 
@@ -147,7 +147,7 @@ Table B-7: Curly Brackets
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | `{...}`                           | Block expression                                                                                                 |                           |
 | `Type{...}`                       | Struct literal                                                                                                   |                           |
-| `(type, ...){ lvalue/name, ... }` | Tuple destrucutring. If a undeclared var is used, it declares it, assigns tuple values ordered into the lvalues. | `(type, ...) perator{}()` |
+| `(type, ...){ lvalue/name, ... }` | Tuple destrucutring. If a undeclared var is used, it declares it, assigns tuple values ordered into the lvalues. | `(type, ...) operator{}()` |
 
 Table B-8 shows the contexts in which square brackets are used.
 
