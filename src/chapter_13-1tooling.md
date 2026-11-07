@@ -28,7 +28,7 @@ General formatting recommendations:
 - File paths are written without quotes.
 - Place everything except `main` inside a namespace when practical.
   A namespace should generally contain one of the following:
-
+- `//?` for bottom-of-the-file implementation notes/faq
 1. Namespaces should do one thing well, similar to the UNIX philosophy,
 2. Namespaces should have either: 1. one type (or group of TIGHTLY related types, eg bigints) and their core helpers, 2. above + namespaces containing extra helpers 3. helper functions / utility functions (think a `Math` namespace with log, cos...) 4. OR anything if directly mapping C/C++/Zig/Rust code to C^4
 3. Types in namespaces should have short names: The namespace should have the longer name

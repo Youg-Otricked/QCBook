@@ -14,7 +14,7 @@ on every error path. Do I really need to?"
 
 Yes. You do. Bad. Don't make me take away your memory and text editor privileges and have you write one pentary byte at a time directly to hard disk.
 
-However defer slightly lightens that blow. Defer just makes a block of code run on every normal scope exit.
+However defer slightly lightens that blow. Defer just makes a block of code run on every scope exit.
 
 You can defer single lines or full blocks.
 ```qc
@@ -32,7 +32,6 @@ int doSomeStuff() {
 ```
 
 And you can never worry about it again.
-A normal scope exit is anything reaching the end of an if, a break statement, or a return statement. The only non-normal scope exit is stack unwinding (Explained in chapter 12)
 
 "OH MY GOD IT'S A ZERO COST"
 

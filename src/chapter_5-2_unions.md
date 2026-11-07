@@ -35,18 +35,17 @@ You can also use the typeof keyword.
 typeof x; // still string
 ```
 
-### Constant Members
+To extract values from a union, you either use a match again, with the fields types as the names, and then the name for the variable of the value in () just like the switch.
 
-Unions aren't limited to types — they can also be restricted to specific constant values:
 ```qc
-type Nothing = 0.0 | 0 | 0.0f;
-```
-A `Nothing` can only ever be `0.0`, `0`, or `0.0f`, not "any double, int, or float," just those exact values. This is handy for things like status codes, where you want a value that's "one of these int-or-string things, and nothing else":
-```qc
-type StatusCode = int | "OK" | "ERROR";
-StatusCode code = 123;
-code = "OK";
-code = 0;
+match (myUnion) {
+    int(i) => ...
+    string(s) => ...
+}
 ```
 
-You can also use a enum for this purpose.
+Or you can cast.
+
+```qc
+myUnion as int;
+```

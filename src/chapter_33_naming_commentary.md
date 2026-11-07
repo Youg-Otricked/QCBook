@@ -85,3 +85,4 @@ g
 11. `//!` for file-level documentation. Same as above.
 12. File paths are written without quotes. I like includes looking clean.
 13. Place everything except `main` inside a namespace when practical. Ideally not much code should be private to your file.
+14. `//?` for end-of-file documentation/implementation notes, because it answers questions about the code, hence ?
