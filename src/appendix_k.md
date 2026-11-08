@@ -74,3 +74,6 @@ define i32 @"X::Y<int>"() {
 4. Intriniscs changed to start with a backtick.
 5. This changed to a pointer. 
 6. Major enum syntax full overhaul.
+7. Major union full overhaul.
+8. Major error full overhaul.
+9. Removed string and lots of intrinsics.

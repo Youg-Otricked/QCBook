@@ -22,15 +22,8 @@ int myOtherVar = 123;
 6. Unrelated thins in one namespace (not unrelated subnamespaces)
 7. Magic numbers used more than once.
 8. Dead code
-9. Ignoring/Swallowing errors.
-```qc
-try {
-    ...
-} catch (...) {
-}
-```
-10. Using uninitialized variables (that's just UB).
-11. More than 7 parameters in a function (Just use a struct)
+9. Using uninitialized variables (that's just UB).
+10. More than 7 parameters in a function (Just use a struct)
 ```qc
 void create_thing(
     int a,
@@ -42,7 +35,7 @@ void create_thing(
     int g
 ) ...
 ```
-12. Premature `<abstraction|optimizaion|helpers>`
-13. Outdated comments.
-14. Excesssive commentation in readable code.
-15. Abusing langauge features for reasons that are against the core goals of the language. Not being clever, being against the language.
+11. Premature `<abstraction|optimizaion|helpers>`
+12. Outdated comments.
+13. Excesssive commentation in readable code.
+14. Abusing langauge features for reasons that are against the core goals of the language. Not being clever, being against the language.
