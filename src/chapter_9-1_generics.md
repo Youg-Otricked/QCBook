@@ -94,10 +94,10 @@ This allows any type except `int`.
 Multiple types can be included or excluded using `|`.
 Example:
 ```qc
-<T(:!int|string)>
+<T(:!int|char*)>
 ```
 means:
-> T cannot be int or string.
+> T cannot be int or char*.
 
 ---
 
@@ -229,6 +229,6 @@ class Array<T, int S = 0> {
 }
 int main() {
     Array<int, 10> numbers;
-    Array<string> names;
+    Array<char*> names;
 }
 ```

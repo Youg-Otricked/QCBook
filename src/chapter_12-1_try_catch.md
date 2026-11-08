@@ -12,7 +12,7 @@ Error values are any:
 
 The "unhappy path" (error states) are:
 
-- Union with current variant not set to the first (`string` for `int | string`)
+- Union with current variant not set to the first (`char*` for `int | char*`)
 - Enum with current variant not set to the first (`Bad` for `enum ... { OK; Bad; }`)
 - Struct field 0 (int) != 0
 
@@ -29,7 +29,7 @@ panic "my msg"
 This crashes the program. It's also usefull for asserts.
 
 ```qc
-void assert(bool condition, string msg) {
+void assert(bool condition, char* msg) {
     if (!condition) panic msg;
 }
 ```

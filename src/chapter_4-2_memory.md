@@ -243,9 +243,9 @@ x[0]; // first element
 
 And because arrays first element is stored at the address of the array, you need to get the address of the array, which is `x + 0`
 
-Strings are actually pointers to an array of chars!
+Char* is actually a pointer to an array of chars!
 
-string == char* == char[]
+char* == char[]
 
 The type of " " is `char *`.
 This means you can index strings.

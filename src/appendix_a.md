@@ -8,7 +8,6 @@ These are the currently in-use keywords:
 - `float`: f32
 - `double`: f64
 - `bool`: u1
-- `string`: char*
 - `qbool`: u2
 - `void`: void
 - `char`: i8

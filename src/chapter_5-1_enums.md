@@ -48,7 +48,7 @@ You access an enum's members with the `.` operator, on the type itself (not an i
 Directions d = Directions.EAST;
 ```
 
-Because enums are usertypes, you can use them anywhere you'd use `int` or `string` or any struct:
+Because enums are usertypes, you can use them anywhere you'd use `int` or `char*` or any struct:
 ```qc
 void move(Directions d) {
     // ...

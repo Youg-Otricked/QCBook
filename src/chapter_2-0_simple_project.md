@@ -29,7 +29,7 @@ Declaring a variable in C^4 looks like this:
 
 ```qc
 int age = 25;
-string name = "Me";
+char* name = "Me";
 ```
 
 Type comes first, then the name, then `=` and a value. Unlike some languages, C^4 requires an explicit type. There's no implicit `let`-style inference outside of the `auto` keyword:
@@ -96,7 +96,7 @@ int x, int y = addmul(123, 321);
 To read from the user, use the `qin` feature, the inverse of `` `qout `` from Chapter 1. It reads a single line from standard input and puts it in a variable.
 
 ```qc
-string name = "";
+char* name = "";
 qin |> name;
 ```
 
@@ -105,16 +105,16 @@ You can also input to any type and it casts if possible and comptime-errors if n
 
 ```qc
 int x;
-string name;
+char* name;
 qin |> x |> name;
 ```
 
 ## Printing with Formatters
 
-You already saw plain strings in Chapter 1. For anything with variables mixed in, you must use formatters. You can't use `f-strings` or string concatenation (taught later) because the first argument must be a compile-time known string:
+You already saw plain strings in Chapter 1. For anything with variables mixed in, you must use formatters. You can't use any fancy concatenation, because the first argument must be a compile-time known string:
 
 ```qc
-string name = "Me";
+char* name = "Me";
 int age = 25;
 `qout("Hi %s, you are %i years old.\n", name, age);
 ```
@@ -122,7 +122,7 @@ int age = 25;
 Each of those %'s represents a variable to be inserted.
 
 %b = bool
-%s = string
+%s = char*
 %c = char
 %d = double
 %f = float
@@ -140,7 +140,7 @@ The following types are the types you should familiarise yourself with.
 | `int`    | A whole number between -2.1 and 2.1 billion |
 | `float`  | A ~6 meaningful digit decimal number        |
 | `double` | A ~15 meaningful digit decimal number       |
-| `string` | A string of text                            |
+| `char*` | A string of text                            |
 | `char`   | A single letter                             |
 
 ## Literals
@@ -159,7 +159,7 @@ Decimal number + f. e.g. 123.456f
 double literal (has double type)
 Any decimal number.
 
-string literal (has string type)
+char* literal (has char* type)
 Any text wrapped in ""
 
 char literal (has char type)
@@ -167,7 +167,7 @@ Any single character wrapped in ''
 
 ## Escape Sequences
 
-You cannot just type certain characters in a string or char (namely a newline, tab, " (in string) and ' (in char))
+You cannot just type certain characters in a char* or char (namely a newline, tab, " (in char*) and ' (in char))
 This is what escape sequences are: They represent a character.
 ```
 \n == newline
@@ -276,7 +276,7 @@ int: != 0
 float: != 0.0f
 double: != 0.0
 char: != '\0' // null escape sequence
-string: != ""
+char*: != ""
 ```
 ## Putting It Together
 
@@ -285,15 +285,15 @@ Here's the full program.
 `main.qc`
 
 ```qc
-string ask_name() {
+char* ask_name() {
     `qout("What's your name? ");
-    string result;
+    char* result;
     qin |> result;
     return result;
 }
 
 int main() {
-    string name = ask_name();
+    char* name = ask_name();
     `qout("Nice to meet you, %s!\n", name);
     return 0;
 }
@@ -316,6 +316,6 @@ Nice to meet you, Me!
 - Functions declare a return type, a name, and typed parameters. `void` means "returns nothing." Functions can return multiple values at once.
 - `qin |> variable` reads a line of input into a variable, and can be chained to read into several at once. Input casts to the target type where possible, errors at runtime if its a invalid value, and errors at compile time if it is a uncastable type.
 - Formatted printing uses `%`-placeholders (`%s`, `%i`, `%f`, etc.).
-- C^4 has six core types (`bool`, `int`, `float`, `double`, `string`, `char`) and a literal form for each.
+- C^4 has six core types (`bool`, `int`, `float`, `double`, `char*`, `char`) and a literal form for each.
 - Escape sequences (`\n`, `\t`, `\"`, `\'`, `\0`) represent characters that can't be typed directly in a string or char literal.
 - Non-bool values convert to booleans via "truthiness". Each type has its own zero/empty value that's `false`.

@@ -43,7 +43,7 @@ namespace Exported {
 namespace Args {
     struct Argument {
         Argument *next;
-        string value;
+        char* value;
     }
     Argument *args;
     void destroy_args(Argument *arg = nullptr) {

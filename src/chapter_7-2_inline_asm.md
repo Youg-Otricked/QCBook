@@ -2,7 +2,7 @@
 
 ## Raw Strings
 
-Raw strings allow you to put any character in your string, raw. This includes multi-line strings. To make a raw string, before the opening quote you put a `R`, and right after the quote you put some
+Raw strings allow you to put any character in your char*, raw. This includes multi-line strings. To make a raw char*, before the opening quote you put a `R`, and right after the quote you put some
 combination of (, ), {, }, \[, \], <, and >, then when you are done with your string you put the inverse of that. e.g.
 
 ```qc

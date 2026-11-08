@@ -87,7 +87,7 @@ Table B-2: Stand-alone Syntax
 | Digits                                               | immediately followed by y, i, f, a and so on Numeric literal |
 | Digits                                               | prefixed with 0x/0b/0o/0X/0B/0O Hex/Binary/Octal literal     |
 | `"..."`                                              | String literal                                               |
-| `R"(...)"`, `R"(<...>)"`, `R"({<[...]>})"` and so on | Raw string literal; escape characters not processed          |
+| `R"(...)"`, `R"(<...>)"`, `R"({<[...]>})"` and so on | Raw char* literal; escape characters not processed          |
 | `'.'`                                                | Character literal                                            |
 | `fn(argtype argname, ...) -> rettype { code }`       | Lambda                                                       |
 | `_`                                                  | "Ignored" variable, integer separator literals readable      |
@@ -114,8 +114,8 @@ Table B-4: Type Constraints
 | Symbol             | Explanation                                            |
 | ------------------ | ------------------------------------------------------ |
 | `T(proves U:)`     | Generic parameter T constrained to types that prove U  |
-| `T(:int\|string)`  | Generic parameter T must be a int or a string          |
-| `T(:!int\|string)` | Generic parameter T may not be int or string           |
+| `T(:int\|char*)`  | Generic parameter T must be a int or a char*          |
+| `T(:!int\|char*)` | Generic parameter T may not be int or char*           |
 | `T(proves X && Y)` | Combining concepts                                     |
 | `T(proves U:!int)` | Generic parameter T must both not be a int and prove U |
 

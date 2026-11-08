@@ -63,7 +63,7 @@ Example:
 ```
 namespace Network {
     class Client {
-        string server_name;
+        char* server_name;
 
         void connectToServer() {
             ...

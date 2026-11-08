@@ -63,7 +63,7 @@ Guess what. It's another integer and array of bytes.
 
 This union:
 ```qc
-type T = int | string;
+type T = int | char*;
 ```
 
 Becomes

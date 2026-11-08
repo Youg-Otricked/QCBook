@@ -19,15 +19,17 @@ Currently, the standard library is rather small, with only 14 namespaces.
 8. [Pair](#Pair).
    Pair of 2 items.
 9. [Optional](#Optional).
-    Optional value.
+   Optional value.
 10. [Span](#Span).
     Like an array, but does not own the memory.
-11. [Encodings](#Encodings).
-    Base64, Hex, and URL encodings.
-12. [Unordered](#Unordered).
+11. [Unordered](#Unordered).
     Hash-based Map and Set.
-13. [Filesystem](#Filesystem).
-    Filesystem functionality similar to C++ `std::filesystem`.
+12. [String](#String)
+    String.
+13. [Owned](#Owned)
+    A owned value marker
+14. [Errors](#Errors)
+    Error values.
 
 # CoreConcepts
 
@@ -94,7 +96,6 @@ Arr<T, S>& operator=(Arr<T, S> other)
 # Vector
 
 ## `Iterator`
-
 
 ### `It<T>`
 
@@ -363,15 +364,15 @@ double tan(double x)
 Returns the tangent of `x`.
 
 ```qc
-double log(double x)
+Errors::Error<double> log(double x)
 ```
 
-Returns the logarithm of `x`.
+Returns the logarithm of `x`, or Errors::Codes.InvalidArgument if x is < 0.
 
 # OSInterop
 
 ```qc
-void system(string command)
+void system(char* command)
 ```
 
 Executes the supplied command using the operating system's command interpreter.
@@ -481,81 +482,6 @@ void operator[]=(T *data, int length)
 Iterator::It<T> _begin()
 Iterator::It<T> _end()
 ```
-
-# Encodings
-
-Encoding and decoding functions for various representations.
-
-## Hex
-
-Hexadecimal encoding and decoding.
-
-```qc
-const string chars = "0123456789abcdef";
-```
-
-```qc
-string encode(string data)
-```
-
-Encodes string to hex.
-
-```qc
-string decode(string hex)
-```
-
-Decodes hex back into text.
-
-## Base64
-
-Base64 encoding and decoding.
-
-```qc
-const string chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-```
-
-Characters used by the Base64 encoding.
-
-```qc
-string encode(string data)
-```
-
-Encodes data using Base64.
-
-```qc
-int charValue(char c)
-```
-
-Returns the Base64 numeric value represented by a character.
-
-```qc
-string decode(string data)
-```
-
-Decodes Base64 data.
-
-## URI
-
-URL/URI percent encoding and decoding.
-
-```qc
-bool isUnreserved(char c)
-```
-
-Returns whether a character is allowed to appear unescaped in a URI.
-
-```qc
-string encode(string data)
-```
-
-Percent-encodes characters that require escaping in a URI.
-
-```qc
-string decode(string data)
-```
-
-Decodes percent-encoded URI data.
 
 # Unordered
 
@@ -687,534 +613,235 @@ Iterators::MapIt<K, V> _begin()
 Iterators::MapIt<K, V> _end()
 ```
 
-# Filesystem
+# String
 
-Filesystem path, file, directory, and stream functionality.
+## `struct View {`
 
 ```qc
-string realpath(string input_path)
+        char *data;
+        addr_t length;
 ```
 
-Resolves a path into its canonical filesystem path.
+Data and length of the view. Views do not own data ever.
 
-```qc
-type DateTime = addr_t;
-```
-
-Filesystem timestamp representation.
-
-## `FileType`
-
-```qc
-enum FileType {
-    Unknown = 0;
-    File = 1;
-    Directory = 2;
-    Symlink = 3;
-    Other = 4;
-}
-```
-
-## `FileStatus`
-
-Contains metadata about a filesystem object.
-
-```qc
-FileType filetype;
-addr_t size;
-addr_t created;
-addr_t accessed;
-addr_t modified;
-short int permissions;
-bool exists;
-```
-
-Stores the object's type, size, timestamps, permissions, and existence state.
-
-## `Path`
-
-Represents and manipulates filesystem paths.
-
-```qc
-Path(string path)
-Path operator/(string other)
-Path operator/(Path other)
-Path& operator=(Path other)
-Path& operator=(string other)
-```
-
-```qc
-string toString()
-```
-
-Returns the path as a string.
-
-```qc
-bool empty()
-```
-
-Returns whether the path contains no characters.
-
-```qc
-bool isAbsolute()
-```
-
-Returns whether the path is absolute.
-
-```qc
-bool isRelative()
-```
-
-Returns whether the path is relative.
-
-```qc
-Path parent()
-```
-
-Returns the parent directory of the path.
-
-```qc
-string filename()
-```
-
-Returns the filename component of the path.
-
-```qc
-string extension()
-```
-
-Returns the file extension of the path.
-
-```qc
-string stem()
-```
-
-Returns the filename without its extension.
-
-```qc
-bool hasFilename()
-```
-
-Returns whether the path contains a filename component.
-
-```qc
-bool hasExtension()
-```
-
-Returns whether the path contains a file extension.
-
-```qc
-bool hasParent()
-```
-
-Returns whether the path has a parent component.
-
-```qc
-Path normalize()
-```
-
-Returns a normalized version of the path with redundant path components resolved.
-
-```qc
-Path absolute()
-```
-
-Returns an absolute version of the path.
-
-```qc
-Path canonical()
-```
-
-Returns the canonical filesystem path with symbolic links and redundant components resolved.
-
-```qc
-bool exists()
-```
-
-Returns whether the path exists.
-
-```qc
-addr_t fileSize()
-```
-
-Returns the size of the file represented by the path.
-
-```qc
-DateTime lastWriteTime()
-```
-
-Returns the last modification time of the filesystem object.
-
-```qc
-DateTime lastAccess_Time()
-```
-
-Returns the last access time of the filesystem object.
-
-```qc
-DateTime creationTime()
-```
-
-Returns the creation time of the filesystem object.
-
-```qc
-FileStatus status()
-```
-
-Returns filesystem metadata for the path.
-
-```qc
-FileStatus linkStatus()
-```
-
-Returns filesystem metadata for the path itself without following a symbolic link.
-
-```qc
-addr_t size()
-```
-
-Returns the size of the filesystem object.
-
-```qc
-bool isHidden()
-```
-
-Returns whether the filesystem object is considered hidden.
-
-```qc
-bool isFile()
-```
-
-Returns whether the path refers to a regular file.
-
-```qc
-bool isDirectory()
-```
-
-Returns whether the path refers to a directory.
-
-```qc
-bool isSymlink()
-```
-
-Returns whether the path refers to a symbolic link.
-
-## `getCwd`
-
-```qc
-Path getCwd()
-```
-
-Returns the process's current working directory.
-
-# InputStream
-
-A stream used for reading data from files or file descriptors.
-
-```qc
-InputStream()
-```
-
-Creates a closed input stream.
-
-```qc
-InputStream(Path path)
-```
-
-Creates an input stream and opens the specified path.
-
-```qc
-void open(Path path)
-```
-
-Opens the specified path for reading.
-
-```qc
-void setFd(int fd)
-```
-
-Sets the file descriptor used by the stream.
-
-```qc
-char get()
-```
-
-Reads and returns the next character from the stream.
-
-```qc
-void getline(string dest, char till = '\n')
-```
-
-Reads characters into `dest` until the specified delimiter is encountered.
-
-```qc
-void read(string dest, addr_t count)
-```
-
-Reads up to `count` bytes into `dest`.
-
-```qc
-addr_t gcount()
-```
-
-Returns the number of bytes read by the most recent read operation.
-
-```qc
-bool isOpen()
-```
-
-Returns whether the stream currently has an open file descriptor.
-
-```qc
-void close()
-```
-
-Closes the stream's file descriptor.
-
-```qc
-void _destroy()
-```
-
-# OutputStream
-
-A stream used for writing data to files or file descriptors.
-
-```qc
-OutputStream()
-```
-
-Creates a closed output stream.
+## `class Str {`
 
 ```qc
-OutputStream(Path path)
+static addr_t NOT_FOUND = ~(0a);
 ```
 
-Creates an output stream and opens the specified path.
+Sentinal used for a value not being found.
 
 ```qc
-void open(Path path)
+Str(char *data) {
 ```
 
-Opens the specified path for writing.
+Creates a string from a char*.
 
 ```qc
-void setFd(int fd)
+Str(addr_t copies, char letter) {
 ```
 
-Sets the file descriptor used by the stream.
+Creates a string with copies copies of letter.
 
 ```qc
-void put(char c)
+Str(char *data, addr_t length) {
 ```
 
-Writes a single character to the stream.
+Takes ownership of and creates a string from a char * and a length.
 
 ```qc
-void write(string data)
+Str operator=(char* data) {
 ```
 
-Writes the supplied string to the stream.
+Reassign. Invali strings old data. Str now owns data.
 
 ```qc
-bool isOpen()
+Str substr(addr_t start, addr_t length) {
 ```
 
-Returns whether the stream currently has an open file descriptor.
+Returns a new string of the data from start to length. Caller owns.
 
 ```qc
-void close()
+View subView(addr_t start, addr_t length) {
 ```
 
-Closes the stream's file descriptor.
+Returns a View of the data from start to length. View does not own.
 
 ```qc
-void _destroy()
+addr_t find(Str other, addr_t offset = 0) {
 ```
 
-# RWStream
+Find the substring other starting from offset. Returns NOT_FOUND if it is not in the string. Otherwise returns the start index of the substring.
 
-A stream that supports both reading and writing.
-
-```qc
-RWStream()
-```
-
-Creates a closed read/write stream.
-
-```qc
-RWStream(Path path)
-```
-
-Creates a read/write stream and opens the specified path.
-
 ```qc
-void open(Path path)
+bool contains(Str other) {
 ```
 
-Opens the specified path for reading and writing.
+Returns true if the string contains other.
 
 ```qc
-void setFd(int fd)
+bool startsWith(Str other) {
 ```
 
-Sets the file descriptor used by the stream.
+Returns true if the string starts with other.
 
 ```qc
-void put(char c)
+bool endsWith(Str other) {
 ```
 
-Writes a single character to the stream.
+Returns true if the string ends with other.
 
 ```qc
-void write(string data)
+bool isEmpty() {
 ```
 
-Writes the supplied string to the stream.
+Returns true if the string is empty.
 
 ```qc
-char get()
+bool operator==(Str other) {
 ```
 
-Reads and returns the next character from the stream.
+Returns true if the string equals another string.
 
 ```qc
-void getline(string dest, char till = '\n')
+bool operator!=(Str other) {
 ```
 
-Reads characters into `dest` until the specified delimiter is encountered.
+Returns true if the string doesn't equal another string.
 
 ```qc
-void read(string dest, addr_t count)
+bool _eval() {
 ```
 
-Reads up to `count` bytes into `dest`.
+Returns true if the string is not empty.
 
 ```qc
-addr_t gcount()
+Str operator+(Str other) {
 ```
 
-Returns the number of bytes read by the most recent read operation.
+Returns a new string resulting in the concatenation of this and other. Caller owns the new string. No string is invalidated.
 
 ```qc
-bool isOpen()
+Str operator+=(Str other) {
 ```
 
-Returns whether the stream currently has an open file descriptor.
+Reallocates and concatenates this with other. Inval data of this, returns this.
 
 ```qc
-void close()
+char& operator[](addr_t index) {
 ```
 
-Closes the stream's file descriptor.
+Index strings data.
 
 ```qc
-void _destroy()
+void _destroy() {
 ```
 
-# DirectoryIterator
+Deallocate.
 
-Iterates over the entries within a directory.
-
 ```qc
-DirectoryIterator()
+void insert(addr_t index, Str str) {
 ```
 
-Creates a closed directory iterator.
+Inserts str at index.
 
 ```qc
-DirectoryIterator(Path path)
+void erase(addr_t start, addr_t length) {
 ```
 
-Creates an iterator for the specified directory.
+Removes length chars from start.
 
 ```qc
-bool hasNext()
+T toInteger<T(numeric:)>() {
 ```
 
-Returns whether another directory entry is available.
+Returns the string as whatever integer type T is.
 
 ```qc
-Path next()
+T toFloating<T(numeric:)>() {
 ```
 
-Returns the next entry in the directory.
+Returns the string as whatever decimal type T is.
 
 ```qc
-void close()
+bool operator==(char *data) {
 ```
 
-Closes the directory iterator.
+operator== for char*
 
 ```qc
-bool isOpen()
+bool operator!=(char *data) {
 ```
 
-Returns whether the directory iterator is currently open.
+operator!= for char*
 
 ```qc
-void _destroy()
+bool toBool() {
 ```
 
-# Filesystem Operations
+Returns the string converted to bool.
 
 ```qc
-bool createDirectory(Path path, int mode = 755)
+qbool toQBool() {
 ```
 
-Creates a single directory at the specified path.
+Returns the string converted to qbool.
 
 ```qc
-bool createDirectories(Path path)
+char *c_str() {
 ```
 
-Creates the specified directory and any missing parent directories.
+Returns the strings data.
 
-```qc
-bool remove(Path path)
-```
+## `Str toStr<T(numeric:)>(T value)`
 
-Removes the specified filesystem object.
+Returns a string of whatever number value is. Caller owns.
 
 ```qc
-bool removeAll(Path path)
+String proves CoreConcepts::Allocated;
 ```
 
-Recursively removes the specified filesystem object and its contents.
+# Errors
 
 ```qc
-bool rename(Path from, Path to)
+enum Codes { OK; Unknown; NotFound; InvalidArgument; OutOfBounds; Unsupported; }
 ```
 
-Renames or moves a filesystem object.
+Default error codes.
 
 ```qc
-void copy(Path source, Path destination)
+type Error<T> = T|Codes;
 ```
 
-Copies a filesystem object from `source` to `destination`.
+Union of a type or a error code.
 
 # Owned
 
-## `class Owned<T>` 
+Owned value used for function returns. Ment to never be captured, only to be used as a result.
+
+## `class Owned<T>`
+
+Owned value.
 
 ```qc
-Owned(T *data);
+Owned(T *data) {
 ```
-Constructor. Owns data. `inval data` for original owner.
+
+Constructor. Owned owns.
 
 ```qc
-T *own()
+T *own() {
 ```
-Take ownership of data. Owned no longer owns.
-
+Take ownership of Owneds data. Inval owned.
 ```qc
-void ignore()
+void ignore() {
 ```
-Ignore data. Frees data. `inval data`
-        
+Ignore owneds data. Inval owned. Inval data.
+```qc        
+void _destroy() {
+```
+Destroy. Inval owned. Inval data.
 ```qc
-void _destroy()
+Owned proves CoreConcepts::Allocated;
 ```
-Frees data. `inval data`
-
-Use `Owned::Owned` for when you want to specify you no longer have anything to do with a value.

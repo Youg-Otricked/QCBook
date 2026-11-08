@@ -42,7 +42,7 @@ entry:
 }
 ```
 
-excluding `tail` and `sideeffect` which only exist for optimization, along with `local_unnamed_addr`, It's simple. The compiler creates a unnamed `asm` function (inline asm, llvm just does inline asm this way) and calls it, hence the `call void`. The next argument is the param types (so just one r for the r parameter) followed by comma and then the clober string, then the arguments to the asm function.
+excluding `tail` and `sideeffect` which only exist for optimization, along with `local_unnamed_addr`, It's simple. The compiler creates a unnamed `asm` function (inline asm, llvm just does inline asm this way) and calls it, hence the `call void`. The next argument is the param types (so just one r for the r parameter) followed by comma and then the clober char*, then the arguments to the asm function.
 This would become this asm.
 ```asm
 	.intel_syntax noprefix

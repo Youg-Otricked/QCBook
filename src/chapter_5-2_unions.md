@@ -16,23 +16,23 @@ addr_t later = now;
 
 Aliases give a type a second name. Unions let a single value hold more than one type.
 ```qc
-type Value = int | string;
+type Value = int | char*;
 Value x = 123;
 x = "hello";
 ```
-`x` can hold either an `int` or a `string`.
+`x` can hold either an `int` or a `char*`.
 
-Since a union value's type can change at runtime, you need a way to ask "which one do I shoot?" That's the `` `typeof `` builtin. It returns the current type of a value as a string.
+Since a union value's type can change at runtime, you need a way to ask "which one do I shoot?" That's the `` `typeof `` builtin. It returns the current type of a value as a char*.
 ```qc
 Value x = 123;
 `qout("%s", `typeof(x)); // int
 x = "hello";
-`qout("%s", `typeof(x)); // string
+`qout("%s", `typeof(x)); // char*
 ```
 
 You can also use the typeof keyword.
 ```qc
-typeof x; // still string
+typeof x; // still char*
 ```
 
 To extract values from a union, you either use a match again, with the fields types as the names, and then the name for the variable of the value in () just like the switch.
@@ -40,7 +40,7 @@ To extract values from a union, you either use a match again, with the fields ty
 ```qc
 match (myUnion) {
     int(i) => ...
-    string(s) => ...
+    char*(s) => ...
 }
 ```
 

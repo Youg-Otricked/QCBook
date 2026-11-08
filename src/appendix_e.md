@@ -17,7 +17,7 @@ Table T1:
 | `i16u_t`     | `u16`                                     | U16                                                             |
 | `i32u_t`     | `u32`                                     | U32                                                             |
 | `char`       | `i8`                                      | ASCII characters                                                |
-| `string`     | `ptr`                                     | String of text                                                  |
+| `char*`     | `ptr`                                     | String of text                                                  |
 | All pointers | `ptr`                                     | Pointers                                                        |
 | `bool`       | `u1`¹                                     | Conditions                                                      |
 | `qbool`      | `u2`¹                                     | 4 state logic/Error codes                                       |

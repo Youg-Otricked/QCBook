@@ -7,7 +7,9 @@ When you declare a variable, a llvm `alloca` is created, which is a stack storag
 ```qc
 int x = 12;
 ```
+
 could become
+
 ```llvm
 %x = alloca i32, align 4
 call void @llvm.memset.p0.i64(ptr align 4 %x, i8 0, i64 4, i1 false)
@@ -34,11 +36,13 @@ sub rsp, 64
 ```
 
 Then, `alloca` actually just stores the stack pointer + an offset. e.g.
+
 ```asm
 mov [rsp + 4], 64
 ```
 
-Or if the size is unknown, 
+Or if the size is unknown,
+
 ```asm
 ; size is in rdi
 add rdi, 15 ; alignment calculation
@@ -50,12 +54,15 @@ mov rax, rsp ; moves data to rsp
 ## Functions
 
 Functions in llvm look somewhat similar to normal functions.
+
 ```qc
 int ret1() {
     return 1;
 }
 ```
-becomes 
+
+becomes
+
 ```llvm
 define i32 @ret1() !qc.return_types !0 {
     ret i32 1
@@ -66,6 +73,7 @@ Define defines a function, the i32 is the return type, the @ marks the names sta
 and the ret instruction returns a value.
 
 A function with parameters would look like this
+
 ```llvm
 define i32 @add(i32 %a, i32 %b) {
     ...
@@ -87,16 +95,18 @@ In asm, functions are just labels (spots you can jump to in code) with special c
 The conventions: arg 1 goes in `rdi`, arg 2 goes in `rsi`, arg 3 goes in `rdx`..., up to `r9` then your return value goes in rax. All arguments past 6 must go inside the stack.
 Certain registers are saved by the function (callee save)
 Our add function:
+
 ```asm
 add_nums:
     mov rax, rdi ; store rdi in rax
     add rax, rsi ; add rsi to it
-    ret ; return 
+    ret ; return
 _entry:
     mov rdi, 12
     mov rsi, 2
     call add_nums
 ```
+
 The call function stores on the stack (yes, just the top of rsp) `rip` (the instruction pointer, stores the current instruction address, thus the address after the call).
 The ret instruction just looks at the top of the stack to see where to go.
 
@@ -114,6 +124,7 @@ This actually works via something called _syscalls_, which are special functions
 
 Syscalls work like this: You move the number of the syscall (1 for write) into `rax`, then the arguments like normal calling conventions except `rcx` is `r10`, and then the return result is either not there or in rax. `rcx` and `r11` are destroyed by syscalls and are _caller save_, unlike _callee save_. All the argument registers + `r10` and `r11` are caller save, `rbp`, `rsp`, `rbx`, and `r12`-`r15` are callee save.
 The write syscalls argument 1 is the file descriptor to write to (Both input AND output are actually files! `0` is input (stdin), `1` is output (stdout), and `2` is error (stderr)), arg 2 is the text to write, and arg 3 is the length of the text.
+
 ```asm
 mov rax, 1
 mov rdi, 1
@@ -122,7 +133,7 @@ mov rdx, 14
 syscall ; prints the string to console
 ```
 
-## Types 
+## Types
 
 This is the llvm mapping of the core types.
 
@@ -132,7 +143,7 @@ This is the llvm mapping of the core types.
 | `int`    | `i32`    |
 | `float`  | `float`  |
 | `double` | `double` |
-| `string` | `ptr`    |
+| `char*`  | `ptr`    |
 | `char`   | `i8`     |
 
 ## Math

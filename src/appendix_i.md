@@ -68,7 +68,7 @@ octal-escape =
 identifier = (letter | '_'), { letter | '_' | digit } ;
 
 keyword =
-      'int' | 'float' | 'double' | 'bool' | 'string' | 'qbool' | 'char'
+      'int' | 'float' | 'double' | 'bool' | 'qbool' | 'char'
     | 'long' | 'short' | 'const' | 'atomic'
     | 'case' | 'switch' | 'default'
     | 'if' | 'else'
@@ -97,7 +97,6 @@ sizeof = 'sizeof' ;
 throw = 'throw' ;
 string = '"', { ascii-char | '\"' | "'" }, '"' ;
 char = "'", ( ascii-char | "\'" | '"' ), "'" ;
-fstring = 'f"', { ascii-char | '{', ternary, '}' | '\"' | "'" }, '"' ;
 rawstring = 'R"', ? a delimiter ?, '(', { any-char }, ')', ? the mirror of the previous delimiter ?, '"' ;
 plus = '+' ;
 increment = '++' ;
@@ -177,7 +176,7 @@ else = 'else ', block ;
 if-stmt = 'if (', (ternary, semicolon), expr, ') ', block, [else];
 qualified-identifier = { identifier, generics, scope }, identifier, generics ;
 type = qualified-identifier | keyword ;
-literal = char | string | bool | qbool | number-literal | 'nullptr' | decimal | fstring | rawstring ;
+literal = char | char* | bool | qbool | number-literal | 'nullptr' | decimal | rawstring ;
 generics = less, { type | literal, comma }, type | literal, more ;
 catch = 'catch (', type, identifier, rparen, block ;
 try-catch-stmt = 'try', block, catch ;

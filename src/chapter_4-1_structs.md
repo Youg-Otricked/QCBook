@@ -52,7 +52,7 @@ struct Position {
 }
 struct Player {
     Position pos;
-    string name;
+    char* name;
     int health;
 }
 Player player1;
@@ -63,11 +63,11 @@ is obviously better than
 int player1_position_x;
 int player1_position_y;
 int player1_health;
-string player1_name;
+char* player1_name;
 int player2_position_x;
 int player2_position_y;
 int player2_health;
-string player2_name;
+char* player2_name;
 ```
 2. Structs keep functions from having 55 parameters
 

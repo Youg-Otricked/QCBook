@@ -4,21 +4,11 @@ There are a lot of intrinsics in the language. This is a quick reference of all 
 
 | Intrinsic              | Function                                                                                                                                       |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `` `len ``             | Returns the length of a value, such as a string or array.                                                                                      |
-| `` `to_lower ``        | Converts a string to lowercase.                                                                                                                |
-| `` `to_upper ``        | Converts a string to uppercase.                                                                                                                |
-| `` `substring ``       | Returns a substring from a string.                                                                                                             |
-| `` `contains ``        | Checks whether a string contains another string.                                                                                               |
-| `` `startswith ``      | Checks whether a string starts with another string.                                                                                            |
-| `` `endswith ``        | Checks whether a string ends with another string.                                                                                              |
-| `` `trim ``            | Removes surrounding whitespace from a string.                                                                                                  |
-| `` `replace ``         | Replaces occurrences of one string with another.                                                                                               |
 | `` `to_int ``          | Converts a value to `int`.                                                                                                                     |
 | `` `to_float ``        | Converts a value to `float`.                                                                                                                   |
 | `` `to_double ``       | Converts a value to `double`.                                                                                                                  |
 | `` `to_char ``         | Converts a value to `char`.                                                                                                                    |
 | `` `to_bool ``         | Converts a value to `bool`.                                                                                                                    |
-| `` `to_string ``       | Converts a value to a string representation.                                                                                                   |
 | `` `to_byte ``         | Converts a value to `byte`.                                                                                                                    |
 | `` `to_nibble ``       | Converts a value to `nibble`.                                                                                                                  |
 | `` `to_addr_t ``       | Converts a value to `addr_t`.                                                                                                                  |

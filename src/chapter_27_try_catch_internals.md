@@ -16,7 +16,7 @@ Panic just prints a message and calls the `abort` libc function, which calls the
 `try` becomes a comparison and a bb.
 
 ```qc
-type MyErr = int | string;
+type MyErr = int | char*;
 MyErr error()...
 
 ...
