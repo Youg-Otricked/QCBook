@@ -1,6 +1,6 @@
 # STDRef
 
-Currently, the standard library is rather small, with only 14 namespaces.
+Currently, the standard library is rather small, with only 15 namespaces.
 
 1. [CoreConcepts](#CoreConcepts).
    This contains concepts for everything else to use, those being `Eq` (`operator==`), and `Allocated` (`_destroy`).
@@ -30,6 +30,8 @@ Currently, the standard library is rather small, with only 14 namespaces.
     A owned value marker
 14. [Errors](#Errors)
     Error values.
+15. [IO](#IO)
+    Input and Output functions.
 
 # CoreConcepts
 
@@ -845,3 +847,17 @@ Destroy. Inval owned. Inval data.
 ```qc
 Owned proves CoreConcepts::Allocated;
 ```
+
+# IO
+
+## `void qout(char *fmt_string, ...args)`
+
+Prints fmt_string to console, replacing formatters such as %s, with values from args.
+
+## `char *getWord()`
+
+Returns a heap allocated string that you take ownership of containing up to the next ' ' in input.
+
+## `char *getLine()`
+
+Returns a heap allocated string that you take ownership of containing up to the next '\n' in input.
