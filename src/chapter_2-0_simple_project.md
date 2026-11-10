@@ -78,7 +78,7 @@ Functions that don't return a value use `void`:
 
 ```qc
 void greet() {
-    `qout("Hi there!\n");
+    IO::qout("Hi there!\n");
 }
 ```
 
@@ -93,20 +93,11 @@ int x, int y = addmul(123, 321);
 
 ## Input
 
-To read from the user, use the `qin` feature, the inverse of `` `qout `` from Chapter 1. It reads a single line from standard input and puts it in a variable.
+To read from the user, use the `IO::getWord` function, the inverse of `` IO::qout `` from Chapter 1. It reads a single word from standard input.
 
 ```qc
 char* name = "";
-qin |> name;
-```
-
-You can also input to multiple variables by chaining |>, and each variable will contain up to a space.
-You can also input to any type and it casts if possible and comptime-errors if not.
-
-```qc
-int x;
-char* name;
-qin |> x |> name;
+name = IO::getWord();
 ```
 
 ## Printing with Formatters
@@ -116,7 +107,7 @@ You already saw plain strings in Chapter 1. For anything with variables mixed in
 ```qc
 char* name = "Me";
 int age = 25;
-`qout("Hi %s, you are %i years old.\n", name, age);
+IO::qout("Hi %s, you are %i years old.\n", name, age);
 ```
 
 Each of those %'s represents a variable to be inserted.
@@ -195,7 +186,7 @@ You may notice if you have code like this:
 ```qc
 int x = 12;
 x + 2;
-`qout("%i", x);
+IO::qout("%i", x);
 ```
 
 It prints 12! Is there a bug in the compiler?
@@ -286,15 +277,14 @@ Here's the full program.
 
 ```qc
 char* ask_name() {
-    `qout("What's your name? ");
-    char* result;
-    qin |> result;
+    IO::qout("What's your name? ");
+    char* result = IO::getWord();
     return result;
 }
 
 int main() {
     char* name = ask_name();
-    `qout("Nice to meet you, %s!\n", name);
+    IO::qout("Nice to meet you, %s!\n", name);
     return 0;
 }
 ```
@@ -314,7 +304,8 @@ Nice to meet you, Me!
 - Variables need an explicit type unless you use `auto`.
 - `const` makes a variable's value constant after initialization.
 - Functions declare a return type, a name, and typed parameters. `void` means "returns nothing." Functions can return multiple values at once.
-- `qin |> variable` reads a line of input into a variable, and can be chained to read into several at once. Input casts to the target type where possible, errors at runtime if its a invalid value, and errors at compile time if it is a uncastable type.
+- `IO::getLine()` reads a line of input.
+- `IO::getWord()` reads a word of input.
 - Formatted printing uses `%`-placeholders (`%s`, `%i`, `%f`, etc.).
 - C^4 has six core types (`bool`, `int`, `float`, `double`, `char*`, `char`) and a literal form for each.
 - Escape sequences (`\n`, `\t`, `\"`, `\'`, `\0`) represent characters that can't be typed directly in a string or char literal.

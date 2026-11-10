@@ -9,9 +9,9 @@ for (int i = -10; x > i; i += 2) {
     x--;
 }
 if (x <= -5) {
-    `qout("%i", x);
+    IO::qout("%i", x);
 } else {
-    `qout("X more than -5");
+    IO::qout("X more than -5");
 }
 ```
 """

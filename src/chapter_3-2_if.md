@@ -63,7 +63,7 @@ if (x > 0) {
 You can omit braces if the body is only one line.
 
 ```qc
-if (x < 10) `qout("%i", x);
+if (x < 10) IO::qout("%i", x);
 else ...
 ```
 
@@ -105,7 +105,7 @@ Start runs before the loop runs, stop is the condition that must be false for it
 
 ```qc
 for (int x = 0; x < 10; x++) {
-    `qout("%i", x);
+    IO::qout("%i", x);
 } // loop ends after 10 iterations & prints 0123456789
 for (int i = 0; ++i < 9;) {
     // omitted the step, but the step happens in the condition.
@@ -187,10 +187,10 @@ switch (day) {
     case 4:
     case 5:
     case 6:
-        `qout("Weekday");
+        IO::qout("Weekday");
         break;
     default:
-        `qout("Weekend");
+        IO::qout("Weekend");
 }
 ```
 

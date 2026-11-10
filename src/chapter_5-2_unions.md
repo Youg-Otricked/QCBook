@@ -25,9 +25,9 @@ x = "hello";
 Since a union value's type can change at runtime, you need a way to ask "which one do I shoot?" That's the `` `typeof `` builtin. It returns the current type of a value as a char*.
 ```qc
 Value x = 123;
-`qout("%s", `typeof(x)); // int
+IO::qout("%s", `typeof(x)); // int
 x = "hello";
-`qout("%s", `typeof(x)); // char*
+IO::qout("%s", `typeof(x)); // char*
 ```
 
 You can also use the typeof keyword.

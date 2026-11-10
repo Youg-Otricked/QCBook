@@ -176,7 +176,7 @@ Example:
 ```qc
 class Printer {
     T print<T>(T value) {
-        `qout("%s", value);
+        IO::qout("%s", value);
         return value;
     }
 }

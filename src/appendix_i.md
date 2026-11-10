@@ -198,14 +198,13 @@ spread = at, atom ;
 indice = ternary, lbracket, number-literal, rbracket ;
 propacc = ternary, (dot | arrow), ( qualified-identifier | atom ) ;
 lambda = "fn", lparen, { type, identifier }, rparen, arrow, type, { type }, block ;
-atom = { identifier }, [ struct-literal | array-literal | qin-expr | number-literal | literal | spread | call | indice | propacc | type | lambda | ( lparen, ternary, rparen ) ] ;
+atom = { identifier }, [ struct-literal | array-literal | number-literal | literal | spread | call | indice | propacc | type | lambda | ( lparen, ternary, rparen ) ] ;
 power-expr = atom { power , factor } ;
 factor = (plus | minus | bitwise-not | not | qnot | ampersand | mul), ternary 
     | ( increment | decrement | sizeof | throw ), factor
     | power ;
 term = factor, { ( div | mul | mod ), factor} ;
 bitwise = term, { ( rshift | lshift | r-rot | l-rot | logical-rshift ), term } ;
-qin-expr = "qin", rshift, bitwise, { rshift, bitwise } ;
 expr = bitwise, { ( plus | minus | semicolon ), bitwise } ;
 
 comparison = expr, "proved-by", expr 

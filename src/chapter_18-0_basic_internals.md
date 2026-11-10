@@ -112,15 +112,8 @@ The ret instruction just looks at the top of the stack to see where to go.
 
 ## Printing
 
-The `` `qout `` intrinsic literally just emits a ton of calls, such as:
-
-```llvm
-call void qc_print_string(call ptr qc_fmt_int(i32 123))
-```
-
-The `` `qout `` intrinsic just turns your format string into a lot of calls, which can then be optimized.
-
-This actually works via something called _syscalls_, which are special functions exposed by the operating system that allows you to perform operations that you can't do by your self. Specifically, the `` `qout `` intrinsic uses the write syscall.
+The `` IO::qout `` function calls a ton of other functions. It's just a function in the standard library.
+The actual printing works via something called _syscalls_, which are special functions exposed by the operating system that allows you to perform operations that you can't do by your self. Specifically, the `` IO::qout `` function uses the write syscall.
 
 Syscalls work like this: You move the number of the syscall (1 for write) into `rax`, then the arguments like normal calling conventions except `rcx` is `r10`, and then the return result is either not there or in rax. `rcx` and `r11` are destroyed by syscalls and are _caller save_, unlike _callee save_. All the argument registers + `r10` and `r11` are caller save, `rbp`, `rsp`, `rbx`, and `r12`-`r15` are callee save.
 The write syscalls argument 1 is the file descriptor to write to (Both input AND output are actually files! `0` is input (stdin), `1` is output (stdout), and `2` is error (stderr)), arg 2 is the text to write, and arg 3 is the length of the text.

@@ -36,7 +36,7 @@ You can access fields on a struct with the . operator.
 
 ```qc
 X my_struct = {1, 4};
-`qout("%i", my_struct.x);
+IO::qout("%i", my_struct.x);
 
 my_struct.x = 2;
 ```

@@ -153,3 +153,5 @@ The important stuff:
 - `std` is a builtin alias for `~/.qc/lib/stdlib.qc`.
 
 That's basically it. Includes aren't complicated, they just have a slightly different idea behind them than C's `#include`. 
+
+IO is a standard library namespace. That's what that include block has been doing. Pulling in the IO namespace with qout in it.

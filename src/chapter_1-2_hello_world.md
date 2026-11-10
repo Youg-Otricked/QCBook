@@ -14,8 +14,11 @@ Create and open a main.qc file. C^4 files end with .qc, and are kebab-case (word
 
 Filename: main.qc
 ```qc
+namespace Exported {
+    #include <IO, std>
+}
 int main() {
-    `qout("Hello, World!\n");
+    IO::qout("Hello, World!\n");
     return 0;
 }
 ```
@@ -36,6 +39,14 @@ It should have printed `Hello, World!`, Mac and Linux alike. Congrats: You wrote
 Breaking it up:
 
 ```qc
+namespace Exported {
+    #include <IO, std>
+}
+```
+
+This includes the IO namespace from the standard library. Ignore it for now, it's explained in the namespaces and includes chapters. Just know you need it to use the print function.
+
+```qc
 int main() {
 }
 ```
@@ -47,11 +58,11 @@ The function "body" (code) is wrapped in {}. Braces wrap all function bodys. Acc
 
 The body of the function is 
 ```qc
-`qout("Hello, World!\n");
+IO::qout("Hello, World!\n");
 return 0;
 ```
 
-`` `qout `` is a compiler intrinsic that writes to console. All compiler intrinsics start with backtick. The string "Hello, World!\n" is what it will write.
+`` IO::qout `` is a function that writes to console. The string "Hello, World!\n" is what it will write.
 `return 0;` tells the OS that this program successfully ran.
 
 ### Compilation and Execution.

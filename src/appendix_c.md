@@ -15,7 +15,6 @@ There are a lot of intrinsics in the language. This is a quick reference of all 
 | `` `to_qbool ``        | Converts a value to `qbool`.                                                                                                                   |
 | `` `to_long_int ``     | Converts a value to `long int`.                                                                                                                |
 | `` `to_short_int ``    | Converts a value to `short int`.                                                                                                               |
-| `` `qout ``            | Prints to console with formatting, truncation, zext, and other fancy stuff. All the printf formatting features with different names for types. |
 | `` `typeof ``          | Returns the type of an expression as a string.                                                                                                 |
 | `` `open ``            | Opens a file and returns its file descriptor.                                                                                                  |
 | `` `close ``           | Closes an open file.                                                                                                                           |
@@ -62,7 +61,6 @@ There are a lot of intrinsics in the language. This is a quick reference of all 
 
 The following intrinsics are implemented directly by the compiler rather than being simple runtime function calls:
 
-- `` `qout ``
 - `` `typeof ``
 - `` `mapped_ptr ``
 - `` `ternary ``

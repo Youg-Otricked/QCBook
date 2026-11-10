@@ -39,9 +39,12 @@ and finally, we make our `.qc` file.
 ```qc
 === main.qc ===
 #include<math_helpers.h>
+namespace Exported {
+    #include <IO, std>
+}
 #link<math_helpers.o>
 int main() {
-    `qout("%i", factorial(6));
+    IO::qout("%i", factorial(6));
     return 0;
 }
 ===============

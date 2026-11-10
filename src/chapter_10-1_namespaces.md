@@ -17,4 +17,5 @@ Now everything in the namespace X must be access with it's qualifier. To get thi
 X::Y = 123;
 ```
 
+You've been seeing them for a while. IO is a namespace with qout in it.
 Simple!
