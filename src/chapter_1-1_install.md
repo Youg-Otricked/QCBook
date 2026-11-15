@@ -5,24 +5,11 @@ To install C^4, first you should install the package and version manager, `qcm`.
 To install `qcm`:
 
 <details>
-    <summary>Linux</summary>
+    <summary>Linux/Macos</summary>
     <details>
-        <summary>Debian</summary>
-        <p>Run this command. (Must have jq installed)</p>
-        <pre><code>curl -s https://api.github.com/repos/Youg-Otricked/quartic-c-manager/releases/latest | jq -r '.assets[].browser_download_url | select(endswith(".deb"))' | xargs curl -OL
-    sudo apt install ./qcm_*.deb
-    qcm setup</code></pre>
+        <p>Run this command in your terminal. It will install everything for you. If you don't trust it, go to the repo and follow the readme.</p>
+        <code>curl -fsSL "https://raw.githubusercontent.com/Youg-Otricked/quartic-c-manager/master/install.sh" | sh</code>
     </details>
-    <details>
-        <summary>Else</summary>
-        <p>Run this command in your terminal.</p>
-        <code>curl -L "https://github.com/Youg-Otricked/quartic-c-manager/releases/latest/download/qcm-linux" -o ./qcm && chmod +x ./qcm && ./qcm setup</code>
-    </details>
-</details>
-<details>
-    <summary>MacOS</summary>
-    <p>Run this command in your terminal.</p>
-    <code>curl -L "https://github.com/Youg-Otricked/quartic-c-manager/releases/latest/download/qcm-macos" -o ./qcm && chmod +x ./qcm && ./qcm setup</code>
 </details>
 <details>
     <summary>Windows</summary>
@@ -31,7 +18,8 @@ To install `qcm`:
 
 ###### A Webi script is currently awaiting approval to make this process significantly easier.
 
-Now, to install qc, just run 
+Now, to install qc, just run
+
 ```bash
 qcm tooling install latest
 ```

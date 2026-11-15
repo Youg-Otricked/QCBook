@@ -1,3 +1,3 @@
-# Final Project 1: Text Editor
+# Final Project 1: P2P Communication App
 
-Coming Soon
+In this project, you will build a fully fleged between-person communication app.
