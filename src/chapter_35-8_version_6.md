@@ -1,6 +1,6 @@
 # Final Project 1: Bonus 2
 
-We have a problem: Any rando from the internet can join! So let's fix this, by implementing TLS-Style password verification and handshakes.
+We have a problem: Any rando from the internet can join! So let's fix this, by implementing password verification and handshakes.
 
 # Hashing Algorithms
 
@@ -18,7 +18,7 @@ You may think "how can a hash be irreversible?" That's because hashes are _destr
 - It's cramming infinitely many inputs into a fixed size of outputs. The 256 bit output has 1.15792089e77 many combinations. The any-size input has infinite combinations. And infinite is so infinite that that means any one hash has infinite inputs that produce it. Something, something, converging infinities, hollow purple, JJK reference.
 This is called "pre-image resistance"
 Collisions are a big worry in the hashing space. That's when two inputs make the same output. They are guaranteed for the same reasons hashes are irreversible, however with any sha2 series algorithm, they are basically impossible to find. The thing people are worried about is checksums: Hashes of files to guarantee they are trustworthy. If you have an entirely different file that has the same checksum, then you could put malware in it.
-Most passwords don't actually use SHA256. Not because it's bad, but because it's _too good_. It's too fast. A lot of hashing attacks revolve around hashing billions of common passwords to see if they match your password. If an algorithm is too fast, then attackers can solve it too fast.
+Most passwords don't actually use SHA256. Not because it's bad, but because it's _too good_. It's too fast. A lot of hashing attacks revolve around hashing billions of common passwords to see if they match your password. If an algorithm is too fast, then attackers can solve it too fast. This is why we use algorithms like BCrypt and Argon2id.
 Another typical way to make passwords more secure is _salting_. This is adding random bytes to the beginning of the password. This isn't actually to stop those files of passwords: It's to stop _rainbow tables_: Precomputed lookup tables with text and their hashes.
 
 # Implementation 
