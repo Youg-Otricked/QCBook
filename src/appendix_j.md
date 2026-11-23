@@ -126,6 +126,41 @@ e.g.
 /// @note inval query is NOT triggered; the input string remains untouched.
 ```
 
+Generic arguments can start with
+```qc 
+/// @generic
+```
+Then each nesting starts with ~ before the @.
+```qc
+/// @generic
+/// ~@name T
+...
+```
+You use `/// ~@constraint` for constraints, and still use summary for description.
+You use another `~` for every nesting.
+Usertypes:
+
+Structs and classes:
+Before class definition:
+```qc
+/// @name NAME
+/// @staticfield STATICFIELDS
+...
+```
+Then you put method and non-static member annotations inside the class.
+Structs:
+Before definition:
+```qc
+/// @name NAME
+/// @field FIELD
+...
+```
+Enums, Unions, Raw Unions:
+Just a name and description.
+Compile time verification such as concepts and patterns, modifiers:
+name, description, `/// @block`, `/// @case`, etc. Use what makes sense.
+Namespaces should be prefixed with a summary, or if it's a one namespace file, use a file-level doc comment.
+
 ## Extensibility & Stability
 
 Structs are `POD` in C^4. So when do I use them over classes?
