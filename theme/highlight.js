@@ -423,9 +423,9 @@ relevance:0},{className:"number",variants:[{
 begin:/[su]?0[xX][KMLHR]?[a-fA-F0-9]+/},{
 begin:/[-+]?\d+(?:[.]\d+)?(?:[eE][-+]?\d+(?:[.]\d+)?)?/}],relevance:0}]}},
 grmr_qc:e=>{const s={
-keyword:["if","else","switch","case","default","while","for","do","loop","foreach","in","break","continue","return","try","catch","throw","defer","comptime","foreign","extern","namespace","class","struct","enum","type","friend","friendly","static","abstract","final","public","protected","private","operator","roperator","concept","proves","with_proof","_of","at_least","all_of","proved_by","modifier","on_call","on_return","on_use","sizeof","fn","function","qif","qelse","qelif","qswitch"],
+keyword:["panic","jmp","goto","match","returning","if","else","switch","case","default","while","for","do","loop","foreach","in","break","continue","return","try","catch","defer","comptime","foreign","extern","namespace","class","struct","enum","type","friend","friendly","static","abstract","final","public","protected","private","operator","roperator","concept","proves","with_proof","_of","at_least","all_of","proved_by","modifier","on_call","on_return","on_use","sizeof","fn","function","qif","qelse","qelif","qswitch"],
 modifier:["const","atomic","long","short","out","inout","volatile","restrict"],
-type:["int","float","double","bool","string","qbool","char","void","auto","byte","nibble","addr_t"],
+type:["int","float","double","bool","string","qbool","char","void","auto","byte","nibble","addr_t","ai64u_t","ai64_t","i16u_t","i32u_t"],
 literal:["true","false","qtrue","qfalse","both","none","nullptr"]},t={
 begin:/[a-zA-Z_]\w*/,keywords:s,relevance:0},n={className:"string",begin:/f"/,
 end:'"',illegal:"\\n",contains:[e.BACKSLASH_ESCAPE,{className:"subst",
