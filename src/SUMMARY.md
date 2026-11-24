@@ -90,4 +90,5 @@
   - [Appendix K: Compatibility / Version History](./appendix_k.md)
   - [Appendix L: Bad Practices](./appendix_l.md)
   - [Appendix M: File Structure](./appendix_m.md)
+  - [Appendix N: Contributing](./appendix_n.md)
 - [Glossary](./reference/glossary.md)

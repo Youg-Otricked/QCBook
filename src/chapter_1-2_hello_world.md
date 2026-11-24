@@ -15,7 +15,7 @@ Create and open a main.qc file. C^4 files end with .qc, and are kebab-case (word
 Filename: main.qc
 ```qc
 namespace Exported {
-    #include <IO, std>
+    #include <IO, std/io.hqc>
 }
 int main() {
     IO::qout("Hello, World!\n");
@@ -40,7 +40,7 @@ Breaking it up:
 
 ```qc
 namespace Exported {
-    #include <IO, std>
+    #include <IO, std/io.hqc>
 }
 ```
 

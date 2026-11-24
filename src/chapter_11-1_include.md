@@ -23,7 +23,7 @@ Then you put your include statements inside it.
 
 ```qc
 namespace Exported {
-    #include<OSInterop, std>
+    #include<OSInterop, std/io.hqc>
 }
 ```
 
@@ -90,7 +90,7 @@ C^4 has a builtin alias called `std`.
 It points to:
 
 ```text
-~/.qc/lib/stdlib.qc
+~/.qc/lib/std
 ```
 
 So instead of having to write the path to the standard library every time, you can just use `std`.
@@ -99,7 +99,7 @@ For example, the standard library contains the `OSInterop` namespace. To include
 
 ```qc
 namespace Exported {
-    #include<OSInterop, std>
+    #include<OSInterop, std/os-interop.hqc>
 }
 ```
 
@@ -150,7 +150,7 @@ The important stuff:
 
 - `::` is used to include nested namespaces.
 - Including `Namespace::Nested` only includes `Nested`, not the whole parent namespace.
-- `std` is a builtin alias for `~/.qc/lib/stdlib.qc`.
+- `std` is a builtin alias for `~/.qc/lib/std`.
 
 That's basically it. Includes aren't complicated, they just have a slightly different idea behind them than C's `#include`. 
 

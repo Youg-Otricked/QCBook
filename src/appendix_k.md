@@ -3,10 +3,10 @@
 ## Versioning Scheme
 
 QuarticC uses the following versioning scheme:
-`cMa.Mo.MiP`
+`cMa.Mo.MipP`
 , where `c` is critical, for massive additions, such as the compiler being added, `Ma` being major versions, tracking large collections of features, `Mo` being moderate versions, tracking collections of similar features, `Mi` being minor versions, which track individual feature milestones within the current moderate version's theme, and `P` being the patch version. 
 For the version
-`x1.2.34`
+`x1.2.3p4`
 `c` = `x`
 `Ma` = `1`
 `Mo` = `2`
@@ -27,8 +27,6 @@ not language features.
 Development toward future critical versions may begin before the current
 critical version is complete. Multiple critical generations may therefore
 be in development simultaneously.
-
-Minor (Mi) is always a single decimal digit (0-9). Once a minor version reaches 9, the next release increments the moderate version instead.
 
 Unlike semantic versioning, QuarticC versions describe the scale and category of language evolution rather than API compatibility.
 
@@ -77,3 +75,4 @@ define i32 @"X::Y<int>"() {
 7. Major union full overhaul.
 8. Major error full overhaul.
 9. Removed string and lots of intrinsics.
+10. Overhauled stdlib strucutre.

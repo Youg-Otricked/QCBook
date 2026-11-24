@@ -40,7 +40,7 @@ and finally, we make our `.qc` file.
 === main.qc ===
 #include<math_helpers.h>
 namespace Exported {
-    #include <IO, std>
+    #include <IO, std/io.hqc>
 }
 #link<math_helpers.o>
 int main() {

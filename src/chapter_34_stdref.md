@@ -1,6 +1,6 @@
 # STDRef
 
-Currently, the standard library is rather small, with only 15 namespaces.
+Currently, the standard library is rather small, with only 13 namespaces.
 
 1. [CoreConcepts](#CoreConcepts).
    This contains concepts for everything else to use, those being `Eq` (`operator==`), and `Allocated` (`_destroy`).
@@ -10,28 +10,48 @@ Currently, the standard library is rather small, with only 15 namespaces.
    A dynamic array.
 4. [List](#List).
    A linked list.
-5. [Utils](#Utils).
-   Basic utility functions.
-6. [Math](#Math).
+5. [Math](#Math).
    Math intrinsics.
-7. [OSInterop](#OSInterop).
-   Operating-system interaction.
-8. [Pair](#Pair).
+6. [Pair](#Pair).
    Pair of 2 items.
-9. [Optional](#Optional).
+7. [Optional](#Optional).
    Optional value.
-10. [Span](#Span).
+8. [Span](#Span).
     Like an array, but does not own the memory.
-11. [Unordered](#Unordered).
+9. [Unordered](#Unordered).
     Hash-based Map and Set.
-12. [String](#String)
+10. [String](#String)
     String.
-13. [Owned](#Owned)
+11. [Owned](#Owned)
     A owned value marker
-14. [Errors](#Errors)
+12. [Errors](#Errors)
     Error values.
-15. [IO](#IO)
+13. [IO](#IO)
     Input and Output functions.
+
+# Structure
+
+The standard library is split up into files, with the current structure being like this:
+
+- Root: Core types & non-catagorical items. Those are currently:
+- * core-concepts.hqc
+- * errors.hqc
+- * io.hqc
+- * string.hqc
+- collections: Collection types. Those are:
+- * vector.hqc
+- * span.hqc
+- * unordered.hqc 
+- * list.hqc
+- * array.hqc
+- memory: Memory types. Those are:
+- * owned.hqc
+- math: Math funcitons. Those are:
+- * core.hqc
+- types: Algebraic datatypes. Those are:
+- * optional.hqc
+
+# std/core-concepts.hqc
 
 # CoreConcepts
 
@@ -60,6 +80,8 @@ concept Allocated {
 ```
 
 Concept requiring `_destory`.
+
+# std/collections/array.hqc
 
 # Array
 
@@ -94,6 +116,8 @@ Iterator::It<T> _end()
 void _destroy()
 Arr<T, S>& operator=(Arr<T, S> other)
 ```
+
+# std/collections/vector.hqc
 
 # Vector
 
@@ -162,6 +186,8 @@ bool isEmpty()
 ```
 
 Returns `true` if the vector contains no elements.
+
+# std/collections/list.hqc
 
 # List
 
@@ -261,21 +287,7 @@ void operator[]=(T* data, int length)
 List<T>& operator=(List<T> other)
 ```
 
-# Utils
-
-General-purpose utility functions.
-
-```qc
-Vector::Vec<int> range(int start, int stop, int step = 1)
-```
-
-Creates a vector containing a range of integers from `start` toward `stop`, incrementing by `step`.
-
-```qc
-volatile void sleep(long int milliseconds)
-```
-
-Sleeps for milliseconds milliseconds.
+# std/math/core.hqc
 
 # Math
 
@@ -371,13 +383,7 @@ Errors::Error<double> log(double x)
 
 Returns the logarithm of `x`, or Errors::Codes.InvalidArgument if x is < 0.
 
-# OSInterop
-
-```qc
-void system(char* command)
-```
-
-Executes the supplied command using the operating system's command interpreter.
+# std/collections/unordered.hqc
 
 # Pair
 
@@ -399,6 +405,8 @@ Pair<A, B> makePair<A, B>(A first, B second)
 ```
 
 Creates and returns a `Pair` containing the two supplied values.
+
+# std/types/optional.hqc
 
 # Optional
 
@@ -448,6 +456,8 @@ void removeValue()
 
 Removes the contained value and marks the option as empty.
 
+# std/collections/span.hqc
+
 # Span
 
 A non-owning "view" over a contiguous section of memory.
@@ -484,6 +494,8 @@ void operator[]=(T *data, int length)
 Iterator::It<T> _begin()
 Iterator::It<T> _end()
 ```
+
+# std/collections/unordered.hqc
 
 # Unordered
 
@@ -614,6 +626,8 @@ Returns a reference to the value associated with `key`. Throws if not found.
 Iterators::MapIt<K, V> _begin()
 Iterators::MapIt<K, V> _end()
 ```
+
+# std/string.hqc
 
 # String
 
@@ -804,6 +818,8 @@ Returns a string of whatever number value is. Caller owns.
 String proves CoreConcepts::Allocated;
 ```
 
+# std/errors.hqc
+
 # Errors
 
 ```qc
@@ -817,6 +833,8 @@ type Error<T> = T|Codes;
 ```
 
 Union of a type or a error code.
+
+# std/memory/owned.hqc
 
 # Owned
 
@@ -847,6 +865,8 @@ Destroy. Inval owned. Inval data.
 ```qc
 Owned proves CoreConcepts::Allocated;
 ```
+
+# std/io.hqc
 
 # IO
 
